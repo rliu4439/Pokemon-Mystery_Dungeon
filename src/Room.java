@@ -10,4 +10,14 @@ private int length;
 		this.length = length;
 	}
 	
+	public int[] getDimensions(){
+		int[] d = new int[]{x, y, width, length};
+		return d;
+	}
+	
+	public boolean overlap(){
+	
+	}
+	
+	
 }
