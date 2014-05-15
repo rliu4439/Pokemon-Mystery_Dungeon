@@ -4,8 +4,8 @@ import java.util.ArrayList;
 public class Dungeon {
 private String[][] dungeon;
 private int numOfRooms;
-private ArrayList<Integer> width = new ArrayList<Integer>();
-private ArrayList<Integer> length = new ArrayList<Integer>();
+private ArrayList<Integer> widthRoom = new ArrayList<Integer>();
+private ArrayList<Integer> lengthRoom = new ArrayList<Integer>();
 	public Dungeon (int width, int length){
 		
 		
