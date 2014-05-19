@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class PersonalityTest {
 	public PersonalityTest() {
-
+chooseCharacter();
 	}
 
 	public Pokemon chooseCharacter() {
@@ -91,10 +91,11 @@ public class PersonalityTest {
 				gotInput = false;
 			}
 			if (counter == 0) {
-				Pokemon a = new Pokemon(50);
+				Pokemon a = new AlliedPokemon();
 				return a;
 			}
 		}
+		return null;
 
 	}
 }
