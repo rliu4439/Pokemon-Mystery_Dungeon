@@ -4,6 +4,7 @@ private int hp = 14;
 private int attack = 2;
 private int defense = 3;
 	public Mudkip(){
-		super (level, hp, attack, defense);
+		
+		super ();
 	}
 }
