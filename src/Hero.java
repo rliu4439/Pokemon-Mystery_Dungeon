@@ -10,4 +10,17 @@ public class Hero  {
 	
 	}
 	
+	public void eatFood(Items i){
+		main.setHp(main.getHp()+i.getHealthChange());
+		addStamina(i.getStaminaChange());
+		
+	}
+
+	private void addStamina(int staminaChange) {
+		// TODO Auto-generated method stub
+		stamina+=staminaChange;
+		if(stamina>100){
+			stamina=100;
+		}
+	}
 }

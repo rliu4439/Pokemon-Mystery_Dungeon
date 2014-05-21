@@ -2,5 +2,13 @@
 public class Items {
 int healthChange;
 int staminaChange;
-int 
+public int getHealthChange() {
+	return healthChange;
+}
+public int getStaminaChange() {
+	return staminaChange;
+}
+
+
+
 }
