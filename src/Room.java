@@ -17,8 +17,7 @@ private int length;
 		return d;
 	}
 	
-	public boolean corridorConnection(Grid g){
-	Grid d = g.getGrid();
+	public boolean corridorConnection(Grid d){
 	int t = y-1;
 		for (int b = 0; b < 2; b++){
 			for ( int a = x-1; a < x+width+1; a++){
