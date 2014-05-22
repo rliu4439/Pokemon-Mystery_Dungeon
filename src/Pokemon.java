@@ -34,6 +34,10 @@ public abstract class Pokemon {
 	public void setAttack(int attack) {
 		this.attack = attack;
 	}
+	
+	public void setEnemy(boolean b){
+		enemy = b;
+	}
 
 	public int getDefense() {
 		return defense;
