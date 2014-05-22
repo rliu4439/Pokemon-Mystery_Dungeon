@@ -7,6 +7,7 @@ public class Hero  {
 	Pokemon main;
 	public Hero(Pokemon p){
 		main=p;
+		main.setEnemy(false);
 	
 	}
 	public boolean checkHP(){// if hp below 0, game over/restart
