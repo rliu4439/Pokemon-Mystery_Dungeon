@@ -16,6 +16,30 @@ private int length;
 		int[] d = new int[]{x, y, width, length};
 		return d;
 	}
+	
+	public boolean corridorConnection(Grid g){
+	Grid d = g.getGrid();
+	int t = y-1;
+		for (int b = 0; b < 2; b++){
+			for ( int a = x-1; a < x+width+1; a++){
+				Location l = new Location(t,a);
+				if (d.get(l).equalsTo("C")
+					return true;
+			}
+			t= y+length+1
+		}
+	int s = x-1;
+		for( int c = 0; c < 2; c++){
+			for (int d = y-1; d<y+length+1; d++){
+				Location l = new Location (d,s);
+				if (d.get(l)equalsTo("C")
+					return true;
+			}
+			s= x + width +1;
+		}
+		return false;
+	}
+	
 	//clear radius of 5
 	public boolean overlap(Grid d){
 //	Grid g = getGrid();
