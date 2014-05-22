@@ -3,6 +3,7 @@ public abstract class Pokemon {
 	public int hp;
 	public int attack;
 	public int defense;
+	public boolean enemy;
 	public int x=0;
 
 	public Pokemon() {
