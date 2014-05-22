@@ -1,4 +1,6 @@
-public abstract class Pokemon {
+import info.gridworld.actor.Actor;
+
+public abstract class Pokemon extends Actor {
 	public int level;
 	public int topHp;
 	public int hp;

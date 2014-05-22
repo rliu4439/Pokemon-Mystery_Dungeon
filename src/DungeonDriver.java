@@ -20,11 +20,8 @@ public class DungeonDriver {
 				System.out.println("done");
 			} catch (ClassNotFoundException | InstantiationException
 					| IllegalAccessException | UnsupportedLookAndFeelException e1) {
-				// TODO Auto-generated catch block
-				//e1.printStackTrace();
 				
 			}
-			//e.printStackTrace();
 		}
 		
 		JFrame jf = new JFrame("Asteriods");

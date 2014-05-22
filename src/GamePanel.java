@@ -1,3 +1,11 @@
+import info.gridworld.actor.Actor;
+import info.gridworld.actor.ActorWorld;
+import info.gridworld.grid.BoundedGrid;
+import info.gridworld.grid.Grid;
+import info.gridworld.grid.Location;
+
+import java.awt.Dimension;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -6,6 +14,12 @@ public class GamePanel extends JPanel {
 
 	public GamePanel() {
 		startGame();
+		Grid<Actor> grid = new BoundedGrid<Actor>(100,100);
+        ActorWorld world = new ActorWorld(grid);
+		this.setPreferredSize(new Dimension(500, 500));
+		world.add(new Location(5, 5),h);
+		
+		
 	}
 
 	public void startGame() {

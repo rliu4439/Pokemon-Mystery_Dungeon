@@ -1,8 +1,12 @@
-public class EnemyPokemon extends Pokemon{
+import info.gridworld.*;
+public class EnemyPokemon extends Pokemon  {
 
-	public EnemyPokemon(){
+	public EnemyPokemon() {
+
+	}
+
+	public void move() {
 	
 	}
-	
-	
+
 }
