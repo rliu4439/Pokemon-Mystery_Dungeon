@@ -1,5 +1,6 @@
 public abstract class Pokemon {
 	public int level;
+	public int topHp;
 	public int hp;
 	public int attack;
 	public int defense;
@@ -49,5 +50,6 @@ public abstract class Pokemon {
 			p.setHp(hp - (attack - defense));
 		}
 	}
+	
 
 }
