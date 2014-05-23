@@ -1,14 +1,18 @@
 import java.util.ArrayList;
 
 public class Hero extends Pokemon {
-	ArrayList<Items> items = new ArrayList<>();
+	ArrayList<Items> items = new ArrayList<>();// list containing items, in order of apple,
+												// grimyfood, then oranBerry, increment numberinbag to add item
 	int stamina = 100;
 	Pokemon main;
 
 	public Hero(Pokemon p) {
 		main = p;
+		
+		items.add(new Apple());
+		items.add(new GrimyFood());
 		items.add(new OranBerry());
-		System.out.println(items.get(0).numberInBag);
+		
 
 	}
 

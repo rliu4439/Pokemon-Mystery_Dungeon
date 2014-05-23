@@ -1,13 +1,17 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
+
 import info.gridworld.*;
+import info.gridworld.grid.BoundedGrid;
+import info.gridworld.grid.Location;
 
 public class Dungeon {
 	private BoundedGrid dungeon;
 //	private int numOfRooms;
 //	private ArrayList<Integer> widthRoom = new ArrayList<Integer>();
 //	private ArrayList<Integer> lengthRoom = new ArrayList<Integer>();
-	private Arraylist<Room> rooms = new ArrayList<Room>();
+	private ArrayList<Room> rooms = new ArrayList<Room>();
 	public Dungeon (int width, int length){
 		dungeon = new BoundedGrid(length, width);
 		for (int a = 0; a < dungeon.getNumRows(); a++)
@@ -31,8 +35,8 @@ public class Dungeon {
 	}
 
 	private void initCorridors() {
-		private boolean check = false;
-		private ArrayList<Location> locs = new ArrayList<Location>();
+		 boolean check = false;
+		ArrayList<Location> locs = new ArrayList<Location>();
 		for (int a = 0; a < rooms.size(); a++){
 			Collections.shuffle(rooms);
 			Room r1 = rooms.get(0);
@@ -53,7 +57,7 @@ public class Dungeon {
 			int x = rand.nextInt(dungeon.getNumCols() - width);
 			int y = rand.nextInt(dungeon.getNumRows() - length);
 			r = new Room(x, y, width, length);
-			if (!r.overlap())
+			if (!r.overlap(dungeon))
 				break;
 		}
 		rooms.add(r);
