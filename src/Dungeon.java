@@ -82,6 +82,7 @@ public class Dungeon {
 	}
 	
 	private ArrayList<Location> placeCorridors(Location l, l1) {
+		ArrayList<Location> spaces = new ArrayList<Location>();
 		while (!l.equals(l1)){
 			int point = l.getDirectionToward(l1);
 			ArrayList<Location> locs = dungeon.getEmptyAdjacentLocations(l);
@@ -89,12 +90,23 @@ public class Dungeon {
 			ArrayList<Location> head = new ArrayList<Location>();
 			for (Location loc : locs){
 				int bam = this.getLocation().getDirectionToward(loc);
-				if (Math.abs(point - bam) == 90 || point - bam == 0)
-					head.add(loc);
+				if (dungeon.get(loc) instanceof String && !dungeon.get(loc).equals("R") && !spaces.contains(dungeon.get(loc))){
+					if (point % 10 == 0 && (Math.abs(point - bam) == 90 || point - bam == 0))
+						head.add(loc);
+					else if (point % 10 != 0 && (Math.abs(point - bam) == 45)
+						head.add(loc);
+				}
 			}
-			dungeon.p
-   		 	return head;
+			Location chosen;
+			Collections.shuffle(head)
+			if (point % 10 != 0)
+				chosen = head.get(0);
+			else
+				Random rand = new Random();
+				int chance = rand.nextInt(10) + 1; //70% straight, 15% side
+				
 		}
+		return head;
 	}
 	
 	private void placeRoom(int width, int length) {
