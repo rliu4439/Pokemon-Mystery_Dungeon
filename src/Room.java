@@ -20,7 +20,7 @@ private int length;
 	public boolean corridorConnection(Grid d){
 	int t = y-1;
 		for (int b = 0; b < 2; b++){
-			for ( int a = x-1; a < x+width+1; a++){
+			for ( int a = x; a < x+width; a++){
 				Location l = new Location(t,a);
 				if (d.get(l).equalsTo("C")
 					return true;
@@ -29,7 +29,7 @@ private int length;
 		}
 	int s = x-1;
 		for( int c = 0; c < 2; c++){
-			for (int d = y-1; d<y+length+1; d++){
+			for (int d = y; d<y+length; d++){
 				Location l = new Location (d,s);
 				if (d.get(l)equalsTo("C")
 					return true;
