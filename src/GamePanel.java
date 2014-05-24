@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel {
 	Hero h;
 	ArrayList<Location> openSpaces;
+	ArrayList <Location> rooms;
+	ArrayList<Location> corridors;// need to place corridors/rooms after pokemon move
 	ActorWorld world;
 	BoundedGrid grid;
 	int numEnemies = 5;
@@ -56,26 +58,26 @@ public class GamePanel extends JPanel {
 		// TODO Auto-generated method stub
 		int pick = (int) (Math.random() * openSpaces.size());
 		Location l = openSpaces.get(pick);
+		String last =(String) grid.get(l);
 		int choose = (int) (Math.random() * 4);
 		openSpaces.remove(l);
 		switch (choose) {
 		case 0:
-			grid.put(l, new Cyndaquil(true));
+			grid.put(l, new Cyndaquil(true,last));
 			break;
 		case 1:
-			grid.put(l, new Mudkip(true));
+			grid.put(l, new Mudkip(true,last));
 			break;
 		case 2:
-			grid.put(l, new Munchlax(true));
+			grid.put(l, new Munchlax(true,last));
 			break;
 		case 3:
-			grid.put(l, new Pichu(true));
+			grid.put(l, new Pichu(true,last));
 		}
 
 	}
 
 	private void choosePokemon() {
-		// TODO Auto-generated method stub
 		PersonalityTest test = new PersonalityTest();
 		Pokemon p = test.chooseCharacter();
 		h = new Hero(p);
@@ -84,7 +86,6 @@ public class GamePanel extends JPanel {
 
 	@Override
 	public void paintComponent(Graphics g) {
-		// TODO Auto-generated method stub
 		super.paintComponent(g);
 		drawDungeon(g);
 

@@ -5,8 +5,8 @@ public class Pichu extends Pokemon {
 //	private int attack = 4;
 //	private int defense = 1;
 
-	public Pichu(boolean enemy) {
-		super(enemy,10,4,1,1);
+	public Pichu(boolean enemy,String last) {
+		super(enemy,10,4,1,1, last);
 
 
 	}

@@ -6,42 +6,44 @@ import info.gridworld.*;
 import info.gridworld.grid.BoundedGrid;
 import info.gridworld.grid.Location;
 
-public class Dungeon {//"R" represents Room, "W" represents wall
+public class Dungeon {// "R" represents Room, "W" represents wall
 	private BoundedGrid dungeon;
-//	private int numOfRooms;
-//	private ArrayList<Integer> widthRoom = new ArrayList<Integer>();
-//	private ArrayList<Integer> lengthRoom = new ArrayList<Integer>();
+	// private int numOfRooms;
+	// private ArrayList<Integer> widthRoom = new ArrayList<Integer>();
+	// private ArrayList<Integer> lengthRoom = new ArrayList<Integer>();
 	private ArrayList<Room> rooms = new ArrayList<Room>();
-	private ArrayList<ArrayList<Location>> corridors =  ArrayList<ArrayList<Location>>();
-	public Dungeon (int width, int length){
+	private ArrayList<ArrayList<Location>> corridors = new ArrayList<ArrayList<Location>>();
+	private ArrayList<Location> roomLocs = new ArrayList<Location>();
+	
+	public Dungeon(int width, int length) {
 		dungeon = new BoundedGrid(length, width);
 		for (int a = 0; a < dungeon.getNumRows(); a++)
-			for (int b = 0; b < dungeon.getNumCols(); b++){
+			for (int b = 0; b < dungeon.getNumCols(); b++) {
 				Location l = new Location(a, b);
 				dungeon.put(l, "W");
 			}
-		
+
 		generateDungeon();
-//		dungeon = new String[length][width]; //length is number of rows, width is the number of cols
-//		for (int a = 0; a < dungeon.length; a++)
-//			for (int b = 0; b < dungeon[0].length; b++)
-//				dungeon[a][b] = "w";
+		// dungeon = new String[length][width]; //length is number of rows,
+		// width is the number of cols
+		// for (int a = 0; a < dungeon.length; a++)
+		// for (int b = 0; b < dungeon[0].length; b++)
+		// dungeon[a][b] = "w";
 	}
-	
+
 	public BoundedGrid getDungeon() {
 		return dungeon;
 	}
 
-
-	private void generateDungeon(){
-	initRooms();
-//	placeRoom();
-	initCorridors();
+	private void generateDungeon() {
+		initRooms();
+		// placeRoom();
+		initCorridors();
 	}
-	
+
 	private void initCorridors() {
-		private ArrayList<Location> locs = new ArrayList<Location>();
-		private ArrayList<Location> locs1 = new ArrayList<Location>();
+		 ArrayList<Location> locs = new ArrayList<Location>();
+		 ArrayList<Location> locs1 = new ArrayList<Location>();
 		for (int a = 0; a < rooms.size(); a++){
 			Collections.shuffle(rooms);
 			Room r1 = rooms.get(0);
@@ -81,7 +83,7 @@ public class Dungeon {//"R" represents Room, "W" represents wall
 			Collections.shuffle(locs1);
 			corridors.add(placeCorridors(locs.get(0), locs1.get(0)));
 		}
-		ArrayList<Room> roomsLeft - new ArrayList<Room>();
+		ArrayList<Room> roomsLeft = new ArrayList<Room>();
 		for (Room r: rooms)
 			if (!r.corridorConnection(dungeon)){
 				roomsLeft.add(r);
@@ -101,7 +103,7 @@ public class Dungeon {//"R" represents Room, "W" represents wall
 			for (int b = 0; b < 2; b++){
 				for ( int a = d1[0]; a < d1[0]+width; a++)
 					locs.add(new Location(t,a));
-				t= d1[1] + length + 1
+				t= d1[1] + length + 1;
 			}
 			int s = d1[0]-1;
 			for( int c = 0; c < 2; c++){
@@ -128,35 +130,37 @@ public class Dungeon {//"R" represents Room, "W" represents wall
 			Collections.shuffle(locs1);
 			corridors.add(placeCorridors(locs.get(0), locs1.get(0)));
 		}
-		for (Room r : rooms){
-			int[] dim = r.getDimensions();
+		for (Room ro : rooms){
+			int[] dim = ro.getDimensions();
 			for (int a = dim[0]; a < dim[2]; a++)
 				for (int b = dim[1]; b < dim[3]; b++){
 					Location loc = new Location(b, a);
-					dungeon.put(loc, "R");
+					dungeon.put(loc, "R");//don't the rooms already have "R" from placeRooms?
 				}
 		}
 	}
-	
-	private ArrayList<Location> placeCorridors(Location l, l1) {
+
+	private ArrayList<Location> placeCorridors(Location l, Location l1) {
 		ArrayList<Location> spaces = new ArrayList<Location>();
 		spaces.add(l);
 		while (!l.equals(l1)){
 			int point = l.getDirectionToward(l1);
 			ArrayList<Location> locs = dungeon.getEmptyAdjacentLocations(l);
-			locs.add(dungeon.getOccupiedAdjacentLocations(l))
+			locs.addAll(dungeon.getOccupiedAdjacentLocations(l));
 			ArrayList<Location> head = new ArrayList<Location>();
 			for (Location loc : locs){
 				int bam = this.getLocation().getDirectionToward(loc);
 //				if (dungeon.get(loc) instanceof String && !dungeon.get(loc).equals("R")){
 				if (point % 10 == 0 && (Math.abs(point - bam) == 90 || point - bam == 0))
 					head.add(loc);
-				else if (point % 10 != 0 && (Math.abs(point - bam) == 45)
+				else if (point % 10 != 0 && (Math.abs(point - bam) == 45){
 					head.add(loc);
+
+				}
 //				}
 			}
 			Location chosen;
-			Collections.shuffle(head)
+			Collections.shuffle(head);
 			if (point % 10 != 0)
 				chosen = head.get(0);
 			else{
@@ -177,36 +181,39 @@ public class Dungeon {//"R" represents Room, "W" represents wall
 			}
 			dungeon.put(chosen, "C");
 			l = chosen;
-			spaces.add(l)
+			spaces.add(l);
 		}
 		return spaces;
 	}
-	
+
 	private void placeRoom(int width, int length) {
 		Random rand = new Random();
-		Room r;
-		for (int a = 0; a < 1000; a++){
+		Room r = null;
+
+		for (int a = 0; a < 1000; a++) {
 			int x = rand.nextInt(dungeon.getNumCols() - width);
 			int y = rand.nextInt(dungeon.getNumRows() - length);
 			r = new Room(x, y, width, length);
 			if (!r.overlap(dungeon))
 				break;
+			
 		}
 		rooms.add(r);
-		for (int a = x; a < width; a++)
-			for (int b = y; b < length; b++){
+		for (int a = r.getX(); a < width; a++)
+			for (int b = r.getY(); b < length; b++) {
 				Location loc = new Location(b, a);
 				dungeon.put(loc, "R");
-			}	
+				roomLocs.add(loc);
+			}
 	}
 
 	private void initRooms() {
 		Random rand = new Random();
 		int a = dungeon.getNumRows() * dungeon.getNumCols();
-		int numOfRooms = rand.nextInt(a/1000) + 2;
-		for(int b=0; b<numOfRooms;b++){
-			int w = (int) (Math.random()*5+5); //width
-			int l = (int) (Math.random()*5+5); //length
+		int numOfRooms = rand.nextInt(a / 1000) + 2;
+		for (int b = 0; b < numOfRooms; b++) {
+			int w = (int) (Math.random() * 5 + 5); // width
+			int l = (int) (Math.random() * 5 + 5); // length
 			placeRoom(w, l);
 
 		}

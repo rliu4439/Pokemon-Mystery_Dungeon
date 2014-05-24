@@ -1,4 +1,8 @@
-/EnemyPokemon.class
+/AlliedPokemon.class
+/Apple.class
+/Cyndaquil.class
+/Dungeon.class
+/DungeonDriver.class
 /GamePanel.class
 /GrimyFood.class
 /Hero.class
@@ -11,8 +15,3 @@
 /Pikachu.class
 /Pokemon.class
 /Room.class
-/AlliedPokemon.class
-/Apple.class
-/Cyndaquil.class
-/Dungeon.class
-/DungeonDriver.class
