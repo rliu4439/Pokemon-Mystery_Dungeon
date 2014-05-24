@@ -7,7 +7,7 @@ public class Dungeon {//"R" represents Room, "W" represents wall
 //	private int numOfRooms;
 //	private ArrayList<Integer> widthRoom = new ArrayList<Integer>();
 //	private ArrayList<Integer> lengthRoom = new ArrayList<Integer>();
-	private Arraylist<Room> rooms = new ArrayList<Room>();
+	private ArrayList<Room> rooms = new ArrayList<Room>();
 	private ArrayList<ArrayList<Location>> corridors =  ArrayList<ArrayList<Location>>();
 	public Dungeon (int width, int length){
 		dungeon = new BoundedGrid(length, width);
