@@ -8,14 +8,14 @@ public class Hero extends Pokemon {
 
 	public Hero(Pokemon p) {
 		main = p;
-		
+		main.setEnemy(false);
 		items.add(new Apple());
 		items.add(new GrimyFood());
 		items.add(new OranBerry());
 		
 
 	}
-
+	
 	public boolean checkHP() {// if hp below 0, game over/restart
 		if (main.getHp() < 0) {
 			return false;
