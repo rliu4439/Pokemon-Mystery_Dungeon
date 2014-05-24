@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import info.gridworld.*;
 
-public class Dungeon {
-	private BoundedGrid dungeon; // my new branch that I want to merge right now
+public class Dungeon {//"R" represents a Room, "W" represents wall
+	private BoundedGrid dungeon;
 //	private int numOfRooms;
 //	private ArrayList<Integer> widthRoom = new ArrayList<Integer>();
 //	private ArrayList<Integer> lengthRoom = new ArrayList<Integer>();
