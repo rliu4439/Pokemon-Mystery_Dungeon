@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import info.gridworld.*;
 
-public class Dungeon {//"R" represents a Room, "W" represents wall
+public class Dungeon {//"R" represents Room, "W" represents wall
 	private BoundedGrid dungeon;
 //	private int numOfRooms;
 //	private ArrayList<Integer> widthRoom = new ArrayList<Integer>();
