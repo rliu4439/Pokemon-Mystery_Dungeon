@@ -12,6 +12,7 @@ public class Dungeon {//"R" represents Room, "W" represents wall
 //	private ArrayList<Integer> widthRoom = new ArrayList<Integer>();
 //	private ArrayList<Integer> lengthRoom = new ArrayList<Integer>();
 	private ArrayList<Room> rooms = new ArrayList<Room>();
+	private ArrayList<ArrayList<Location>> corridors =  ArrayList<ArrayList<Location>>();
 	public Dungeon (int width, int length){
 		dungeon = new BoundedGrid(length, width);
 		for (int a = 0; a < dungeon.getNumRows(); a++)
@@ -40,8 +41,7 @@ public class Dungeon {//"R" represents Room, "W" represents wall
 	}
 
 	private void initCorridors() {
-		 boolean check = false;
-		ArrayList<Location> locs = new ArrayList<Location>();
+		private ArrayList<Location> locs = new ArrayList<Location>();
 		for (int a = 0; a < rooms.size(); a++){
 			Collections.shuffle(rooms);
 			Room r1 = rooms.get(0);
