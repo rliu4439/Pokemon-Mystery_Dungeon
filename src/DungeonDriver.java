@@ -24,7 +24,7 @@ public class DungeonDriver {
 			}
 		}
 		
-		JFrame jf = new JFrame("Asteriods");
+		JFrame jf = new JFrame("Pokemon: Mystery Dungeon 1.0");
 		SwingUtilities.updateComponentTreeUI(jf);
 		jf.setDefaultCloseOperation(jf.EXIT_ON_CLOSE);
 		jf.add(new GamePanel());
