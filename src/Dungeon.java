@@ -54,29 +54,29 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			//first room, get border w/o corners
 			int t = d1[1] - 1;
 			for (int b = 0; b < 2; b++){
-				for ( int a = d1[0]; a < d1[0]+width; a++)
+				for ( int a = d1[0]; a < d1[0]+d1[2]; a++)
 					locs.add(new Location(t,a));
-				t= d1[1] + length + 1
+				t= d1[1] + d1[3] + 1;
 			}
 			int s = d1[0]-1;
 			for( int c = 0; c < 2; c++){
-				for (int d = d1[1]; d<d1[1]+length; d++)
+				for (int d = d1[1]; d<d1[1]+d1[3]; d++)
 					locs.add(new Location(d, s);
-				s= d1[0] + width + 1;
+				s= d1[0] + d1[2] + 1;
 			}
 			
 			//second room, get border w/o corners
 			t = d2[1] - 1;
 			for (int b = 0; b < 2; b++){
-				for ( int a = d2[0]; a < d2[0]+width; a++)
+				for ( int a = d2[0]; a < d2[0]+d2[2]; a++)
 					locs1.add(new Location(t,a));
-				t= d2[1] + length + 1
+				t= d2[1] + d2[3] + 1;
 			}
 			s = d2[0]-1;
 			for( int c = 0; c < 2; c++){
-				for (int d = d2[1]; d<d2[1]+length; d++)
+				for (int d = d2[1]; d<d2[1]+d2[3]; d++)
 					locs1.add(new Location(d, s);
-				s= d2[0] + width + 1;
+				s= d2[0] + d2[2] + 1;
 			}
 			
 			Collections.shuffle(locs);
