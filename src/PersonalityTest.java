@@ -100,21 +100,21 @@ public class PersonalityTest {
 		System.out.println("counter is " + counter);
 		if (counter == 0) {
 			System.out.println("got here");
-			Pokemon a = new Pichu(false);
+			Pokemon a = new Pichu(false,"R");
 			JOptionPane.showMessageDialog(null, "You would be a Pichu!");
 			return a;
 		} else if (counter == 1 || counter == 4) {
 			System.out.println("here");
 
 			JOptionPane.showMessageDialog(null, "You would be a Munchlax!");
-			Pokemon a = new Munchlax(false);
+			Pokemon a = new Munchlax(false,"R");
 			return a;
 		} else if (counter == 2 || counter == 3) {
-			Pokemon a = new Mudkip(false);
+			Pokemon a = new Mudkip(false,"R");
 			JOptionPane.showMessageDialog(null, "You would be a Mudkip!");
 			return a;
 		} else if (counter == 5) {
-			Pokemon a = new Cyndaquil(false);
+			Pokemon a = new Cyndaquil(false,"R");
 			JOptionPane.showMessageDialog(null, "You would be a Cyndaquil!");
 			return a;
 		}
