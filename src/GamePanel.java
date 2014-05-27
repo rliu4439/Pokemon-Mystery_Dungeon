@@ -6,6 +6,7 @@ import info.gridworld.grid.Location;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -20,15 +21,17 @@ public class GamePanel extends JPanel {
 	ActorWorld world;
 	BoundedGrid grid;
 	int numEnemies = 9;
-	int numSteps=0;//number of steps taken by main character
+	int numSteps = 0;// number of steps taken by main character
+	Image wall;
+	Image floor;
 
 	public GamePanel() {
 		startGame();
 		Dungeon d = new Dungeon(50, 50);
 		openSpaces = d.getRoomLocs();// gets locations of the rooms/corridors
-		ArrayList<ArrayList<Location>> a= d.getCorridors();
-		for(ArrayList<Location> l:a){
-			for(int i=0;i<l.size();i++){
+		ArrayList<ArrayList<Location>> a = d.getCorridors();
+		for (ArrayList<Location> l : a) {
+			for (int i = 0; i < l.size(); i++) {
 				openSpaces.add(l.get(i));
 			}
 		}
@@ -59,7 +62,7 @@ public class GamePanel extends JPanel {
 		for (int i = 0; i < numEnemies; i++) {
 			addEnemy();
 		}
-		world.add(openSpaces.get((int) (Math.random()*openSpaces.size())),h);
+		world.add(openSpaces.get((int) (Math.random() * openSpaces.size())), h);
 	}
 
 	private void addEnemy() {
@@ -71,9 +74,9 @@ public class GamePanel extends JPanel {
 		openSpaces.remove(l);
 		switch (choose) {
 		case 0:
-			Cyndaquil a= new Cyndaquil(true, last);
-			world.add(l,a);
-			
+			Cyndaquil a = new Cyndaquil(true, last);
+			world.add(l, a);
+
 			break;
 		case 1:
 			world.add(l, new Mudkip(true, last));
@@ -102,8 +105,20 @@ public class GamePanel extends JPanel {
 	}
 
 	private void drawDungeon(Graphics g) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub]
+		for (int row = 0; row < grid.getNumRows() * 10; row += 10) {
+			for (int col = 0; col < grid.getNumCols() * 10; col += 10) {
+				if (grid.get(new Location(row, col)).equals("C")
+						|| grid.get(new Location(row, col)).equals("R")) {
+					g.drawImage(floor, row, col, 10, 10, null);
+				} else {
+
+					g.drawImage(wall, row, col, 10, 10, null);
+
+				}
+			}
+		}
+
 	}
 
 }
