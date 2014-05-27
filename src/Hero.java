@@ -4,6 +4,7 @@ public class Hero extends Pokemon {
 	ArrayList<Items> items = new ArrayList<>();// list containing items, in order of apple,
 												// grimyfood, then oranBerry, increment numberinbag to add item
 	int stamina = 100;
+	int steps = 0;
 	Pokemon main;
 
 	public Hero(Pokemon p) {
@@ -17,7 +18,7 @@ public class Hero extends Pokemon {
 	}
 	
 	public boolean checkHP() {// if hp below 0, game over/restart
-		if (main.getHp() < 0) {
+		if (main.getHp() <= 0) {
 			return false;
 		}
 		return true;
