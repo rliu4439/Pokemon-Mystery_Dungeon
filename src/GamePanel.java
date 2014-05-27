@@ -14,22 +14,30 @@ import javax.swing.JPanel;
 public class GamePanel extends JPanel {
 	Hero h;
 	ArrayList<Location> openSpaces;
-	ArrayList <Location> rooms;
-	ArrayList<Location> corridors;// need to place corridors/rooms after pokemon move
+	ArrayList<Location> rooms;
+	ArrayList<Location> corridors;// need to place corridors/rooms after pokemon
+									// move
 	ActorWorld world;
 	BoundedGrid grid;
-	int numEnemies = 5;
+	int numEnemies = 9;
+	int numSteps=0;//number of steps taken by main character
 
 	public GamePanel() {
-		// startGame();
-//		Dungeon d = new Dungeon(50, 50);
-//		openSpaces = d.getLocations();// gets locations of the rooms/corridors
-//		grid = d.getDungeon();
-		BoundedGrid grid = new BoundedGrid<>(10, 10);
+		startGame();
+		Dungeon d = new Dungeon(50, 50);
+		openSpaces = d.getRoomLocs();// gets locations of the rooms/corridors
+		ArrayList<ArrayList<Location>> a= d.getCorridors();
+		for(ArrayList<Location> l:a){
+			for(int i=0;i<l.size();i++){
+				openSpaces.add(l.get(i));
+			}
+		}
+		grid = d.getDungeon();
+		// BoundedGrid grid = new BoundedGrid<>(10, 10);
 		world = new ActorWorld(grid);
-		
+
 		this.setPreferredSize(new Dimension(500, 500));
-//		 grid.put(new Location(9,1), "C");
+		// grid.put(new Location(9,1), "C");
 		// for(int i=0;i<3;i++){
 		// for(int col=0;col<3;col++){
 		// grid.put(new Location(i,col), "C");
@@ -51,28 +59,30 @@ public class GamePanel extends JPanel {
 		for (int i = 0; i < numEnemies; i++) {
 			addEnemy();
 		}
-
+		world.add(openSpaces.get((int) (Math.random()*openSpaces.size())),h);
 	}
 
 	private void addEnemy() {
 		// TODO Auto-generated method stub
 		int pick = (int) (Math.random() * openSpaces.size());
 		Location l = openSpaces.get(pick);
-		String last =(String) grid.get(l);
+		String last = (String) grid.get(l);
 		int choose = (int) (Math.random() * 4);
 		openSpaces.remove(l);
 		switch (choose) {
 		case 0:
-			grid.put(l, new Cyndaquil(true,last));
+			Cyndaquil a= new Cyndaquil(true, last);
+			world.add(l,a);
+			
 			break;
 		case 1:
-			grid.put(l, new Mudkip(true,last));
+			world.add(l, new Mudkip(true, last));
 			break;
 		case 2:
-			grid.put(l, new Munchlax(true,last));
+			world.add(l, new Munchlax(true, last));
 			break;
 		case 3:
-			grid.put(l, new Pichu(true,last));
+			world.add(l, new Pichu(true, last));
 		}
 
 	}
@@ -93,7 +103,7 @@ public class GamePanel extends JPanel {
 
 	private void drawDungeon(Graphics g) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }

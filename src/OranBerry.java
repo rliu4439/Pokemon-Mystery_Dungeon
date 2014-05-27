@@ -2,7 +2,7 @@
 public class OranBerry extends Items {
 
 public OranBerry(){
-	super(100,20);
+	super(10,10);
 
 }
 
