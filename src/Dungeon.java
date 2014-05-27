@@ -40,6 +40,14 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		// placeRoom();
 		initCorridors();
 	}
+	
+	public ArrayList<ArrayList<Location>> getCorridors(){
+		return corridors;
+	}
+	
+	public ArrayList<Location> getRoomLocs(){
+		return roomLocs;
+	}
 
 	private void initCorridors() {
 		 ArrayList<Location> locs = new ArrayList<Location>();
