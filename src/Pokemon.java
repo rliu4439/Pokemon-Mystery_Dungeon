@@ -32,7 +32,7 @@ public abstract class Pokemon extends Actor {
 
 	public Pokemon() {
 	};
-	public void draw(Graphics g){
+	public void draw(Graphics g, int row, int col){
 		
 	}
 	
