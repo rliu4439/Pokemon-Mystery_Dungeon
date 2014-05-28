@@ -127,6 +127,18 @@ public class GamePanel extends JPanel {
 					g.drawImage(wall, row, col, 10, 10, null);
 
 				}
+				
+				if (grid.get(new Location(row, col)) instanceof Pokemon) {
+					Pokemon p = grid.get(new Location(row, col));
+					g.drawImage(floor, row, col, 10, 10, null);
+					p.draw(g, row, col);
+				}
+				
+				else if (grid.get(new Location(row, col)) instanceof Items) {
+					Items i = grid.get(new Location(row, col));
+					g.drawImage(floor, row, col, 10, 10, null);
+					i.draw(g, row, col);
+				}
 			}
 		}
 
