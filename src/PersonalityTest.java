@@ -97,6 +97,7 @@ public class PersonalityTest {
 				gotInput = false;
 			}
 		}
+		in.close();
 		System.out.println("counter is " + counter);
 		if (counter == 0) {
 			System.out.println("got here");

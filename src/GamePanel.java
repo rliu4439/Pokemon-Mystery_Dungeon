@@ -7,8 +7,11 @@ import info.gridworld.grid.Location;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -26,6 +29,14 @@ public class GamePanel extends JPanel {
 	Image floor;
 
 	public GamePanel() {
+		try {
+			wall= ImageIO.read(new File("src/image/Wall.png"));
+			floor=ImageIO.read(new File("src/image/Floor.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		startGame();
 		Dungeon d = new Dungeon(50, 50);
 		openSpaces = d.getRoomLocs();// gets locations of the rooms/corridors

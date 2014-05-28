@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -13,8 +14,10 @@ public abstract class Pokemon extends Actor {
 	protected int defense;
 	protected boolean enemy;
 	protected int x = 0;
-	protected String lastSpot;//String is the type of the last spot eg. corridor or room
-	private int dir; //dir = direction, stick with definitions as defined by Location Class
+	protected String lastSpot;// String is the type of the last spot eg.
+								// corridor or room
+	private int dir; // dir = direction, stick with definitions as defined by
+						// Location Class
 
 	public Pokemon(boolean enemy, int hp, int attack, int defense, int level,
 			String last) {
@@ -29,6 +32,9 @@ public abstract class Pokemon extends Actor {
 
 	public Pokemon() {
 	};
+	public void draw(Graphics g){
+		
+	}
 
 	public int getLevel() {
 		return level;
