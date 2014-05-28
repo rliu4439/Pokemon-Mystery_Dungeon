@@ -14,6 +14,7 @@ public abstract class Pokemon extends Actor {
 	protected boolean enemy;
 	protected int x = 0;
 	protected String lastSpot;//String is the type of the last spot eg. corridor or room
+	private int dir; //dir = direction, stick with definitions as defined by Location Class
 
 	public Pokemon(boolean enemy, int hp, int attack, int defense, int level,
 			String last) {
