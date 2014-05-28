@@ -35,6 +35,10 @@ public abstract class Pokemon extends Actor {
 	public void draw(Graphics g){
 		
 	}
+	
+	public String getLastSpot(){
+		return lastSpot;
+	}
 
 	public int getLevel() {
 		return level;
