@@ -23,6 +23,7 @@ public class GamePanel extends JPanel {
 									// move
 	ActorWorld world;
 	BoundedGrid grid;
+	String[][] land;
 	int numEnemies = 9;
 	int numSteps = 0;// number of steps taken by main character
 	Image wall;
@@ -33,21 +34,20 @@ public class GamePanel extends JPanel {
 			wall= ImageIO.read(new File("src/image/Wall.png"));
 			floor=ImageIO.read(new File("src/image/Floor.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		startGame();
 		Dungeon d = new Dungeon(50, 50);
 		openSpaces = d.getRoomLocs();// gets locations of the rooms/corridors
+		//startGame();
+		
 		ArrayList<ArrayList<Location>> a = d.getCorridors();
 		for (ArrayList<Location> l : a) {
 			for (int i = 0; i < l.size(); i++) {
 				openSpaces.add(l.get(i));
 			}
 		}
-		grid = d.getDungeon();
-		// BoundedGrid grid = new BoundedGrid<>(10, 10);
+		grid = d.getDungeon();/// change to land
+		// BoundedGrid USEgrid = new BoundedGrid<>(land.length,land[1].length);
 		world = new ActorWorld(grid);
 
 		this.setPreferredSize(new Dimension(500, 500));
@@ -129,13 +129,13 @@ public class GamePanel extends JPanel {
 				}
 				
 				if (grid.get(new Location(row, col)) instanceof Pokemon) {
-					Pokemon p = grid.get(new Location(row, col));
+					Pokemon p = (Pokemon) grid.get(new Location(row, col));
 					g.drawImage(floor, row, col, 10, 10, null);
 					p.draw(g, row, col);
 				}
 				
 				else if (grid.get(new Location(row, col)) instanceof Items) {
-					Items i = grid.get(new Location(row, col));
+					Items i = (Items) grid.get(new Location(row, col));
 					g.drawImage(floor, row, col, 10, 10, null);
 					i.draw(g, row, col);
 				}

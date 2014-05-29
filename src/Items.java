@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+
 
 public class Items {
 int healthChange;
@@ -16,6 +18,10 @@ public int getStaminaChange() {
 
 public void add(){// adds another item to bag
 	numberInBag++;
+}
+public void draw(Graphics g, int row, int col) {
+	// TODO Auto-generated method stub
+	
 }
 
 }
