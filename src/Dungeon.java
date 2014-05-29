@@ -201,16 +201,19 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 	private void placeRoom(int width, int length) {
 		Random rand = new Random();
 		Room r = null;
-
+		int b = 0;
 		for (int a = 0; a < 1000; a++) {
 			int x = rand.nextInt(dungeon.getNumCols() - width);
 			int y = rand.nextInt(dungeon.getNumRows() - length);
 			r = new Room(x, y, width, length);
+			b=a;
 			if (!r.overlap(dungeon))
 				break;
 
 		}
-		rooms.add(r);
+		if (!b==1000)
+			rooms.add(r);
+			
 		for (int a = r.getX(); a < width; a++)
 			for (int b = r.getY(); b < length; b++) {
 				Location loc = new Location(b, a);
