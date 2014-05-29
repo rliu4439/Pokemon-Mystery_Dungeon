@@ -45,4 +45,10 @@ public class Hero extends Pokemon {
 			stamina = 100;
 		}
 	}
+	
+	public void staminaLoss(){
+		stamina--;
+	}
+	
+	
 }
