@@ -15,8 +15,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class GamePanel extends JPanel {
-	Hero h;
+public class GamePanel extends JPanel {// change grid to land to hold locations
+										// w/ strings
+	Hero h; // place pokemon and items in the gridworld but put wall, floor in
+			// array
 	ArrayList<Location> openSpaces;
 	ArrayList<Location> rooms;
 	ArrayList<Location> corridors;// need to place corridors/rooms after pokemon
@@ -31,38 +33,27 @@ public class GamePanel extends JPanel {
 
 	public GamePanel() {
 		try {
-			wall= ImageIO.read(new File("src/image/Wall.png"));
-			floor=ImageIO.read(new File("src/image/Floor.png"));
+			wall = ImageIO.read(new File("src/image/Wall.png"));
+			floor = ImageIO.read(new File("src/image/Floor.png"));// reads in
+																	// pictures
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Dungeon d = new Dungeon(50, 50);
+		Dungeon d = new Dungeon(50, 50);// creates a dungeon
 		openSpaces = d.getRoomLocs();// gets locations of the rooms/corridors
-		//startGame();
-		
+		// startGame();
+
 		ArrayList<ArrayList<Location>> a = d.getCorridors();
 		for (ArrayList<Location> l : a) {
 			for (int i = 0; i < l.size(); i++) {
 				openSpaces.add(l.get(i));
 			}
 		}
-		grid = d.getDungeon();/// change to land
+		grid = d.getDungeon();// / change to land
 		// BoundedGrid USEgrid = new BoundedGrid<>(land.length,land[1].length);
 		world = new ActorWorld(grid);
 
 		this.setPreferredSize(new Dimension(500, 500));
-		// grid.put(new Location(9,1), "C");
-		// for(int i=0;i<3;i++){
-		// for(int col=0;col<3;col++){
-		// grid.put(new Location(i,col), "C");
-		// }
-		// }
-
-		// ArrayList<Actor> a=grid.getNeighbors(new Location(1,1));
-		// for(Actor ac:a){
-		// System.out.println(ac);
-		// }
-		// world.add(new Location(5, 5),h);
 
 	}
 
@@ -117,23 +108,22 @@ public class GamePanel extends JPanel {
 
 	private void drawDungeon(Graphics g) {
 		// TODO Auto-generated method stub]
-		for (int row = 0; row < grid.getNumRows() * 10; row += 10) {
-			for (int col = 0; col < grid.getNumCols() * 10; col += 10) {
-				if (grid.get(new Location(row, col)).equals("C")
-						|| grid.get(new Location(row, col)).equals("R")) {
+		for (int row = 0; row < land.length * 10; row += 10) {
+			for (int col = 0; col < land[0].length * 10; col += 10) {
+				if (land[row][col].equals("C") || land[row][col].equals("R")) {
 					g.drawImage(floor, row, col, 10, 10, null);
 				} else {
 
 					g.drawImage(wall, row, col, 10, 10, null);
 
 				}
-				
+
 				if (grid.get(new Location(row, col)) instanceof Pokemon) {
 					Pokemon p = (Pokemon) grid.get(new Location(row, col));
 					g.drawImage(floor, row, col, 10, 10, null);
 					p.draw(g, row, col);
 				}
-				
+
 				else if (grid.get(new Location(row, col)) instanceof Items) {
 					Items i = (Items) grid.get(new Location(row, col));
 					g.drawImage(floor, row, col, 10, 10, null);

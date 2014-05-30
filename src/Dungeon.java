@@ -155,7 +155,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		ArrayList<Location> spaces = new ArrayList<Location>();
 		spaces.add(l);
 		while (!l.equals(l1)) {
-			int point = l.getDirectionToward(l1);
+			int point = l.getDirectionToward(l1);//gets direction from room 1 to room 2
 			ArrayList<Location> locs = dungeon.getEmptyAdjacentLocations(l);
 			locs.addAll(dungeon.getOccupiedAdjacentLocations(l));
 			ArrayList<Location> head = new ArrayList<Location>();
@@ -211,12 +211,12 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 				break;
 
 		}
-		if (!b==1000)
+		if (b!=1000)
 			rooms.add(r);
 			
 		for (int a = r.getX(); a < width; a++)
-			for (int b = r.getY(); b < length; b++) {
-				Location loc = new Location(b, a);
+			for (int c = r.getY(); c < length; c++) {
+				Location loc = new Location(c, a);
 				dungeon.put(loc, "R");
 				roomLocs.add(loc);
 			}
