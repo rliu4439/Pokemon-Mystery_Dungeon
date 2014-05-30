@@ -32,13 +32,13 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	Image floor;
 
 	public GamePanel() {
-		try {
-			wall = ImageIO.read(new File("src/image/Wall.png"));
-			floor = ImageIO.read(new File("src/image/Floor.png"));// reads in
-																	// pictures
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			wall = ImageIO.read(new File("src/image/Wall.png"));
+//			floor = ImageIO.read(new File("src/image/Floor.png"));// reads in
+//																	// pictures
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		Dungeon d = new Dungeon(50, 50);// creates a dungeon
 		openSpaces = d.getRoomLocs();// gets locations of the rooms/corridors
 		// startGame();

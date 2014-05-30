@@ -57,7 +57,7 @@ public class Room {
 				if (a > -1 && a < d.getNumCols() && b > -1
 						&& b > d.getNumRows()) {
 					Location l = new Location(a, b);
-					if (d.get(l) instanceof Room)
+					if (d.get(l) instanceof String && d.get(l).equals("R"))
 						return true;
 				}
 			}

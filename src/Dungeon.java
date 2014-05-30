@@ -55,7 +55,9 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		for (int a = 0; a < rooms.size(); a++) {
 			Collections.shuffle(rooms);
 			Room r1 = rooms.get(0);
+			System.out.println("Y: " + r1.getY());
 			Room r2 = rooms.get(1);
+			System.out.println("Y: " + r2.getY());
 			int[] d1 = r1.getDimensions();
 			int[] d2 = r2.getDimensions();
 
@@ -205,6 +207,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		for (int a = 0; a < 1000; a++) {
 			int x = rand.nextInt(dungeon.getNumCols() - width);
 			int y = rand.nextInt(dungeon.getNumRows() - length);
+			System.out.println(dungeon.getNumCols() + " " + dungeon.getNumRows() + " " + x + " " + y);
 			r = new Room(x, y, width, length);
 			b=a;
 			if (!r.overlap(dungeon))
