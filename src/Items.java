@@ -1,27 +1,27 @@
 import java.awt.Graphics;
 
 
-public class Items {
-int healthChange;
-int staminaChange;
-int numberInBag;
-public Items(int health,int stamina){
-	healthChange=health;
-	staminaChange=stamina;
-}
-public int getHealthChange() {
-	return healthChange;
-}
-public int getStaminaChange() {
-	return staminaChange;
-}
-
-public void add(){// adds another item to bag
-	numberInBag++;
-}
-public void draw(Graphics g, int row, int col) {
-	// TODO Auto-generated method stub
+public abstract class Items {
+	int healthChange;
+	int staminaChange;
+	int numberInBag;
+	public Items(int health,int stamina){
+		healthChange=health;
+		staminaChange=stamina;
+	}
+	public int getHealthChange() {
+		return healthChange;
+	}
+	public int getStaminaChange() {
+		return staminaChange;
+	}
 	
-}
+	public void add(){// adds another item to bag
+		numberInBag++;
+	}
+	public abstract void draw(Graphics g, int row, int col) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
