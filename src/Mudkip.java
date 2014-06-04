@@ -31,7 +31,9 @@ public class Mudkip extends Pokemon{
 		}
 
 	}
-	public void draw(Graphics g) {// draws pokemon according to their direction
+	@Override
+	public void draw(Graphics g, int row, int col) {
+		// TODO Auto-generated method stub
 		int direction = this.getDirection();
 		if (direction == Location.EAST) {
 			this.currentImage = right;
@@ -43,4 +45,5 @@ public class Mudkip extends Pokemon{
 			currentImage = front;
 		}
 	}
+
 }
