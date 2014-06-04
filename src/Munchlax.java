@@ -22,10 +22,10 @@ public class Munchlax extends Pokemon {
 	public Munchlax(boolean enemy, String last) {
 		super(enemy, 16, 1, 3, 1, last);
 		try {
-			back = ImageIO.read(new File("src/image/pichu/pichu-back.png"));
-			front = ImageIO.read(new File("src/image/pichu/pichu-forward.png"));
-			left = ImageIO.read(new File("src/image/pichu/pichu-left.png"));
-			right = ImageIO.read(new File("src/image/pichu/pichu-right.png"));
+			back = ImageIO.read(new File("src/image/munchlax/munchlax-backward.png"));
+			front = ImageIO.read(new File("src/image/munchlax/munchlax-forward.png"));
+			left = ImageIO.read(new File("src/image/munchlax/munchlax-left.png"));
+			right = ImageIO.read(new File("src/image/munchlax/munchlax-right.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
