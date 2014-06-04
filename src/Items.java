@@ -19,9 +19,6 @@ public abstract class Items {
 	public void add(){// adds another item to bag
 		numberInBag++;
 	}
-	public abstract void draw(Graphics g, int row, int col) {
-		// TODO Auto-generated method stub
-		
-	}
+	public abstract void draw(Graphics g, int row, int col);
 
 }

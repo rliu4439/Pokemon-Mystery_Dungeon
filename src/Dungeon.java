@@ -31,8 +31,14 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		// dungeon[a][b] = "w";
 	}
 
-	public BoundedGrid getDungeon() {
-		return dungeon;
+	public String[][] getDungeon() {
+		String[][] retu = new String[dungeon.getNumRows()][dungeon.getNumCols()];
+		for (int row = 0; row < dungeon.getNumRows(); row++) {
+			for (int col = 0; col < dungeon.getNumCols(); col++) {
+				retu[row][col] = (String) dungeon.get(new Location(row, col));
+			}
+		}
+		return retu;
 	}
 
 	private void generateDungeon() {
@@ -55,9 +61,9 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		for (int a = 0; a < rooms.size(); a++) {
 			Collections.shuffle(rooms);
 			Room r1 = rooms.get(0);
-			System.out.println("Y: " + r1.getY());//-Integer.MAX_VALUE
+			System.out.println("Y: " + r1.getY());// -Integer.MAX_VALUE
 			Room r2 = rooms.get(1);
-			System.out.println("Y: " + (r2.getY()));//-Integer.MAX_VALUE
+			System.out.println("Y: " + (r2.getY()));// -Integer.MAX_VALUE
 			int[] d1 = r1.getDimensions();
 			int[] d2 = r2.getDimensions();
 
@@ -95,53 +101,54 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		}
 		ArrayList<Room> roomsLeft = new ArrayList<Room>();
 		for (Room r : rooms)
-			if (!r.corridorConnection(dungeon)) {
+			if (!r.corridorConnection(dungeon))
 				roomsLeft.add(r);
-				while (roomsLeft.size() > 0) {
-					Collections.shuffle(rooms);
-					Room r1 = rooms.get(0);
-					Room r2 = rooms.get(1);
-					if (roomsLeft.contains(r1))
-						roomsLeft.remove(r1);
-					if (roomsLeft.contains(r2))
-						roomsLeft.remove(r2);
-					int[] d1 = r1.getDimensions();
-					int[] d2 = r2.getDimensions();
+		
+		while (roomsLeft.size() > 0) {
+			Collections.shuffle(rooms);
+			Room r1 = rooms.get(0);
+			Room r2 = rooms.get(1);
+			if (roomsLeft.contains(r1))
+				roomsLeft.remove(r1);
+			if (roomsLeft.contains(r2))
+				roomsLeft.remove(r2);
+			int[] d1 = r1.getDimensions();
+			int[] d2 = r2.getDimensions();
 
-					// first room, get border w/o corners
-					int t = d1[1] - 1;
-					for (int b = 0; b < 2; b++) {
-						for (int e = d1[0]; e < d1[0] + d1[2]; e++)
-							locs.add(new Location(t, e));
-						t = d1[1] + d1[3] + 1;
-					}
-					int s = d1[0] - 1;
-					for (int c = 0; c < 2; c++) {
-						for (int d = d1[1]; d < d1[1] + d1[3]; d++)
-							locs.add(new Location(d, s));
-						s = d1[0] + d1[2] + 1;
-					}
-
-					// second room, get border w/o corners
-					t = d2[1] - 1;
-					for (int b = 0; b < 2; b++) {
-						for (int e = d2[0]; e < d2[0] + d2[2]; e++)
-							locs1.add(new Location(t, e));
-						t = d2[1] + d2[3] + 1;
-					}
-					s = d2[0] - 1;
-					for (int c = 0; c < 2; c++) {
-						for (int d = d2[1]; d < d2[1] + d2[3]; d++)
-							locs1.add(new Location(d, s));
-						s = d2[0] + d2[2] + 1;
-					}
-
-				}
-
-				Collections.shuffle(locs);
-				Collections.shuffle(locs1);
-				corridors.add(placeCorridors(locs.get(0), locs1.get(0)));
+			// first room, get border w/o corners
+			int t = d1[1] - 1;
+			for (int b = 0; b < 2; b++) {
+				for (int e = d1[0]; e < d1[0] + d1[2]; e++)
+					locs.add(new Location(t, e));
+				t = d1[1] + d1[3] + 1;
 			}
+			int s = d1[0] - 1;
+			for (int c = 0; c < 2; c++) {
+				for (int d = d1[1]; d < d1[1] + d1[3]; d++)
+					locs.add(new Location(d, s));
+				s = d1[0] + d1[2] + 1;
+			}
+
+			// second room, get border w/o corners
+			t = d2[1] - 1;
+			for (int b = 0; b < 2; b++) {
+				for (int e = d2[0]; e < d2[0] + d2[2]; e++)
+					locs1.add(new Location(t, e));
+				t = d2[1] + d2[3] + 1;
+			}
+			s = d2[0] - 1;
+			for (int c = 0; c < 2; c++) {
+				for (int d = d2[1]; d < d2[1] + d2[3]; d++)
+					locs1.add(new Location(d, s));
+				s = d2[0] + d2[2] + 1;
+			}
+
+		}
+
+		Collections.shuffle(locs);
+		Collections.shuffle(locs1);
+		corridors.add(placeCorridors(locs.get(0), locs1.get(0)));
+		
 		for (Room ro : rooms) {
 			int[] dim = ro.getDimensions();
 			for (int a = dim[0]; a < dim[2]; a++)
@@ -157,7 +164,8 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		ArrayList<Location> spaces = new ArrayList<Location>();
 		spaces.add(l);
 		while (!l.equals(l1)) {
-			int point = l.getDirectionToward(l1);//gets direction from room 1 to room 2
+			int point = l.getDirectionToward(l1);// gets direction from room 1
+													// to room 2
 			ArrayList<Location> locs = dungeon.getEmptyAdjacentLocations(l);
 			locs.addAll(dungeon.getOccupiedAdjacentLocations(l));
 			ArrayList<Location> head = new ArrayList<Location>();
@@ -205,21 +213,23 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		Room r = null;
 		int b = 0;
 		for (int a = 0; a < 1000; a++) {
-			int x = rand.nextInt(dungeon.getNumCols() - width);
-			int y = rand.nextInt(dungeon.getNumRows() - length);
-			System.out.println(dungeon.getNumCols() + " " + dungeon.getNumRows() + " " + x + " " + y);
+			int x = rand.nextInt(dungeon.getNumCols() - width - 1);
+			int y = rand.nextInt(dungeon.getNumRows() - length - 1);
+			System.out.println(dungeon.getNumCols() + " "
+					+ dungeon.getNumRows() + " " + x + " " + y);
 			r = new Room(x, y, width, length);
-			
-			b=a;
-			System.out.println("place room y :"+r.getY());
-			if (!r.overlap(dungeon)){
-				
-				break;}
+
+			b = a;
+			System.out.println("place room y :" + r.getY());
+			if (!r.overlap(dungeon)) {
+
+				break;
+			}
 
 		}
-		if (b!=1000)
+		if (b != 1000)
 			rooms.add(r);
-		
+
 		for (int a = r.getX(); a < width; a++)
 			for (int c = r.getY(); c < length; c++) {
 				Location loc = new Location(c, a);
@@ -233,8 +243,8 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		int a = dungeon.getNumRows() * dungeon.getNumCols();
 		int numOfRooms = rand.nextInt(a / 1000) + 2;
 		for (int b = 0; b < numOfRooms; b++) {
-			int w = (int) (Math.random() * 5 + 5); // width
-			int l = (int) (Math.random() * 5 + 5); // length
+			int w = (int) (Math.random() * 10 + 15); // width
+			int l = (int) (Math.random() * 10 + 15); // length
 			placeRoom(w, l);
 
 		}

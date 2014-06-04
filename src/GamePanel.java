@@ -34,29 +34,29 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	public GamePanel() {
 		try {
 			wall = ImageIO.read(new File("src/image/Wall.png"));
-			floor = ImageIO.read(new File("src/image/Floor.png"));
-		// reads in
+			floor = ImageIO.read(new File("src/image/Floor.png"));// reads in
 																	// pictures
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-//		Mudkip m= new Mudkip(false, "W");
-//		Dungeon d = new Dungeon(50, 50);// creates a dungeon
-//		openSpaces = d.getRoomLocs();// gets locations of the rooms/corridors
-//		// startGame();
-//
-//		ArrayList<ArrayList<Location>> a = d.getCorridors();
-//		for (ArrayList<Location> l : a) {
-//			for (int i = 0; i < l.size(); i++) {
-//				openSpaces.add(l.get(i));
-//			}
-//		}
-//		grid = d.getDungeon();// / change to land
-//		// BoundedGrid USEgrid = new BoundedGrid<>(land.length,land[1].length);
-//		world = new ActorWorld(grid);
-//
-//		this.setPreferredSize(new Dimension(500, 500));
+		Dungeon d = new Dungeon(50, 50);// creates a dungeon
+		openSpaces = d.getRoomLocs();// gets locations of the rooms/corridors
+		// startGame();
 
+		ArrayList<ArrayList<Location>> a = d.getCorridors();
+		for (ArrayList<Location> l : a) {
+			for (int i = 0; i < l.size(); i++) {
+				openSpaces.add(l.get(i));
+			}
+		}
+		land = d.getDungeon();// / change to land
+		grid = new BoundedGrid<>(land.length, land[1].length);
+		world = new ActorWorld(grid);
+
+		this.setPreferredSize(new Dimension(500, 500));
+//		for (int i = 0; i < numEnemies; i++) {
+//			addEnemy();
+//		}
 	}
 
 	public void startGame() {
@@ -110,13 +110,15 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 
 	private void drawDungeon(Graphics g) {
 		// TODO Auto-generated method stub]
-		for (int row = 0; row < land.length * 10; row += 10) {
-			for (int col = 0; col < land[0].length * 10; col += 10) {
+		System.out.println("Drawing dungeon");
+		for (int row = 0; row < land.length ; row ++) {
+			for (int col = 0; col < land[0].length ; col ++) {
 				if (land[row][col].equals("C") || land[row][col].equals("R")) {
-					g.drawImage(floor, row, col, 10, 10, null);
+					g.drawImage(floor, row*10, col*10, 10, 10, null);
+					
 				} else {
 
-					g.drawImage(wall, row, col, 10, 10, null);
+					g.drawImage(wall, row*10, col*10, 10, 10, null);
 
 				}
 

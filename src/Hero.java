@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class Hero extends Pokemon {
@@ -48,6 +49,12 @@ public class Hero extends Pokemon {
 	
 	public void staminaLoss(){
 		stamina--;
+	}
+
+	@Override
+	public void draw(Graphics g, int row, int col) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

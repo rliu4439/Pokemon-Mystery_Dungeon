@@ -32,9 +32,7 @@ public abstract class Pokemon extends Actor {
 
 	public Pokemon() {
 	};
-	public abstract void draw(Graphics g, int row, int col){
-		
-	}
+	public abstract void draw(Graphics g, int row, int col);
 	
 	public String getLastSpot(){
 		return lastSpot;
