@@ -19,7 +19,7 @@ public abstract class Items {
 	public void add(){// adds another item to bag
 		numberInBag++;
 	}
-	public void draw(Graphics g, int row, int col) {
+	public abstract void draw(Graphics g, int row, int col) {
 		// TODO Auto-generated method stub
 		
 	}
