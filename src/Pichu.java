@@ -34,6 +34,8 @@ public class Pichu extends Pokemon {
 
 	}
 
+
+
 	@Override
 	public void draw(Graphics g, int row, int col) {
 		// TODO Auto-generated method stub
@@ -48,5 +50,4 @@ public class Pichu extends Pokemon {
 			currentImage = front;
 		}
 	}
-
 }

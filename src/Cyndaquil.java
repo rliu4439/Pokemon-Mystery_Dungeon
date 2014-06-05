@@ -21,16 +21,17 @@ public class Cyndaquil extends Pokemon {
 	public Cyndaquil(boolean enemy, String last) {
 		super(enemy, 12, 3, 2, 1, last);
 		try {
-			back = ImageIO.read(new File("src/image/cyndaquil/cyndaquil-back.png"));
-			front = ImageIO.read(new File("src/image/cyndaquil/cyndaquil-forward.png"));
-			left = ImageIO.read(new File("src/image/cyndaquil/cyndaquil-left.png"));
-			right = ImageIO.read(new File("src/image/cyndaquil/cyndaquil-right.png"));
+			back = ImageIO.read(new File("src/image/pichu/pichu-back.png"));
+			front = ImageIO.read(new File("src/image/pichu/pichu-forward.png"));
+			left = ImageIO.read(new File("src/image/pichu/pichu-left.png"));
+			right = ImageIO.read(new File("src/image/pichu/pichu-right.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
+
 
 	@Override
 	public void draw(Graphics g, int row, int col) {
@@ -46,5 +47,4 @@ public class Cyndaquil extends Pokemon {
 			currentImage = front;
 		}
 	}
-
 }

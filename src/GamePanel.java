@@ -54,9 +54,9 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		world = new ActorWorld(grid);
 
 		this.setPreferredSize(new Dimension(500, 500));
-//		for (int i = 0; i < numEnemies; i++) {
-//			addEnemy();
-//		}
+		// for (int i = 0; i < numEnemies; i++) {
+		// addEnemy();
+		// }
 	}
 
 	public void startGame() {
@@ -111,14 +111,16 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	private void drawDungeon(Graphics g) {
 		// TODO Auto-generated method stub]
 		System.out.println("Drawing dungeon");
-		for (int row = 0; row < land.length ; row ++) {
-			for (int col = 0; col < land[0].length ; col ++) {
+
+		for (int row = 0; row < land.length; row++) {
+			for (int col = 0; col < land[0].length; col++) {
+				System.out.print(land[row][col]);
 				if (land[row][col].equals("C") || land[row][col].equals("R")) {
-					g.drawImage(floor, row*10, col*10, 10, 10, null);
-					
+					g.drawImage(floor, row * 10, col * 10, 10, 10, null);
+
 				} else {
 
-					g.drawImage(wall, row*10, col*10, 10, 10, null);
+					g.drawImage(wall, row * 10, col * 10, 10, 10, null);
 
 				}
 
@@ -134,6 +136,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 					i.draw(g, row, col);
 				}
 			}
+			System.out.println();
 		}
 
 	}

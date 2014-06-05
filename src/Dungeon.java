@@ -44,7 +44,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 	private void generateDungeon() {
 		initRooms();
 		// placeRoom();
-		initCorridors();
+		 initCorridors();
 	}
 
 	public ArrayList<ArrayList<Location>> getCorridors() {
@@ -56,6 +56,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 	}
 
 	private void initCorridors() {
+		System.out.println("going into initCorridors");
 		ArrayList<Location> locs = new ArrayList<Location>();
 		ArrayList<Location> locs1 = new ArrayList<Location>();
 		for (int a = 0; a < rooms.size(); a++) {
@@ -103,7 +104,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		for (Room r : rooms)
 			if (!r.corridorConnection(dungeon))
 				roomsLeft.add(r);
-		
+
 		while (roomsLeft.size() > 0) {
 			Collections.shuffle(rooms);
 			Room r1 = rooms.get(0);
@@ -148,7 +149,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		Collections.shuffle(locs);
 		Collections.shuffle(locs1);
 		corridors.add(placeCorridors(locs.get(0), locs1.get(0)));
-		
+
 		for (Room ro : rooms) {
 			int[] dim = ro.getDimensions();
 			for (int a = dim[0]; a < dim[2]; a++)
@@ -161,6 +162,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 	}
 
 	private ArrayList<Location> placeCorridors(Location l, Location l1) {
+		System.out.println("going into placecorridors");
 		ArrayList<Location> spaces = new ArrayList<Location>();
 		spaces.add(l);
 		while (!l.equals(l1)) {
@@ -209,10 +211,11 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 	}
 
 	private void placeRoom(int width, int length) {
+		System.out.println("going into placeroom");
 		Random rand = new Random();
 		Room r = null;
 		int b = 0;
-		for (int a = 0; a < 1000; a++) {
+		for (int a = 0; a < 1000000; a++) {
 			int x = rand.nextInt(dungeon.getNumCols() - width - 1);
 			int y = rand.nextInt(dungeon.getNumRows() - length - 1);
 			System.out.println(dungeon.getNumCols() + " "
@@ -220,31 +223,47 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			r = new Room(x, y, width, length);
 
 			b = a;
-			System.out.println("place room y :" + r.getY());
 			if (!r.overlap(dungeon)) {
 
 				break;
 			}
 
 		}
-		if (b != 1000)
+		
+		System.out.println("Chance to build room completed");
+		
+		if (b != 1000000) {
 			rooms.add(r);
 
-		for (int a = r.getX(); a < width; a++)
-			for (int c = r.getY(); c < length; c++) {
-				Location loc = new Location(c, a);
-				dungeon.put(loc, "R");
-				roomLocs.add(loc);
+			for (int a = r.getX(); a < width + r.getX(); a++) {
+				// System.out.println("place room y :" + r.getY());
+			//	System.out.println("x is "+r.getX());
+				for (int c = r.getY(); c < length + r.getY(); c++) {
+					Location loc = new Location(c, a);
+					System.out.println("x is "+a+" y is "+c);
+					dungeon.put(loc, "R");
+
+					roomLocs.add(loc);
+				}
 			}
+		}
+		for (int row = 0; row < dungeon.getNumRows(); row++) {
+			for (int col = 0; col < dungeon.getNumCols(); col++) {
+				System.out.print(dungeon.get(new Location(row, col)));
+			}
+			System.out.println();
+		}
+		System.out.println("done");
 	}
 
 	private void initRooms() {
+		System.out.println("Going into init Rooms");
 		Random rand = new Random();
 		int a = dungeon.getNumRows() * dungeon.getNumCols();
 		int numOfRooms = rand.nextInt(a / 1000) + 2;
 		for (int b = 0; b < numOfRooms; b++) {
-			int w = (int) (Math.random() * 10 + 15); // width
-			int l = (int) (Math.random() * 10 + 15); // length
+			int w =  (int) (Math.random() * 8 + 10); // width
+			int l =  (int) (Math.random() * 8 + 10); // length
 			placeRoom(w, l);
 
 		}
