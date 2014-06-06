@@ -62,14 +62,14 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		for (int a = 0; a < rooms.size(); a++) {
 			Collections.shuffle(rooms);
 			Room r1 = rooms.get(0);
-			System.out.println("Y: " + r1.getY());// -Integer.MAX_VALUE
+			System.out.println("Y: " + r1.getY());
 			Room r2 = rooms.get(1);
-			System.out.println("Y: " + (r2.getY()));// -Integer.MAX_VALUE
+			System.out.println("Y: " + (r2.getY()));
 			int[] d1 = r1.getDimensions();
 			int[] d2 = r2.getDimensions();
 
 			// first room, get border w/o corners
-			int t = d1[1] - 1;
+			int t = d1[1] - 1;// remove negative one? seems to work
 			for (int b = 0; b < 2; b++) {
 				for (int e = d1[0]; e < d1[0] + d1[2]; e++)
 					locs.add(new Location(t, e));
@@ -192,12 +192,12 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 				Random rand = new Random();
 				int chance = rand.nextInt(10) + 1; // 70% straight, 15% side
 				// Location temp;
-				for (Location lo : head) {
-					if (chance < 8 && l.getDirectionToward(lo) == point) {
-						chosen = lo;
+				for(int i=0;i<head.size();i++){//for (Location lo : head) {
+					if (chance < 8 && l.getDirectionToward(head.get(i)) == point) {
+						chosen = head.get(i);
 						break;
-					} else if (chance >= 8 && l.getDirectionToward(lo) == point) {
-						head.remove(lo);
+					} else if (chance >= 8 && l.getDirectionToward(head.get(i)) == point) {
+						head.remove(head.get(i));
 						chosen = head.get(0);
 						break;
 					}
@@ -240,7 +240,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			//	System.out.println("x is "+r.getX());
 				for (int c = r.getY(); c < length + r.getY(); c++) {
 					Location loc = new Location(c, a);
-					System.out.println("x is "+a+" y is "+c);
+//					System.out.println("x is "+a+" y is "+c);
 					dungeon.put(loc, "R");
 
 					roomLocs.add(loc);

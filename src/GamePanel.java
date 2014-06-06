@@ -54,9 +54,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		world = new ActorWorld(grid);
 
 		this.setPreferredSize(new Dimension(500, 500));
-		// for (int i = 0; i < numEnemies; i++) {
-		// addEnemy();
-		// }
+		
 	}
 
 	public void startGame() {

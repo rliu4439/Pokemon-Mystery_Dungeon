@@ -35,11 +35,11 @@ public class Room {
 
 			for (int e = y; e < y + length; e++) {
 				Location l = new Location(e, s);
-				if (d.get(l).equals("C"))
+				if (d.isValid(l) && d.get(l).equals("C"))
 
 					for (int f = y - 1; f < y + length + 1; f++) {
 						Location ll = new Location(f, s);
-						if (d.get(ll).equals("C"))
+						if (d.isValid(ll) && d.get(ll).equals("C"))
 
 							return true;
 					}

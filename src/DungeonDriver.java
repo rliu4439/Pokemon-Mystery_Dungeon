@@ -7,7 +7,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import info.gridworld.*;
 
 public class DungeonDriver {
-	Hero h;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
@@ -17,7 +16,6 @@ public class DungeonDriver {
 			// TODO Auto-generated catch block
 			try {
 				UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-				System.out.println("done");
 			} catch (ClassNotFoundException | InstantiationException
 					| IllegalAccessException | UnsupportedLookAndFeelException e1) {
 				
