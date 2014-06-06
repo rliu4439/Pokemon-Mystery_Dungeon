@@ -14,19 +14,21 @@ public abstract class Pokemon extends Actor {
 	protected int defense;
 	protected boolean enemy;
 	protected int x = 0;
-	protected String lastSpot;// String is the type of the last spot eg.
+	protected String lastSpot;
+	private String[][] land;// String is the type of the last spot eg.
 								// corridor or room
 	private int dir; // dir = direction, stick with definitions as defined by
 						// Location Class
 
 	public Pokemon(boolean enemy, int hp, int attack, int defense, int level,
-			String last) {
+			 String[][]land) {
 		this.enemy = enemy;
 		this.hp = hp;
 		this.topHp = hp;
 		this.attack = attack;
 		this.defense = defense;
-		this.lastSpot = last;
+		
+		this.land=land;
 
 	}
 
@@ -34,9 +36,7 @@ public abstract class Pokemon extends Actor {
 	};
 	public abstract void draw(Graphics g, int row, int col);
 	
-	public String getLastSpot(){
-		return lastSpot;
-	}
+	
 
 	public int getLevel() {
 		return level;

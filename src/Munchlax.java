@@ -13,26 +13,30 @@ public class Munchlax extends Pokemon {
 	// private int topHp=16; // max hp at current level
 	// private int attack = 1;
 	// private int defense = 3;
-	Image front;
-	Image back;
-	Image left;
-	Image right;
-	Image currentImage;
+	private static Image front;
+	private static Image back;
+	private static Image left;
+	private static Image right;
+	private Image currentImage;
 
-	public Munchlax(boolean enemy, String last) {
-		super(enemy, 16, 1, 3, 1, last);
-		try {
-			back = ImageIO.read(new File("src/image/pichu/pichu-back.png"));
-			front = ImageIO.read(new File("src/image/pichu/pichu-forward.png"));
-			left = ImageIO.read(new File("src/image/pichu/pichu-left.png"));
-			right = ImageIO.read(new File("src/image/pichu/pichu-right.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public Munchlax(boolean enemy,String[][] land) {
+		super(enemy, 16, 1, 3, 1,land);
+		getImages();
 	}
 
-
+	public void getImages(){
+		if (front==null || back==null|| left==null|| right==null){
+			try {
+				back = ImageIO.read(new File("src/image/munchlax/munchlax-back.png"));
+				front = ImageIO.read(new File("src/image/munchlax/munchlax-front.png"));
+				left = ImageIO.read(new File("src/image/munchlax/munchlax-left.png"));
+				right = ImageIO.read(new File("src/image/munchlax/munchlax-right.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 	@Override
 	public void draw(Graphics g, int row, int col) {
 		// TODO Auto-generated method stub

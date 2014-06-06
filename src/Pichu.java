@@ -13,28 +13,34 @@ public class Pichu extends Pokemon {
 	// private int hp = 10;
 	// private int attack = 4;
 	// private int defense = 1;
-	Image front;
-	Image back;
-	Image left;
-	Image right;
-	Image currentImage;
+	private static Image front;
+	private static Image back;
+	private static Image left;
+	private static Image right;
+	private Image currentImage;
 
-	public Pichu(boolean enemy, String last) {
-		super(enemy, 10, 4, 1, 1, last);
-		try {
-			back = ImageIO.read(new File("src/image/pichu/pichu-back 2.png"));
-			front = ImageIO
-					.read(new File("src/image/pichu/pichu-forward 2.png"));
-			left = ImageIO.read(new File("src/image/pichu/pichu-left 2.png"));
-			right = ImageIO.read(new File("src/image/pichu/pichu-right 2.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+	public Pichu(boolean enemy, String[][] land) {
+		super(enemy, 10, 4, 1, 1, land);
+		getImages();
 	}
 
-
+	public void getImages() {
+		if (front == null || back == null || left == null || right == null) {
+			try {
+				back = ImageIO
+						.read(new File("src/image/pichu/pichu-back 2.png"));
+				front = ImageIO.read(new File(
+						"src/image/pichu/pichu-forward 2.png"));
+				left = ImageIO
+						.read(new File("src/image/pichu/pichu-left 2.png"));
+				right = ImageIO.read(new File(
+						"src/image/pichu/pichu-right 2.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 
 	@Override
 	public void draw(Graphics g, int row, int col) {

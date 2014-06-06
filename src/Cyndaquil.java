@@ -12,26 +12,34 @@ public class Cyndaquil extends Pokemon {
 	// private int hp = 12;
 	// private int attack = 3;
 	// private int defense = 2;
-	Image front;
-	Image back;
-	Image left;
-	Image right;
-	Image currentImage;
+	private static Image front;
+	private static Image back;
+	private static Image left;
+	private static Image right;
+	private Image currentImage;
 
-	public Cyndaquil(boolean enemy, String last) {
-		super(enemy, 12, 3, 2, 1, last);
-		try {
-			back = ImageIO.read(new File("src/image/pichu/pichu-back.png"));
-			front = ImageIO.read(new File("src/image/pichu/pichu-forward.png"));
-			left = ImageIO.read(new File("src/image/pichu/pichu-left.png"));
-			right = ImageIO.read(new File("src/image/pichu/pichu-right.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+	public Cyndaquil(boolean enemy, String[][] land) {
+		super(enemy, 12, 3, 2, 1, land);
+		getImages();
 	}
 
+	public void getImages() {
+		if (front == null || back == null || left == null || right == null) {
+			try {
+				back = ImageIO.read(new File(
+						"src/image/cyndaquil/cyndaquil-back.png"));
+				front = ImageIO.read(new File(
+						"src/image/cyndaquil/cyndaquil-front.png"));
+				left = ImageIO.read(new File(
+						"src/image/cyndaquil/cyndaquil-left.png"));
+				right = ImageIO.read(new File(
+						"src/image/cyndaquil/cyndaquil-right.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 
 	@Override
 	public void draw(Graphics g, int row, int col) {

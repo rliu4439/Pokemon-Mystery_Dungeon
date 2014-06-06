@@ -76,24 +76,24 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		openSpaces.remove(l);
 		switch (choose) {
 		case 0:
-			Cyndaquil a = new Cyndaquil(true, last);
+			Cyndaquil a = new Cyndaquil(true,land);
 			world.add(l, a);
 
 			break;
 		case 1:
-			world.add(l, new Mudkip(true, last));
+			world.add(l, new Mudkip(true,land));
 			break;
 		case 2:
-			world.add(l, new Munchlax(true, last));
+			world.add(l, new Munchlax(true,land));
 			break;
 		case 3:
-			world.add(l, new Pichu(true, last));
+			world.add(l, new Pichu(true,land));
 		}
 
 	}
 
 	private void choosePokemon() {
-		PersonalityTest test = new PersonalityTest();
+		PersonalityTest test = new PersonalityTest(this.land);
 		Pokemon p = test.chooseCharacter();
 		h = new Hero(p);
 

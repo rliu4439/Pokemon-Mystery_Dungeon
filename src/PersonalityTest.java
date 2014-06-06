@@ -3,7 +3,9 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class PersonalityTest {
-	public PersonalityTest() {
+	private String[][] land;
+	public PersonalityTest(String[][] land) {
+		this.land=land;
 	}
 
 	public Pokemon chooseCharacter() {
@@ -101,21 +103,21 @@ public class PersonalityTest {
 		System.out.println("counter is " + counter);
 		if (counter == 0) {
 			System.out.println("got here");
-			Pokemon a = new Pichu(false,"R");
+			Pokemon a = new Pichu(false,land);
 			JOptionPane.showMessageDialog(null, "You would be a Pichu!");
 			return a;
 		} else if (counter == 1 || counter == 4) {
 			System.out.println("here");
 
 			JOptionPane.showMessageDialog(null, "You would be a Munchlax!");
-			Pokemon a = new Munchlax(false,"R");
+			Pokemon a = new Munchlax(false,land);
 			return a;
 		} else if (counter == 2 || counter == 3) {
-			Pokemon a = new Mudkip(false,"R");
+			Pokemon a = new Mudkip(false,land);
 			JOptionPane.showMessageDialog(null, "You would be a Mudkip!");
 			return a;
 		} else if (counter == 5) {
-			Pokemon a = new Cyndaquil(false,"R");
+			Pokemon a = new Cyndaquil(false,land);
 			JOptionPane.showMessageDialog(null, "You would be a Cyndaquil!");
 			return a;
 		}
