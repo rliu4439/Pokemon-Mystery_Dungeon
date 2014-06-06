@@ -260,10 +260,10 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		System.out.println("Going into init Rooms");
 		Random rand = new Random();
 		int a = dungeon.getNumRows() * dungeon.getNumCols();
-		int numOfRooms = rand.nextInt(a / 1000) + 2;
+		int numOfRooms = rand.nextInt(a / 1000) + 4;
 		for (int b = 0; b < numOfRooms; b++) {
-			int w =  (int) (Math.random() * 8 + 10); // width
-			int l =  (int) (Math.random() * 8 + 10); // length
+			int w =  (int) (Math.random() * 12 + 8); // width
+			int l =  (int) (Math.random() * 12 + 8); // length
 			placeRoom(w, l);
 
 		}
