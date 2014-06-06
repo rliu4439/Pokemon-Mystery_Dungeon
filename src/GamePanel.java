@@ -39,7 +39,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Dungeon d = new Dungeon(50, 50);// creates a dungeon
+		Dungeon d = new Dungeon(106, 106);// creates a dungeon
 		openSpaces = d.getRoomLocs();// gets locations of the rooms/corridors
 		// startGame();
 
