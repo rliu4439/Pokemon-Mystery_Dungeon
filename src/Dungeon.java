@@ -68,32 +68,32 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			int[] d1 = r1.getDimensions();
 			int[] d2 = r2.getDimensions();
 
-			// first room, get border w/o corners
-			int t = d1[1] - 1;// remove negative one? seems to work
+			// first room, get inner border
+			int t = d1[1];// remove negative one? seems to work
 			for (int b = 0; b < 2; b++) {
 				for (int e = d1[0]; e < d1[0] + d1[2]; e++)
 					locs.add(new Location(t, e));
-				t = d1[1] + d1[3] + 1;
+				t = d1[1] + d1[3];
 			}
-			int s = d1[0] - 1;
+			int s = d1[0];
 			for (int c = 0; c < 2; c++) {
 				for (int d = d1[1]; d < d1[1] + d1[3]; d++)
 					locs.add(new Location(d, s));
-				s = d1[0] + d1[2] + 1;
+				s = d1[0] + d1[2];
 			}
 
-			// second room, get border w/o corners
-			t = d2[1] - 1;
+			// second room, get inner border
+			t = d2[1];
 			for (int b = 0; b < 2; b++) {
 				for (int e = d2[0]; e < d2[0] + d2[2]; e++)
 					locs1.add(new Location(t, e));
-				t = d2[1] + d2[3] + 1;
+				t = d2[1] + d2[3];
 			}
-			s = d2[0] - 1;
+			s = d2[0];
 			for (int c = 0; c < 2; c++) {
 				for (int d = d2[1]; d < d2[1] + d2[3]; d++)
 					locs1.add(new Location(d, s));
-				s = d2[0] + d2[2] + 1;
+				s = d2[0] + d2[2];
 			}
 
 			Collections.shuffle(locs);
@@ -116,32 +116,32 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			int[] d1 = r1.getDimensions();
 			int[] d2 = r2.getDimensions();
 
-			// first room, get border w/o corners
-			int t = d1[1] - 1;
+			// first room, get inner border
+			int t = d1[1];
 			for (int b = 0; b < 2; b++) {
 				for (int e = d1[0]; e < d1[0] + d1[2]; e++)
 					locs.add(new Location(t, e));
-				t = d1[1] + d1[3] + 1;
+				t = d1[1] + d1[3];
 			}
-			int s = d1[0] - 1;
+			int s = d1[0];
 			for (int c = 0; c < 2; c++) {
 				for (int d = d1[1]; d < d1[1] + d1[3]; d++)
 					locs.add(new Location(d, s));
-				s = d1[0] + d1[2] + 1;
+				s = d1[0] + d1[2];
 			}
 
-			// second room, get border w/o corners
-			t = d2[1] - 1;
+			// second room, get inner border
+			t = d2[1];
 			for (int b = 0; b < 2; b++) {
 				for (int e = d2[0]; e < d2[0] + d2[2]; e++)
 					locs1.add(new Location(t, e));
-				t = d2[1] + d2[3] + 1;
+				t = d2[1] + d2[3];
 			}
-			s = d2[0] - 1;
+			s = d2[0];
 			for (int c = 0; c < 2; c++) {
 				for (int d = d2[1]; d < d2[1] + d2[3]; d++)
 					locs1.add(new Location(d, s));
-				s = d2[0] + d2[2] + 1;
+				s = d2[0] + d2[2];
 			}
 
 		}
