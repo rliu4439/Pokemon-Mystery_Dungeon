@@ -216,8 +216,8 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		Room r = null;
 		int b = 0;
 		for (int a = 0; a < 1000000; a++) {
-			int x = rand.nextInt(dungeon.getNumCols() - width - 1);
-			int y = rand.nextInt(dungeon.getNumRows() - length - 1);
+			int x = rand.nextInt(dungeon.getNumCols() - width - 4) + 3;
+			int y = rand.nextInt(dungeon.getNumRows() - length - 4) + 3;
 			System.out.println(dungeon.getNumCols() + " "
 					+ dungeon.getNumRows() + " " + x + " " + y);
 			r = new Room(x, y, width, length);
