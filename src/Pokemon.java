@@ -14,29 +14,27 @@ public abstract class Pokemon extends Actor {
 	protected int defense;
 	protected boolean enemy;
 	protected int x = 0;
-	protected String lastSpot;
 	private String[][] land;// String is the type of the last spot eg.
-								// corridor or room
+							// corridor or room
 	private int dir; // dir = direction, stick with definitions as defined by
 						// Location Class
 
 	public Pokemon(boolean enemy, int hp, int attack, int defense, int level,
-			 String[][]land) {
+			String[][] land) {
 		this.enemy = enemy;
 		this.hp = hp;
 		this.topHp = hp;
 		this.attack = attack;
 		this.defense = defense;
-		
-		this.land=land;
+
+		this.land = land;
 
 	}
 
 	public Pokemon() {
 	};
+
 	public abstract void draw(Graphics g, int row, int col);
-	
-	
 
 	public int getLevel() {
 		return level;
@@ -91,63 +89,52 @@ public abstract class Pokemon extends Actor {
 		}
 	}
 
-	public void move() {// need to check to not move on another Pokemon, need to
-						// reput that the spot is empty or corridor
+	public void move() {
 		BoundedGrid g = (BoundedGrid) this.getGrid();
 		boolean stop = false;
-		ArrayList<Location> a = getPokemon(g);
-		while (a.size() > 0 || stop == true) {
+		ArrayList<Location> a = getPokemon(g);// gets the location of all
+												// pokemon that are not enemy so
+												// it can attack them
+		while (a.size() > 0 || stop == true) {//while there are spaces to go to or the pokemon moved
 			Location go = a.get(0);
 			double max = distanceFrom(go);
 			for (Location l : a) {
-				double temp = distanceFrom(l);// finds closest pokemon
-				if (temp < max) {
-					temp = max;
-					go = l;
+				if (l.equals(this.getLocation()) == false) {
+					double temp = distanceFrom(l);// finds closest pokemon
+					if (temp < max) {
+						temp = max;
+						go = l;// checks for closest pokemon to attack
+					}
 				}
+
 			}
 
 			int direct = this.getLocation().getDirectionToward(go);
 			Location l = getLocation().getAdjacentLocation(direct);
-			if (g.isValid(l) && (g.get(l).equals("W")) == false) {
+			if (g.isValid(l) && (land[l.getRow()][l.getCol()].equals("W")) == false) {// if the new location is valid and it isn't a wall, move toward it
 				this.setDirection(direct);
 				Location current = this.getLocation();
-				if (g.get(l) instanceof String) {// if next location to move to
-													// is
-													// empty, then move and save
-													// what it was(eg
-													// room/corridor)
-					String temp = (String) g.get(l);
+				if (g.get(l).equals(null)) {
 					this.moveTo(l);
-					g.put(current, lastSpot);
-					lastSpot = temp;
-					stop = true;
+					stop=true;
 				} else {
 					this.attack((Pokemon) g.get(l));
 					stop = true;
 
 				}
 			} else {
-				a.remove(l);
+				a.remove(l);// if the location is not valid, then look for a new spot
 			}
 		}
-		if (stop == false) {// never moved
+		if (stop == false) {// if you never moved, move to a random location
 			Random ran = new Random();
 			ArrayList<Location> l = g.getValidAdjacentLocations(getLocation());
-			for (int i = 0; i < l.size(); i++) {
-				if (g.get(l.get(i)) instanceof String) {
-					if (g.get(l.get(i)).equals("W")) {
-						l.remove(i);
-					}
-				}
-			}
 			Location current = this.getLocation();
 			int choose = ran.nextInt(l.size());
 			Location go = l.get(choose);
 			String temp = (String) g.get(go);
 			this.moveTo(go);
-			g.put(current, lastSpot);
-			lastSpot = temp;
+		
 		}
 
 	}
