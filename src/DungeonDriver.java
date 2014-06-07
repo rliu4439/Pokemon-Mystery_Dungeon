@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
@@ -27,11 +28,16 @@ public class DungeonDriver {
 		}
 
 		JFrame jf = new JFrame("Pokemon: Mystery Dungeon 1.0");
-		jf.setLayout(new FlowLayout());
+		jf.setLayout(new BorderLayout());
 		SwingUtilities.updateComponentTreeUI(jf);
 		jf.setDefaultCloseOperation(jf.EXIT_ON_CLOSE);
-		jf.add(new GamePanel());
-		jf.add(new Tester());
+		ItemHolder i = new ItemHolder();
+		GamePanel g = new GamePanel(i);
+		i.setGamePanel(g);
+		jf.add(g,BorderLayout.LINE_START);
+		jf.add(i,BorderLayout.LINE_END);
+		Info a= new Info(g);
+		jf.add(a,BorderLayout.PAGE_END);
 		jf.pack();
 		jf.setVisible(true);
 
