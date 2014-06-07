@@ -2,8 +2,11 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 public class Hero extends Pokemon {
-	ArrayList<Items> items = new ArrayList<>();// list containing items, in order of apple,
-												// grimyfood, then oranBerry, increment numberinbag to add item
+	ArrayList<Items> items = new ArrayList<>();// list containing items, in
+												// order of apple,
+												// grimyfood, then oranBerry,
+												// increment numberinbag to add
+												// item
 	int stamina = 100;
 	int steps = 0;
 	Pokemon main;
@@ -14,21 +17,17 @@ public class Hero extends Pokemon {
 		items.add(new Apple());
 		items.add(new GrimyFood());
 		items.add(new OranBerry());
-		
 
-	}
-	
-	public boolean checkHP() {// if hp below 0, game over/restart
-		if (main.getHp() <= 0) {
-			return false;
-		}
-		return true;
 	}
 
 	public void eatFood(Items i) {
 		addHP(i.getHealthChange());
 		addStamina(i.getStaminaChange());
 
+	}
+
+	public ArrayList<Items> getItems() {
+		return items;
 	}
 
 	private void addHP(int healthChange) {
@@ -39,6 +38,16 @@ public class Hero extends Pokemon {
 		}
 	}
 
+	public void checkStatus() {
+		if (hp <= 0) {
+			System.out.println("Game over");
+		} else if (stamina < 0) {
+			hp--;
+		} else if (stamina > 0 && hp < main.topHp) {
+			hp++;
+		}
+	}
+
 	private void addStamina(int staminaChange) {
 		// TODO Auto-generated method stub
 		stamina += staminaChange;
@@ -46,16 +55,15 @@ public class Hero extends Pokemon {
 			stamina = 100;
 		}
 	}
-	
-	public void staminaLoss(){
+
+	public void staminaLoss() {
 		stamina--;
 	}
 
 	@Override
 	public void draw(Graphics g, int row, int col) {
 		// TODO Auto-generated method stub
-		
+		main.draw(g, row, col);
 	}
-	
-	
+
 }

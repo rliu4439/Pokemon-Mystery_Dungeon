@@ -30,8 +30,11 @@ public class DungeonDriver {
 		jf.setLayout(new FlowLayout());
 		SwingUtilities.updateComponentTreeUI(jf);
 		jf.setDefaultCloseOperation(jf.EXIT_ON_CLOSE);
-		jf.add(new GamePanel());
-		jf.add(new Tester());
+		ItemHolder i = new ItemHolder();
+		GamePanel g = new GamePanel(i);
+		i.setGamePanel(g);
+		jf.add(g);
+		jf.add(i);
 		jf.pack();
 		jf.setVisible(true);
 

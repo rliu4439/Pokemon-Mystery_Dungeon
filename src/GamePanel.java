@@ -17,8 +17,9 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel {// change grid to land to hold locations
 										// w/ strings
-	Hero h; // place pokemon and items in the gridworld but put wall, floor in
-			// array
+	Hero hero; // place pokemon and items in the gridworld but put wall, floor
+				// in
+				// array
 	ArrayList<Location> openSpaces;
 	ArrayList<Location> rooms;
 	ArrayList<Location> corridors;// need to place corridors/rooms after pokemon
@@ -28,10 +29,12 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	String[][] land;
 	int numEnemies = 9;
 	int numSteps = 0;// number of steps taken by main character
-	Image wall;
-	Image floor;
+	private static Image wall;
+	private static Image floor;
+	ItemHolder i;
 
-	public GamePanel() {
+	public GamePanel(ItemHolder i2) {
+		i = i2;
 		try {
 			wall = ImageIO.read(new File("src/image/Wall.png"));
 			floor = ImageIO.read(new File("src/image/Floor.png"));// reads in
@@ -53,9 +56,14 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		grid = new BoundedGrid<>(land.length, land[1].length);
 		world = new ActorWorld(grid);
 
-		this.setPreferredSize(new Dimension(600, 500));
-		
+		this.setPreferredSize(new Dimension(500, 500));
+		//using next line for testing
 	}
+
+	public Hero getHero() {
+		return hero;
+	}
+
 
 	public void startGame() {
 		JOptionPane.showMessageDialog(null,
@@ -64,7 +72,8 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		for (int i = 0; i < numEnemies; i++) {
 			addEnemy();
 		}
-		world.add(openSpaces.get((int) (Math.random() * openSpaces.size())), h);
+		world.add(openSpaces.get((int) (Math.random() * openSpaces.size())),
+				hero);
 	}
 
 	private void addEnemy() {
@@ -76,18 +85,18 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		openSpaces.remove(l);
 		switch (choose) {
 		case 0:
-			Cyndaquil a = new Cyndaquil(true,land);
+			Cyndaquil a = new Cyndaquil(true, land);
 			world.add(l, a);
 
 			break;
 		case 1:
-			world.add(l, new Mudkip(true,land));
+			world.add(l, new Mudkip(true, land));
 			break;
 		case 2:
-			world.add(l, new Munchlax(true,land));
+			world.add(l, new Munchlax(true, land));
 			break;
 		case 3:
-			world.add(l, new Pichu(true,land));
+			world.add(l, new Pichu(true, land));
 		}
 
 	}
@@ -95,7 +104,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	private void choosePokemon() {
 		PersonalityTest test = new PersonalityTest(this.land);
 		Pokemon p = test.chooseCharacter();
-		h = new Hero(p);
+		hero = new Hero(p);
 
 	}
 
