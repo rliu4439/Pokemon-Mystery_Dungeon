@@ -14,6 +14,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 	private ArrayList<Room> rooms = new ArrayList<Room>();
 	private ArrayList<ArrayList<Location>> corridors = new ArrayList<ArrayList<Location>>();
 	private ArrayList<Location> roomLocs = new ArrayList<Location>();
+	private int numberofRooms;
 
 	public Dungeon(int width, int length) {
 		dungeon = new BoundedGrid(length, width);
@@ -155,8 +156,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			for (int a = dim[0]; a < dim[2]; a++)
 				for (int b = dim[1]; b < dim[3]; b++) {
 					Location loc = new Location(b, a);
-					dungeon.put(loc, "R");// don't the rooms already have "R"
-											// from placeRooms?
+					dungeon.put(loc, "R");
 				}
 		}
 	}
@@ -169,8 +169,8 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			int point = l.getDirectionToward(l1);// gets direction from room 1
 													// to room 2
 			ArrayList<Location> locs = dungeon.getEmptyAdjacentLocations(l);
-			ArrayList<Location> temp= dungeon.getOccupiedAdjacentLocations(l);
-			for( Location a:temp){
+			ArrayList<Location> temp = dungeon.getOccupiedAdjacentLocations(l);
+			for (Location a : temp) {
 				locs.add(a);
 			}
 			ArrayList<Location> head = new ArrayList<Location>();
@@ -179,7 +179,16 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 				// if (dungeon.get(loc) instanceof String &&
 				// !dungeon.get(loc).equals("R")){
 				if (point % 10 == 0// if direction to room 2 divisible
-						&& (Math.abs(point - bam) == 90 || point - bam == 0))// by 10 and less than 90 degrees away from point
+						&& (Math.abs(point - bam) == 90 || point - bam == 0))// by
+																				// 10
+																				// and
+																				// less
+																				// than
+																				// 90
+																				// degrees
+																				// away
+																				// from
+																				// point
 					head.add(loc);
 				else if (point % 10 != 0 && (Math.abs(point - bam)) == 45) {
 					head.add(loc);
@@ -189,17 +198,21 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			}
 			Location chosen = null;
 			Collections.shuffle(head);
-			if (point % 10 != 0)// when adding locs, possible to have none that are divisible by 10
+			if (point % 10 != 0)// when adding locs, possible to have none that
+								// are divisible by 10
 				chosen = head.get(0);
 			else {
 				Random rand = new Random();
 				int chance = rand.nextInt(10) + 1; // 70% straight, 15% side
 				// Location temp;
-				for(int i=0;i<head.size();i++){//for (Location lo : head) {
-					if (chance < 8 && l.getDirectionToward(head.get(i)) == point) {
+				for (int i = 0; i < head.size(); i++) {// for (Location lo :
+														// head) {
+					if (chance < 8
+							&& l.getDirectionToward(head.get(i)) == point) {
 						chosen = head.get(i);
 						break;
-					} else if (chance >= 8 && l.getDirectionToward(head.get(i)) == point) {
+					} else if (chance >= 8
+							&& l.getDirectionToward(head.get(i)) == point) {
 						head.remove(head.get(i));
 						chosen = head.get(0);
 						break;
@@ -221,8 +234,8 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		for (int a = 0; a < 1000000; a++) {
 			int x = rand.nextInt(dungeon.getNumCols() - width - 4) + 3;
 			int y = rand.nextInt(dungeon.getNumRows() - length - 4) + 3;
-			System.out.println(dungeon.getNumCols() + " "
-					+ dungeon.getNumRows() + " " + x + " " + y);
+			// System.out.println(dungeon.getNumCols() + " "
+			// + dungeon.getNumRows() + " " + x + " " + y);
 			r = new Room(x, y, width, length);
 
 			b = a;
@@ -237,7 +250,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 
 		if (b != 1000000) {
 			rooms.add(r);
-
+			numberofRooms++;
 			for (int a = r.getX(); a < width + r.getX(); a++) {
 				// System.out.println("place room y :" + r.getY());
 				// System.out.println("x is "+r.getX());
@@ -264,11 +277,12 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		Random rand = new Random();
 		int a = dungeon.getNumRows() * dungeon.getNumCols();
 		int numOfRooms = rand.nextInt(a / 1000) + 4;
-		for (int b = 0; b < numOfRooms; b++) {
+		numberofRooms = 0;
+		while (numberofRooms < numOfRooms) {
 			int w = (int) (Math.random() * 12 + 8); // width
 			int l = (int) (Math.random() * 12 + 8); // length
 			placeRoom(w, l);
-
 		}
+
 	}
 }
