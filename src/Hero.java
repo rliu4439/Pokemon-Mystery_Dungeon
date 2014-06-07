@@ -23,6 +23,7 @@ public class Hero extends Pokemon {
 	public void eatFood(Items i) {
 		addHP(i.getHealthChange());
 		addStamina(i.getStaminaChange());
+		i.numberInBag--;
 
 	}
 
