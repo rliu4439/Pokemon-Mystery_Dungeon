@@ -1,3 +1,5 @@
+import java.awt.FlowLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -10,26 +12,29 @@ public class DungeonDriver {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+			UIManager
+					.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
 		} catch (ClassNotFoundException | InstantiationException
 				| IllegalAccessException | UnsupportedLookAndFeelException e) {
 			// TODO Auto-generated catch block
 			try {
-				UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+				UIManager
+						.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 			} catch (ClassNotFoundException | InstantiationException
 					| IllegalAccessException | UnsupportedLookAndFeelException e1) {
-				
+
 			}
 		}
-		
+
 		JFrame jf = new JFrame("Pokemon: Mystery Dungeon 1.0");
+		jf.setLayout(new FlowLayout());
 		SwingUtilities.updateComponentTreeUI(jf);
 		jf.setDefaultCloseOperation(jf.EXIT_ON_CLOSE);
 		jf.add(new GamePanel());
+		jf.add(new Tester());
 		jf.pack();
 		jf.setVisible(true);
-		
-	}
 
+	}
 
 }

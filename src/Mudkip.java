@@ -28,13 +28,13 @@ public class Mudkip extends Pokemon {
 		if (front == null || back == null || left == null || right == null) {
 			try {
 				back = ImageIO.read(new File(
-						"src/image/pichu/mudkip-backward.png"));
+						"src/image/mudkip/mudkip-backward.png"));
 				front = ImageIO.read(new File(
-						"src/image/pichu/mudkip-forward.png"));
+						"src/image/mudkip/mudkip-forward.png"));
 				left = ImageIO
 						.read(new File("src/image/mudkip/mudkip-left.png"));
 				right = ImageIO.read(new File(
-						"src/image/pichu/mudkip-right.png"));
+						"src/image/mudkip/mudkip-right.png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

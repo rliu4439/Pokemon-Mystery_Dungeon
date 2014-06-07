@@ -4,8 +4,9 @@ import javax.swing.JOptionPane;
 
 public class PersonalityTest {
 	private String[][] land;
+
 	public PersonalityTest(String[][] land) {
-		this.land=land;
+		this.land = land;
 	}
 
 	public Pokemon chooseCharacter() {
@@ -29,7 +30,6 @@ public class PersonalityTest {
 			counter = +3;
 		} else {
 			gotInput = false;
-			System.out.println("got input has been changed to " + gotInput);
 		}
 		System.out.println("Got input is " + gotInput);
 		while (gotInput == false) {
@@ -56,8 +56,7 @@ public class PersonalityTest {
 				gotInput = false;
 			}
 		}
-		System.out.println("Counter is " + counter);
-		
+
 		System.out
 				.println("If you were at a store and saw a sale, what would you do?");
 		System.out.println("A. Don't buy anything and save your money.");
@@ -70,7 +69,6 @@ public class PersonalityTest {
 		} else if (input.equals("b")) {
 			counter++;
 		} else if (input.equals("c")) {
-			System.out.println("got here");
 			counter++;
 			counter++;
 		} else {
@@ -100,24 +98,20 @@ public class PersonalityTest {
 			}
 		}
 		in.close();
-		System.out.println("counter is " + counter);
 		if (counter == 0) {
-			System.out.println("got here");
-			Pokemon a = new Pichu(false,land);
+			Pokemon a = new Pichu(false, land);
 			JOptionPane.showMessageDialog(null, "You would be a Pichu!");
 			return a;
 		} else if (counter == 1 || counter == 4) {
-			System.out.println("here");
-
 			JOptionPane.showMessageDialog(null, "You would be a Munchlax!");
-			Pokemon a = new Munchlax(false,land);
+			Pokemon a = new Munchlax(false, land);
 			return a;
 		} else if (counter == 2 || counter == 3) {
-			Pokemon a = new Mudkip(false,land);
+			Pokemon a = new Mudkip(false, land);
 			JOptionPane.showMessageDialog(null, "You would be a Mudkip!");
 			return a;
 		} else if (counter == 5) {
-			Pokemon a = new Cyndaquil(false,land);
+			Pokemon a = new Cyndaquil(false, land);
 			JOptionPane.showMessageDialog(null, "You would be a Cyndaquil!");
 			return a;
 		}
