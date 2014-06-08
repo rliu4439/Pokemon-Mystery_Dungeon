@@ -1,7 +1,9 @@
+import info.gridworld.actor.Actor;
+
 import java.awt.Graphics;
 
 
-public abstract class Items {
+public abstract class Items extends Actor {
 	int healthChange;
 	int staminaChange;
 	int numberInBag;

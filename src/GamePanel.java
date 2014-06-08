@@ -29,10 +29,13 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	ArrayList<Location> rooms;
 	ArrayList<Location> corridors;// need to place corridors/rooms after pokemon
 									// move
+	ArrayList<Pokemon> enemies= new ArrayList<>();
 	ActorWorld world;
 	BoundedGrid grid;
 	String[][] land;
 	int numEnemies = 40;
+	int numItems = 10;
+	int floorLevel = 1;
 	int numSteps = 0;// number of steps taken by main character
 	private static Image wall;
 	private static Image floor;
@@ -47,7 +50,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Pokemon p = new Mudkip(false, land);
+		Pokemon p = new Mudkip(false, land);// used for testing
 		hero = new Hero(p);
 		Dungeon d = new Dungeon(50, 50);// creates a dungeon
 		land = d.getDungeon();// / change to land
@@ -65,7 +68,6 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		}
 
 		this.setPreferredSize(new Dimension(500, 500));
-		// using next line for testing
 
 	}
 
@@ -73,16 +75,52 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		return hero;
 	}
 
+	public void moveEnemies() {
+		for(Pokemon p: enemies){
+			p.move();
+		}
+	}
+
 	public ArrayList<Location> openLocations() {
-		ArrayList<Location> open= new ArrayList<>();
-		for(int row=0;row<land.length;row++){
-			for(int col=0; col<land[0].length;col++){
-				if(land[row][col].equals("W")==false){
+		ArrayList<Location> open = new ArrayList<>();
+		for (int row = 0; row < land.length; row++) {
+			for (int col = 0; col < land[0].length; col++) {
+				if (land[row][col].equals("W") == false) {
 					open.add(new Location(row, col));
 				}
 			}
 		}
 		return open;
+	}
+
+	public void addItem() {
+		int pick = (int) (Math.random() * openSpaces.size());
+		System.out.println("openspaces is size " + openSpaces.size());
+		Location l = openSpaces.get(pick);
+		int choose = (int) (Math.random() * 3);
+		System.out.println(choose);
+		switch (choose) {
+		case 0:
+			Apple a = new Apple();
+			world.add(l, a);
+			openSpaces.remove(l);
+
+			break;
+		case 1:
+			GrimyFood f = new GrimyFood();
+			world.add(l, f);
+			openSpaces.remove(l);
+
+			break;
+		case 2:
+			OranBerry o = new OranBerry();
+
+			world.add(l, o);
+			openSpaces.remove(l);
+
+			break;
+		}
+
 	}
 
 	public void startGame() {
@@ -91,6 +129,9 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		// choosePokemon();
 		for (int i = 0; i < numEnemies; i++) {
 			addEnemy();
+		}
+		for (int i = 0; i < numItems; i++) {
+			addItem();
 		}
 		Location l = (openSpaces.get((int) (Math.random() * openSpaces.size())));
 		world.add(openSpaces.get((int) (Math.random() * openSpaces.size())),
@@ -109,26 +150,28 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		case 0:
 			Cyndaquil a = new Cyndaquil(true, land);
 			world.add(l, a);
-			System.out.println("Pokemon here");
 			openSpaces.remove(l);
-
+			enemies.add(a);
 			break;
 		case 1:
-			world.add(l, new Mudkip(true, land));
+			Mudkip m= new Mudkip(true, land);
+			world.add(l, m);
 			System.out.println("Pokemon here");
 			openSpaces.remove(l);
-
+			enemies.add(m);
 			break;
 		case 2:
-			world.add(l, new Munchlax(true, land));
+			Munchlax mu= new Munchlax(true, land);
+			world.add(l, mu);
 			System.out.println("Pokemon here");
 			openSpaces.remove(l);
-
+			enemies.add(mu);
 			break;
 		case 3:
-			world.add(l, new Pichu(true, land));
-			System.out.println("Pokemon here");
+			Pichu p= new Pichu(true, land);
+			world.add(l, p );
 			openSpaces.remove(l);
+			enemies.add(p);
 			break;
 
 		}
@@ -168,14 +211,14 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				if (grid.get(new Location(row, col)) instanceof Pokemon) {
 					// System.out.println("Pokemon here");
 					Pokemon p = (Pokemon) grid.get(new Location(row, col));
-					g.drawImage(floor, row*10, col*10, 10, 10, null);
-					p.draw(g, row*10, col*10);
+					g.drawImage(floor, row * 10, col * 10, 10, 10, null);
+					p.draw(g, row * 10, col * 10);
 				}
 
 				else if (grid.get(new Location(row, col)) instanceof Items) {
 					Items i = (Items) grid.get(new Location(row, col));
-					g.drawImage(floor, row*10, col*10, 10, 10, null);
-					i.draw(g, row*10, col*10);
+					g.drawImage(floor, row * 10, col * 10, 10, 10, null);
+					i.draw(g, row * 10, col * 10);
 				}
 			}
 			System.out.println();
@@ -190,6 +233,8 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				hero.moveRight();
+				System.out.println("moving right");
+				repaint();
 			}
 
 		});
@@ -198,6 +243,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				System.out.println("moving left");
 				hero.moveLeft();
 			}
 		});
@@ -206,6 +252,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				System.out.println("moving up");
 				hero.moveUp();
 			}
 
@@ -217,6 +264,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				hero.moveBack();
+				System.out.println("moving down");
 			}
 		});
 
