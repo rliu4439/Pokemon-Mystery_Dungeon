@@ -1,3 +1,6 @@
+import info.gridworld.grid.BoundedGrid;
+import info.gridworld.grid.Location;
+
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -10,39 +13,40 @@ public class Hero extends Pokemon {
 	int stamina = 100;
 	int steps = 0;
 	Pokemon main;
+	BoundedGrid grid;
+	String[][] land;
 
 	public Hero(Pokemon p) {
 		main = p;
+		land = this.getLand();
 		main.setEnemy(false);
 		items.add(new Apple());
 		items.add(new GrimyFood());
 		items.add(new OranBerry());
-
+		grid = (BoundedGrid) this.getGrid();
 	}
 
 	public void eatFood(Items i) {
-		Items a=null;
-		if(i instanceof Apple && items.get(0).getNumInBag()>0){
+		Items a = null;
+		if (i instanceof Apple && items.get(0).getNumInBag() > 0) {
 			System.out.println("This was an apple");
-			a=(Apple)i;
-			 items.get(0).remove();
-			
-		}
-		else if(i instanceof GrimyFood && items.get(1).getNumInBag()>0){
-			a= (GrimyFood)i;
+			a = (Apple) i;
+			items.get(0).remove();
+
+		} else if (i instanceof GrimyFood && items.get(1).getNumInBag() > 0) {
+			a = (GrimyFood) i;
 			items.get(1).remove();
-		}
-		else if(i instanceof OranBerry && items.get(2).getNumInBag()>0){
-			a=( OranBerry)i;
+		} else if (i instanceof OranBerry && items.get(2).getNumInBag() > 0) {
+			a = (OranBerry) i;
 			items.get(2).remove();
-		}
-		else{
+		} else {
 			return;
 		}
 		addHP(a.getHealthChange());
 		addStamina(a.getStaminaChange());
-		System.out.println("There are "+items.get(0).getNumInBag()+" apples left");
-		
+		System.out.println("There are " + items.get(0).getNumInBag()
+				+ " apples left");
+
 	}
 
 	public ArrayList<Items> getItems() {
@@ -85,4 +89,50 @@ public class Hero extends Pokemon {
 		main.draw(g, row, col);
 	}
 
+	public void moveRight() {
+		// TODO Auto-generated method stub
+		this.setDirection(Location.RIGHT);
+		Location current = this.getLocation();
+		if (land[current.getRow()][current.getCol() + 1].equals("W") == false) {
+			if (grid.get(current).equals(null)) {
+				this.moveTo(current.getAdjacentLocation(Location.RIGHT));
+			}
+		}
+	}
+
+	public void moveLeft() {
+		// TODO Auto-generated method stub
+		this.setDirection(Location.LEFT);
+		Location current = this.getLocation();
+		if (land[current.getRow()][current.getCol() + 1].equals("W") == false) {
+			if (grid.get(current).equals(null)) {
+				this.moveTo(current.getAdjacentLocation(Location.RIGHT));
+			}
+		}
+
+	}
+
+	public void moveUp() {
+		this.setDirection(Location.NORTH);
+		Location current = this.getLocation();
+		if (land[current.getRow()][current.getCol() + 1].equals("W") == false) {
+			if (grid.get(current).equals(null)) {
+				this.moveTo(current.getAdjacentLocation(Location.RIGHT));
+			}
+		}
+
+	}
+
+	public void moveBack() {
+		// TODO Auto-generated method stub
+
+		this.setDirection(Location.SOUTH);
+		Location current = this.getLocation();
+		if (land[current.getRow()][current.getCol() + 1].equals("W") == false) {
+			if (grid.get(current).equals(null)) {
+				this.moveTo(current.getAdjacentLocation(Location.RIGHT));
+			}
+		}
+
+	}
 }

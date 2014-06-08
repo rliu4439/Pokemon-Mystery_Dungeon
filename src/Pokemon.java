@@ -31,6 +31,11 @@ public abstract class Pokemon extends Actor {
 
 	}
 
+	public String[][] getLand() {
+		return land;
+	}
+
+
 	public Pokemon() {
 	};
 
