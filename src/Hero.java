@@ -21,10 +21,28 @@ public class Hero extends Pokemon {
 	}
 
 	public void eatFood(Items i) {
-		addHP(i.getHealthChange());
-		addStamina(i.getStaminaChange());
-		i.numberInBag--;
-
+		Items a=null;
+		if(i instanceof Apple && items.get(0).getNumInBag()>0){
+			System.out.println("This was an apple");
+			a=(Apple)i;
+			 items.get(0).remove();
+			
+		}
+		else if(i instanceof GrimyFood && items.get(1).getNumInBag()>0){
+			a= (GrimyFood)i;
+			items.get(1).remove();
+		}
+		else if(i instanceof OranBerry && items.get(2).getNumInBag()>0){
+			a=( OranBerry)i;
+			items.get(2).remove();
+		}
+		else{
+			return;
+		}
+		addHP(a.getHealthChange());
+		addStamina(a.getStaminaChange());
+		System.out.println("There are "+items.get(0).getNumInBag()+" apples left");
+		
 	}
 
 	public ArrayList<Items> getItems() {

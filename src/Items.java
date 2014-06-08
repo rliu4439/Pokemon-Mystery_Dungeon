@@ -20,6 +20,9 @@ public abstract class Items {
 	public void add(){// adds another item to bag
 		numberInBag++;
 	}
+	public void remove(){
+		numberInBag--;
+	}
 	public int getNumInBag(){
 		return numberInBag;
 	}

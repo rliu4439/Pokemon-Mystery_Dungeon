@@ -60,6 +60,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		//using next line for testing
 		Pokemon p= new Mudkip(false, land);
 		hero = new Hero(p);
+//		hero.eatFood(new Apple());
 	}
 
 	public Hero getHero() {

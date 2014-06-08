@@ -54,6 +54,7 @@ public class ItemHolder extends JPanel implements ActionListener {
 	private void drawItems() {
 		// TODO Auto-generated method stub
 //		g.draw3DRect(10, 10, 50, 50, true);
+		
 		items=panel.getHero().getItems();
 		apple=new JButton("Eat Apple: Quantity "+items.get(0).getNumInBag());
 		Grimy = new JButton("Eat Grimyfood: Quantity "+items.get(1).getNumInBag());
@@ -68,19 +69,27 @@ public class ItemHolder extends JPanel implements ActionListener {
 	
 //		
 	}
+	public void redrawButtons(){
+		apple.setText("Eat Apple: Quantity "+items.get(0).getNumInBag());
+		Grimy.setText("Eat Grimyfood: Quantity "+items.get(1).getNumInBag());
+		Oran.setText("Eat Oran Berry: Quantity "+items.get(2).getNumInBag());
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource()==(apple)){
-			System.out.println("apple clicked");
+			panel.getHero().eatFood(new Apple());
 		}
 		if(e.getSource()==(Grimy)){
-			System.out.println("grimiy clicked");
+			panel.getHero().eatFood(new GrimyFood());
+
 		}
 		if(e.getSource()==Oran){
-			System.out.println("oran Clicked");
+			panel.getHero().eatFood(new OranBerry());
+
 		}
+		redrawButtons();
 	}
 
 }
