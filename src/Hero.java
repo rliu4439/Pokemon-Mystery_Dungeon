@@ -16,14 +16,17 @@ public class Hero extends Pokemon {
 	BoundedGrid grid;
 	String[][] land;
 
-	public Hero(Pokemon p) {
+	public Hero(Pokemon p, String[][]la) {
 		main = p;
 		land = this.getLand();
 		main.setEnemy(false);
 		items.add(new Apple());
 		items.add(new GrimyFood());
 		items.add(new OranBerry());
-		grid = (BoundedGrid) this.getGrid();
+		this.land=la;
+	}
+	public void setGrid(BoundedGrid g){
+		grid=g;
 	}
 
 	public void eatFood(Items i) {
@@ -93,9 +96,14 @@ public class Hero extends Pokemon {
 		// TODO Auto-generated method stub
 		this.setDirection(Location.RIGHT);
 		Location current = this.getLocation();
-		if (land[current.getRow()][current.getCol() + 1].equals("W") == false) {
-			if (grid.get(current).equals(null)) {
-				this.moveTo(current.getAdjacentLocation(Location.RIGHT));
+		int row=current.getRow()+1;
+		int col=current.getCol();
+		Object a=grid.get(new Location(row, col));
+		System.out.println("Current Location is "+this.getLocation());
+		if (land[row][col].equals("W") == false) {
+			if (a==null) {
+				this.moveTo(new Location(row,col));
+				System.out.println("Now the current location is "+ this.getLocation());
 			}
 		}
 	}
@@ -104,9 +112,12 @@ public class Hero extends Pokemon {
 		// TODO Auto-generated method stub
 		this.setDirection(Location.LEFT);
 		Location current = this.getLocation();
-		if (land[current.getRow()][current.getCol() + 1].equals("W") == false) {
-			if (grid.get(current).equals(null)) {
-				this.moveTo(current.getAdjacentLocation(Location.RIGHT));
+		int row=current.getRow();
+		int col=current.getCol()-1;
+		Object a=grid.get(new Location(row, col));
+		if (land[row][col ].equals("W") == false) {
+			if (a==null) {
+				this.moveTo(new Location(row,col));
 			}
 		}
 
@@ -115,9 +126,12 @@ public class Hero extends Pokemon {
 	public void moveUp() {
 		this.setDirection(Location.NORTH);
 		Location current = this.getLocation();
-		if (land[current.getRow()][current.getCol() + 1].equals("W") == false) {
-			if (grid.get(current).equals(null)) {
-				this.moveTo(current.getAdjacentLocation(Location.RIGHT));
+		int row=current.getRow()-1;
+		int col=current.getCol();
+		Object a=grid.get(new Location(row, col));
+		if (land[row][col ].equals("W") == false) {
+			if (a==null) {
+				this.moveTo(new Location(row,col));
 			}
 		}
 
@@ -125,12 +139,22 @@ public class Hero extends Pokemon {
 
 	public void moveBack() {
 		// TODO Auto-generated method stub
-
+//		for (int row = 0; row < land.length; row++) {
+//			System.out.print(row);
+//			for (int col = 0; col < land[0].length; col++) {
+//				System.out.print(land[row][col]);
+//			}
+//			System.out.println();
+//		}
 		this.setDirection(Location.SOUTH);
 		Location current = this.getLocation();
-		if (land[current.getRow()][current.getCol() + 1].equals("W") == false) {
-			if (grid.get(current).equals(null)) {
-				this.moveTo(current.getAdjacentLocation(Location.RIGHT));
+		System.out.println("Current Location is "+current.getRow()+" "+current.getCol());
+		int row=current.getRow()+1;
+		int col=current.getCol();
+		Object a=grid.get(new Location(row, col));
+		if (land[row][col ].equals("W") == false) {
+			if (a==null) {
+				this.moveTo(new Location(row,col));
 			}
 		}
 

@@ -263,13 +263,13 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 				}
 			}
 		}
-		for (int row = 0; row < dungeon.getNumRows(); row++) {
-			for (int col = 0; col < dungeon.getNumCols(); col++) {
-				System.out.print(dungeon.get(new Location(row, col)));
-			}
-			System.out.println();
-		}
-		System.out.println("done");
+//		for (int row = 0; row < dungeon.getNumRows(); row++) {
+//			for (int col = 0; col < dungeon.getNumCols(); col++) {
+//				System.out.print(dungeon.get(new Location(row, col)));
+//			}
+//			System.out.println();
+//		}
+//		System.out.println("done");
 	}
 
 	private void initRooms() {

@@ -35,9 +35,9 @@ public class DungeonDriver {
 		GamePanel g = new GamePanel(i);
 		i.setGamePanel(g);
 		jf.add(g,BorderLayout.LINE_START);
-		jf.add(i,BorderLayout.LINE_END);
+//		jf.add(i,BorderLayout.LINE_END);
 		Info a= new Info(g);
-		jf.add(a,BorderLayout.PAGE_END);
+//		jf.add(a,BorderLayout.PAGE_END);
 		jf.pack();
 		jf.setVisible(true);
 
