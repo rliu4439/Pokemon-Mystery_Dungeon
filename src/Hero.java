@@ -1,6 +1,7 @@
 import info.gridworld.grid.BoundedGrid;
 import info.gridworld.grid.Location;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -90,6 +91,8 @@ public class Hero extends Pokemon {
 	public void draw(Graphics g, int row, int col) {
 		// TODO Auto-generated method stub
 		main.draw(g, row, col);
+		g.setColor(Color.MAGENTA);
+		g.draw3DRect(col, row, 10, 10, false);
 	}
 
 	public void moveRight() {
@@ -101,39 +104,52 @@ public class Hero extends Pokemon {
 		Object a=grid.get(new Location(row, col));
 		System.out.println("Current Location is "+this.getLocation());
 		if (land[row][col].equals("W") == false) {
+			System.out.println(a);
 			if (a==null) {
 				this.moveTo(new Location(row,col));
 				System.out.println("Now the current location is "+ this.getLocation());
 			}
 		}
+		checkStatus();
 	}
 
 	public void moveLeft() {
 		// TODO Auto-generated method stub
 		this.setDirection(Location.LEFT);
 		Location current = this.getLocation();
-		int row=current.getRow();
-		int col=current.getCol()-1;
+		int row=current.getRow()-1;
+		int col=current.getCol();
 		Object a=grid.get(new Location(row, col));
-		if (land[row][col ].equals("W") == false) {
+		System.out.println("Current Location is "+this.getLocation());
+		if (land[row][col].equals("W") == false) {
+			System.out.println(a);
 			if (a==null) {
 				this.moveTo(new Location(row,col));
+				System.out.println("Now the current location is "+ this.getLocation());
 			}
 		}
+		checkStatus();
 
-	}
+		}
+
+	
 
 	public void moveUp() {
 		this.setDirection(Location.NORTH);
 		Location current = this.getLocation();
-		int row=current.getRow()-1;
-		int col=current.getCol();
+		int row=current.getRow();
+		int col=current.getCol()-1;
 		Object a=grid.get(new Location(row, col));
-		if (land[row][col ].equals("W") == false) {
+		System.out.println("Current Location is "+this.getLocation());
+		if (land[row][col].equals("W") == false) {
+			System.out.println(a);
 			if (a==null) {
 				this.moveTo(new Location(row,col));
+				System.out.println("Now the current location is "+ this.getLocation());
 			}
 		}
+		checkStatus();
+
 
 	}
 
@@ -148,15 +164,20 @@ public class Hero extends Pokemon {
 //		}
 		this.setDirection(Location.SOUTH);
 		Location current = this.getLocation();
-		System.out.println("Current Location is "+current.getRow()+" "+current.getCol());
-		int row=current.getRow()+1;
-		int col=current.getCol();
+//		System.out.println("Current Location is "+current.getRow()+" "+current.getCol());
+		int row=current.getRow();
+		int col=current.getCol()+1;
 		Object a=grid.get(new Location(row, col));
-		if (land[row][col ].equals("W") == false) {
+		System.out.println("Current Location is "+this.getLocation());
+		if (land[row][col].equals("W") == false) {
+			System.out.println(a);
 			if (a==null) {
 				this.moveTo(new Location(row,col));
+				System.out.println("Now the current location is "+ this.getLocation());
 			}
 		}
+		checkStatus();
+
 
 	}
 }

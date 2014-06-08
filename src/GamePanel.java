@@ -206,24 +206,29 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				// System.out.print(land[row][col]);
 				if (land[row][col].equals("C") || land[row][col].equals("R")) {
 					g.drawImage(floor, row * 10, col * 10, 10, 10, null);
-
+					g.draw3DRect(row*10, col*10, 10, 10, true);
 				} else {
 
 					g.drawImage(wall, row * 10, col * 10, 10, 10, null);
+					g.draw3DRect(row*10, col*10, 10, 10, true);
 
 				}
 
 				if (grid.get(new Location(row, col)) instanceof Pokemon) {
-					// System.out.println("Pokemon here");
+//					 System.out.println("Pokemon here");
 					Pokemon p = (Pokemon) grid.get(new Location(row, col));
 					g.drawImage(floor, row * 10, col * 10, 10, 10, null);
 					p.draw(g, row * 10, col * 10);
+					g.draw3DRect(row*10, col*10, 10, 10, true);
+
 				}
 
 				else if (grid.get(new Location(row, col)) instanceof Items) {
 					Items i = (Items) grid.get(new Location(row, col));
 					g.drawImage(floor, row * 10, col * 10, 10, 10, null);
 					i.draw(g, row * 10, col * 10);
+					g.draw3DRect(row*10, col*10, 10, 10, true);
+
 				}
 			}
 			// System.out.println();
@@ -250,6 +255,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				// TODO Auto-generated method stub
 				System.out.println("moving left");
 				hero.moveLeft();
+				repaint();
 			}
 		});
 		this.getInputMap().put(KeyStroke.getKeyStroke("UP"), "moveUp");
@@ -259,6 +265,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				// TODO Auto-generated method stub
 				System.out.println("moving up");
 				hero.moveUp();
+				repaint();
 			}
 
 		});
@@ -270,6 +277,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			public void actionPerformed(ActionEvent e) {
 				hero.moveBack();
 				System.out.println("moving down");
+				repaint();
 			}
 		});
 
