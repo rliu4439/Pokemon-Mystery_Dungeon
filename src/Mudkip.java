@@ -42,19 +42,32 @@ public class Mudkip extends Pokemon {
 		}
 	}
 
+	public Image getCurrentImage() {
+		return currentImage;
+	}
+
+	public void setCurrentImage(Image currentImage) {
+		this.currentImage = currentImage;
+	}
+
 	@Override
 	public void draw(Graphics g, int row, int col) {
 		// TODO Auto-generated method stub
 
 		int direction = this.getDirection();
-		if (direction == Location.EAST) {
+		System.out.println("Current is "+direction);
+		if (direction == 90) {
 			this.currentImage = right;
-		} else if (direction == Location.WEST) {
+			System.out.println("Changed to right");
+		} else if (direction == 270) {
+			System.out.println("Changed to left");
 			currentImage = left;
-		} else if (direction == Location.NORTH) {
-			currentImage = back;
-		} else {
+		} else if (direction == 0) {
 			currentImage = front;
+			System.out.println("Changed to back");
+		} else {
+			currentImage = back;
+			System.out.println("Changed to front");
 		}
 		g.drawImage(currentImage, row, col, 10, 10, null);
 	}

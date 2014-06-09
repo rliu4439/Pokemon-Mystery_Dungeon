@@ -39,6 +39,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	int numSteps = 0;// number of steps taken by main character
 	private static Image wall;
 	private static Image floor;
+	private static Image stairs;
 	ItemHolder i;
 
 	public GamePanel(ItemHolder i2) {
@@ -47,7 +48,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		try {
 			wall = ImageIO.read(new File("src/image/Wall.png"));
 			floor = ImageIO.read(new File("src/image/Floor.png"));// reads in
-																	// pictures
+			stairs = ImageIO.read(new File("src/image/Stairs.png"));										// pictures
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -105,6 +106,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		case 0:
 			Apple a = new Apple();
 			world.add(l, a);
+			System.out.println("added apple");
 			openSpaces.remove(l);
 
 			break;
@@ -139,8 +141,17 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		hero = new Hero(p, land);
 		Location l = (openSpaces.get((int) (Math.random() * openSpaces.size())));
 		world.add(openSpaces.get((int) (Math.random() * openSpaces.size())),
-				hero);
+				hero.main);
 		hero.setGrid(grid);
+		addStairs();
+	}
+
+	private void addStairs() {
+		// TODO Auto-generated method stub
+		int pick = (int) (Math.random() * openSpaces.size());
+		Location l = openSpaces.get(pick);
+		land[l.getRow()][l.getCol()]="S";
+		openSpaces.remove(l);
 	}
 
 	private void addEnemy() {
@@ -207,11 +218,16 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				if (land[row][col].equals("C") || land[row][col].equals("R")) {
 					g.drawImage(floor, row * 10, col * 10, 10, 10, null);
 					g.draw3DRect(row*10, col*10, 10, 10, true);
-				} else {
+				} else if(land[row][col].equals("W")) {
+					
 
 					g.drawImage(wall, row * 10, col * 10, 10, 10, null);
 					g.draw3DRect(row*10, col*10, 10, 10, true);
 
+				}
+				else{
+					System.out.println("got here");
+					g.drawImage(stairs, row * 10, col * 10, 10, 10, null);
 				}
 
 				if (grid.get(new Location(row, col)) instanceof Pokemon) {
