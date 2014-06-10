@@ -112,8 +112,8 @@ public class Hero extends Pokemon {
 		main.setDirection(90);
 		System.out.println("Direction is now "+main.getDirection());
 		Location current = main.getLocation();
-		int row=current.getRow()+1;
-		int col=current.getCol();
+		int row=current.getRow();
+		int col=current.getCol()+1;
 		Object a=grid.get(new Location(row, col));
 		System.out.println("Current Location is "+main.getLocation());
 		if (land[row][col].equals("W") == false) {
@@ -142,8 +142,8 @@ public class Hero extends Pokemon {
 		main.setDirection(270);
 		System.out.println("Direction is now "+main.getDirection());
 		Location current = main.getLocation();
-		int row=current.getRow()-1;
-		int col=current.getCol();
+		int row=current.getRow();
+		int col=current.getCol()-1;
 		Object a=grid.get(new Location(row, col));
 		System.out.println("Current Location is "+main.getLocation());
 		if (land[row][col].equals("W") == false) {
@@ -175,8 +175,8 @@ public class Hero extends Pokemon {
 		System.out.println("Direction is now "+main.getDirection());
 
 		Location current = main.getLocation();
-		int row=current.getRow();
-		int col=current.getCol()-1;
+		int row=current.getRow()-1;
+		int col=current.getCol();
 		Object a=grid.get(new Location(row, col));
 		System.out.println("Current Location is "+main.getLocation());
 		if (land[row][col].equals("W") == false) {
@@ -216,8 +216,8 @@ public class Hero extends Pokemon {
 
 		Location current = main.getLocation();
 //		System.out.println("Current Location is "+current.getRow()+" "+current.getCol());
-		int row=current.getRow();
-		int col=current.getCol()+1;
+		int row=current.getRow()+1;
+		int col=current.getCol();
 		Object a=grid.get(new Location(row, col));
 		System.out.println("Current Location is "+main.getLocation());
 		if (land[row][col].equals("W") == false) {

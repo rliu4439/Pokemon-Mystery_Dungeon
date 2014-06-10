@@ -35,7 +35,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	BoundedGrid grid;
 	String[][] land;
 	int numEnemies = 40;
-	int numItems = 10;
+	int numItems = 50;
 	int floorLevel = 1;
 	int numSteps = 0;// number of steps taken by main character
 	private static Image wall;
@@ -44,7 +44,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	ItemHolder i;
 
 	public GamePanel(ItemHolder i2) {
-		//tester t= new tester();
+		// tester t= new tester();
 		i = i2;
 		setUpKeyMappings();
 		try {
@@ -60,19 +60,14 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 
 		d = new Dungeon(50, 50);// creates a dungeon
 		ArrayList<Room> roo = d.getRooms();
-		boolean reDo=d.checkRooms();
-		while( reDo==true){
+		boolean reDo = d.checkRooms();
+		while (reDo == true) {
 			System.out.println("need to redo");
 			System.out.println("Checking");
-			//Scanner in = new Scanner(System.in);
-			//in.next();
-			d= new Dungeon(50, 50);
-			reDo=d.checkRooms();
+			d = new Dungeon(50, 50);
+			reDo = d.checkRooms();
 
 		}
-//		for(Room r:roo){
-//			System.out.println(r.corridorConnection(grid));
-//		}
 
 		land = d.getDungeon();// / change to land
 		openSpaces = openLocations();// gets locations of the rooms/corridors
@@ -89,7 +84,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			}
 		}
 
-		this.setPreferredSize(new Dimension(500, 500));
+		this.setPreferredSize(new Dimension(750, 750));
 
 	}
 
@@ -125,7 +120,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		case 0:
 			Apple a = new Apple();
 			world.add(l, a);
-//			System.out.println("added apple");
+			// System.out.println("added apple");
 			openSpaces.remove(l);
 
 			break;
@@ -166,7 +161,6 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	}
 
 	private void addStairs() {
-		// TODO Auto-generated method stub
 		int pick = (int) (Math.random() * openSpaces.size());
 		Location l = openSpaces.get(pick);
 		land[l.getRow()][l.getCol()] = "S";
@@ -227,43 +221,65 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 
 	}
 
+	// } else {
+	// // System.out.println("got here");
+	// g.drawImage(stairs, r * 60, c * 60, 60, 60, null);
+	// }
+
+	// if (grid.get(new Location(r, c)) instanceof Pokemon) {
+	// // System.out.println("Pokemon here");
+	// Pokemon p = (Pokemon) grid.get(new Location(r, c));
+	// g.drawImage(floor, r * 60, c * 60, 60, 60, null);
+	// p.draw(g, r * 60, c * 60);
+	// g.draw3DRect(r * 60, c * 60, 60, 60, true);
+	//
+	// }
+	//
+	// else if (grid.get(new Location(r, c)) instanceof Items) {
+	// Items i = (Items) grid.get(new Location(r, c));
+	// g.drawImage(floor, r * 60, c * 60, 60, 60, null);
+	// i.draw(g, r * 60, c * 60);
+	// g.draw3DRect(r * 60, c * 60, 60, 60, true);
+	//
+	// }
 	private void drawDungeon(Graphics g) {
 		// TODO Auto-generated method stub]
 		// System.out.println("Drawing dungeon");
+		Location current = hero.main.getLocation();
+		int row = current.getRow();
+		int col = current.getCol();
+		System.out.println(current);
+		int counterr = 0;
+		int counterc = 0;
+		for (int r = row - 4; r < row + 5; r++) {
+			for (int c = col - 4; c < col + 5; c++) {
+				if (land[r][c].equals("C") || land[r][c].equals("R")) {
+					System.out.println("Looking at " + r + " " + c);
+					g.drawImage(floor, counterc * 60, counterr * 60, 60, 60,
+							null);
+					// g.draw3DRect(r * 10, c * 10, 10, 10, true);
+				} else if (land[r][c].equals("W")) {
 
-		for (int row = 0; row < land.length; row++) {
-			for (int col = 0; col < land[0].length; col++) {
-				// System.out.print(land[row][col]);
-				if (land[row][col].equals("C") || land[row][col].equals("R")) {
-					g.drawImage(floor, row * 10, col * 10, 10, 10, null);
-					g.draw3DRect(row * 10, col * 10, 10, 10, true);
-				} else if (land[row][col].equals("W")) {
-
-					g.drawImage(wall, row * 10, col * 10, 10, 10, null);
-					g.draw3DRect(row * 10, col * 10, 10, 10, true);
-
+					g.drawImage(wall, counterc * 60, counterr * 60, 60, 60,
+							null);
+					// g.draw3DRect(r * 10, c * 10, 10, 10, true);
 				} else {
-					System.out.println("got here");
-					g.drawImage(stairs, row * 10, col * 10, 10, 10, null);
+					// System.out.println("got here");
+					g.drawImage(stairs,  counterr* 60, counterc * 60, 60, 60, null);
 				}
-
-				if (grid.get(new Location(row, col)) instanceof Pokemon) {
-					// System.out.println("Pokemon here");
-					Pokemon p = (Pokemon) grid.get(new Location(row, col));
-					g.drawImage(floor, row * 10, col * 10, 10, 10, null);
-					p.draw(g, row * 10, col * 10);
-					g.draw3DRect(row * 10, col * 10, 10, 10, true);
-
-				}
-
-				else if (grid.get(new Location(row, col)) instanceof Items) {
-					Items i = (Items) grid.get(new Location(row, col));
-					g.drawImage(floor, row * 10, col * 10, 10, 10, null);
-					i.draw(g, row * 10, col * 10);
-					g.draw3DRect(row * 10, col * 10, 10, 10, true);
-
-				}
+				
+				if (grid.get(new Location(r, c)) instanceof Pokemon) {
+					 // System.out.println("Pokemon here");
+					 Pokemon p = (Pokemon) grid.get(new Location(r, c));
+					 g.drawImage(floor, counterr * 60, counterc * 60, 60, 60, null);
+					 p.draw(g, counterr * 60, counterc * 60);
+//					 g.draw3DRect(r * 60, c * 60, 60, 60, true);
+					
+					 }
+				counterc++;
 			}
+			counterr++;
+			counterc = 0;
 			// System.out.println();
 		}
 

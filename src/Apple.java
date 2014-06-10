@@ -13,7 +13,7 @@ public class Apple extends Items {
 		try {
 			if (img == null) {
 				img = ImageIO.read(new File(
-						"src/image/cyndaquil/cyndaquil-back.png"));
+						"src/image/Oranberry.png"));
 			}
 
 		} catch (IOException e) {
@@ -25,7 +25,7 @@ public class Apple extends Items {
 	@Override
 	public void draw(Graphics g, int row, int col) {
 		// TODO Auto-generated method stub
-		g.drawImage(img, row, col, 10, 10, null);
+		g.drawImage(img, col, row, 60, 60, null);
 	}
 
 }

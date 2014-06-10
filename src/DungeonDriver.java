@@ -33,11 +33,11 @@ public class DungeonDriver {
 		jf.setDefaultCloseOperation(jf.EXIT_ON_CLOSE);
 		ItemHolder i = new ItemHolder();
 		GamePanel g = new GamePanel(i);
-//		i.setGamePanel(g);
+		i.setGamePanel(g);
 		jf.add(g,BorderLayout.LINE_START);
-//		jf.add(i,BorderLayout.LINE_END);
-//		Info a= new Info(g);
-//		jf.add(a,BorderLayout.PAGE_END);
+		jf.add(i,BorderLayout.LINE_END);
+		Info a= new Info(g);
+		jf.add(a,BorderLayout.PAGE_END);
 		jf.pack();
 		jf.setVisible(true);
 

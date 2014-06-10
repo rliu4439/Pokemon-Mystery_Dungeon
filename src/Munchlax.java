@@ -50,6 +50,5 @@ public class Munchlax extends Pokemon {
 		} else {
 			currentImage = front;
 		}
-		g.drawImage(currentImage, row, col, 10, 10, null);
-	}
+		g.drawImage(currentImage, col,row, 60, 60, null);	}
 }

@@ -13,8 +13,7 @@ public class OranBerry extends Items {
 		try {
 			if (img == null) {
 
-				img = ImageIO.read(new File(
-						"src/image/cyndaquil/cyndaquil-back.png"));
+				img = ImageIO.read(new File("src/image/OranBerry.png"));
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -25,7 +24,7 @@ public class OranBerry extends Items {
 	@Override
 	public void draw(Graphics g, int row, int col) {
 		// TODO Auto-generated method stub
-
+		g.drawImage(img, col, row, 60, 60, null);
 	}
 
 }

@@ -63,12 +63,12 @@ public class Mudkip extends Pokemon {
 //			System.out.println("Changed to left");
 			currentImage = left;
 		} else if (direction == 0) {
-			currentImage = front;
+			currentImage = back;
 //			System.out.println("Changed to back");
 		} else {
-			currentImage = back;
+			currentImage = front;
 //			System.out.println("Changed to front");
 		}
-		g.drawImage(currentImage, row, col, 10, 10, null);
+		g.drawImage(currentImage, col,row, 60, 60, null);
 	}
 }

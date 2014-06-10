@@ -28,22 +28,22 @@ public class ItemHolder extends JPanel implements ActionListener {
 	JButton apple;
 	JButton Grimy;
 	JButton Oran;
-//	Button 
+
+	// Button
 	public ItemHolder() {
 		this.setOpaque(true);
 		this.setBackground(Color.WHITE);
 		this.setPreferredSize(new Dimension(200, 500));
 		this.setLayout(new FlowLayout());
-		
-		
+
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+
 		System.out.println("drawing");
-		
+
 	}
 
 	public void setGamePanel(GamePanel p) {
@@ -52,41 +52,45 @@ public class ItemHolder extends JPanel implements ActionListener {
 	}
 
 	private void drawItems() {
-		// TODO Auto-generated method stub
-//		g.draw3DRect(10, 10, 50, 50, true);
-		
-		items=panel.getHero().getItems();
-		apple=new JButton("Eat Apple: Quantity "+items.get(0).getNumInBag());
-		Grimy = new JButton("Eat Grimyfood: Quantity "+items.get(1).getNumInBag());
-		Oran= new JButton("Eat Oran Berry: Quantity "+items.get(2).getNumInBag());
+
+		items = panel.getHero().getItems();
+		apple = new JButton("Eat Apple: Quantity " + items.get(0).getNumInBag());
+		Grimy = new JButton("Eat Grimyfood: Quantity "
+				+ items.get(1).getNumInBag());
+		Oran = new JButton("Eat Oran Berry: Quantity "
+				+ items.get(2).getNumInBag());
 		this.add(apple);
 		this.add(Grimy);
 		this.add(Oran);
-		
+
 		apple.addActionListener(this);
 		Grimy.addActionListener(this);
 		Oran.addActionListener(this);
-	
-//		
+
+		//
 	}
-	public void redrawButtons(){
-		apple.setText("Eat Apple: Quantity "+items.get(0).getNumInBag());
-		Grimy.setText("Eat Grimyfood: Quantity "+items.get(1).getNumInBag());
-		Oran.setText("Eat Oran Berry: Quantity "+items.get(2).getNumInBag());
+
+	public void redrawButtons() {
+		apple.setText("Eat Apple: Quantity " + items.get(0).getNumInBag());
+		Grimy.setText("Eat Grimyfood: Quantity " + items.get(1).getNumInBag());
+		Oran.setText("Eat Oran Berry: Quantity " + items.get(2).getNumInBag());
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource()==(apple)){
+		if (e.getSource() == (apple)) {
 			panel.getHero().eatFood(new Apple());
+			panel.requestFocusInWindow();
 		}
-		if(e.getSource()==(Grimy)){
+		if (e.getSource() == (Grimy)) {
 			panel.getHero().eatFood(new GrimyFood());
+			panel.requestFocusInWindow();
 
 		}
-		if(e.getSource()==Oran){
+		if (e.getSource() == Oran) {
 			panel.getHero().eatFood(new OranBerry());
+			panel.requestFocusInWindow();
 
 		}
 		redrawButtons();

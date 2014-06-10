@@ -14,7 +14,7 @@ public class GrimyFood extends Items {
 			if (img == null) {
 
 				img = ImageIO.read(new File(
-						"src/image/cyndaquil/cyndaquil-back.png"));
+						"src/image/GrimyFood.png"));
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -25,6 +25,6 @@ public class GrimyFood extends Items {
 	@Override
 	public void draw(Graphics g, int row, int col) {
 		// TODO Auto-generated method stub
-		g.drawImage(img, row, col, 10, 10, null);
+		g.drawImage(img, col, row, 60, 60, null);
 	}
 }
