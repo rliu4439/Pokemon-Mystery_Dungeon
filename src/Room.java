@@ -25,6 +25,7 @@ public class Room {
 		for (int b = 0; b < 2; b++) {
 			for (int a = x; a < x + width; a++) {
 				Location l = new Location(t, a);
+//				System.out.println("checking location "+l);
 				if (d.isValid(l) && d.get(l).equals("C"))
 					return true;
 			}

@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
@@ -43,6 +44,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	ItemHolder i;
 
 	public GamePanel(ItemHolder i2) {
+		//tester t= new tester();
 		i = i2;
 		setUpKeyMappings();
 		try {
@@ -58,6 +60,19 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 
 		d = new Dungeon(50, 50);// creates a dungeon
 		ArrayList<Room> roo = d.getRooms();
+		boolean reDo=d.checkRooms();
+		while( reDo==true){
+			System.out.println("need to redo");
+			System.out.println("Checking");
+			//Scanner in = new Scanner(System.in);
+			//in.next();
+			d= new Dungeon(50, 50);
+			reDo=d.checkRooms();
+
+		}
+//		for(Room r:roo){
+//			System.out.println(r.corridorConnection(grid));
+//		}
 
 		land = d.getDungeon();// / change to land
 		openSpaces = openLocations();// gets locations of the rooms/corridors
@@ -110,7 +125,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		case 0:
 			Apple a = new Apple();
 			world.add(l, a);
-			System.out.println("added apple");
+//			System.out.println("added apple");
 			openSpaces.remove(l);
 
 			break;

@@ -56,6 +56,33 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		return roomLocs;
 	}
 
+	public boolean checkRooms() {
+		boolean reDo = false;
+		System.out.println("going to check rooms");
+		for (Room r : rooms) {
+			System.out
+					.println("Checking room " + r.corridorConnection(dungeon));
+			if (r.corridorConnection(dungeon) == false) {
+				reDo = true;
+
+			}
+		}
+//		while (reDo == true) {
+//			generateDungeon();
+//			reDo = false;
+//			for (Room r : rooms) {
+//				System.out.println("ReChecking room "
+//						+ r.corridorConnection(dungeon));
+//				if (r.corridorConnection(dungeon) == false) {
+//					reDo = true;
+//
+//				}
+//			}
+//		}
+		return reDo;
+
+	}
+
 	private void initCorridors() {
 		System.out.println("going into initCorridors");
 		ArrayList<Location> locs = new ArrayList<Location>();
@@ -72,15 +99,16 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			// first room, get inner border
 			int t = d1[1];
 			for (int b = 0; b < 2; b++) {
-				for (int e = d1[0]; e < d1[0] + d1[2]; e++){
-					locs.add(new Location(t, e));}
-				t = d1[1] + d1[3]-1;
+				for (int e = d1[0]; e < d1[0] + d1[2]; e++) {
+					locs.add(new Location(t, e));
+				}
+				t = d1[1] + d1[3] - 1;
 			}
 			int s = d1[0];
 			for (int c = 0; c < 2; c++) {
 				for (int d = d1[1]; d < d1[1] + d1[3]; d++)
 					locs.add(new Location(d, s));
-				s = d1[0] + d1[2]-1;
+				s = d1[0] + d1[2] - 1;
 			}
 
 			// second room, get inner border
@@ -88,13 +116,13 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			for (int b = 0; b < 2; b++) {
 				for (int e = d2[0]; e < d2[0] + d2[2]; e++)
 					locs1.add(new Location(t, e));
-				t = d2[1] + d2[3]-1;
+				t = d2[1] + d2[3] - 1;
 			}
 			s = d2[0];
 			for (int c = 0; c < 2; c++) {
 				for (int d = d2[1]; d < d2[1] + d2[3]; d++)
 					locs1.add(new Location(d, s));
-				s = d2[0] + d2[2]-1;
+				s = d2[0] + d2[2] - 1;
 			}
 
 			Collections.shuffle(locs);
@@ -122,13 +150,13 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			for (int b = 0; b < 2; b++) {
 				for (int e = d1[0]; e < d1[0] + d1[2]; e++)
 					locs.add(new Location(t, e));
-				t = d1[1] + d1[3]-1;
+				t = d1[1] + d1[3] - 1;
 			}
 			int s = d1[0];
 			for (int c = 0; c < 2; c++) {
 				for (int d = d1[1]; d < d1[1] + d1[3]; d++)
 					locs.add(new Location(d, s));
-				s = d1[0] + d1[2]-1;
+				s = d1[0] + d1[2] - 1;
 			}
 
 			// second room, get inner border
@@ -136,13 +164,13 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			for (int b = 0; b < 2; b++) {
 				for (int e = d2[0]; e < d2[0] + d2[2]; e++)
 					locs1.add(new Location(t, e));
-				t = d2[1] + d2[3]-1;
+				t = d2[1] + d2[3] - 1;
 			}
 			s = d2[0];
 			for (int c = 0; c < 2; c++) {
 				for (int d = d2[1]; d < d2[1] + d2[3]; d++)
 					locs1.add(new Location(d, s));
-				s = d2[0] + d2[2]-1;
+				s = d2[0] + d2[2] - 1;
 			}
 
 		}
@@ -263,13 +291,13 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 				}
 			}
 		}
-//		for (int row = 0; row < dungeon.getNumRows(); row++) {
-//			for (int col = 0; col < dungeon.getNumCols(); col++) {
-//				System.out.print(dungeon.get(new Location(row, col)));
-//			}
-//			System.out.println();
-//		}
-//		System.out.println("done");
+		// for (int row = 0; row < dungeon.getNumRows(); row++) {
+		// for (int col = 0; col < dungeon.getNumCols(); col++) {
+		// System.out.print(dungeon.get(new Location(row, col)));
+		// }
+		// System.out.println();
+		// }
+		// System.out.println("done");
 	}
 
 	public ArrayList<Room> getRooms() {
