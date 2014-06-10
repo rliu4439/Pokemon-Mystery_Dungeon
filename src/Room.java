@@ -28,23 +28,24 @@ public class Room {
 				if (d.isValid(l) && d.get(l).equals("C"))
 					return true;
 			}
-			t = y + length + 1;
+			t = y + length;
 		}
 		int s = x - 1;
 		for (int c = 0; c < 2; c++) {
 
 			for (int e = y; e < y + length; e++) {
 				Location l = new Location(e, s);
-				if (d.isValid(l) && d.get(l).equals("C"))
+				if (d.isValid(l) && d.get(l).equals("C")) {
 
-					for (int f = y - 1; f < y + length + 1; f++) {
-						Location ll = new Location(f, s);
-						if (d.isValid(ll) && d.get(ll).equals("C"))
+//					for (int f = y - 1; f < y + length + 1; f++) {
+//						Location ll = new Location(f, s);
+//						if (d.isValid(ll) && d.get(ll).equals("C"))
 
 							return true;
-					}
+//					}
+				}
 			}
-			s = x + width + 1;
+			s = x + width;
 		}
 		return false;
 	}

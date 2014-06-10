@@ -70,17 +70,17 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			int[] d2 = r2.getDimensions();
 
 			// first room, get inner border
-			int t = d1[1];// remove negative one? seems to work
+			int t = d1[1];
 			for (int b = 0; b < 2; b++) {
-				for (int e = d1[0]; e < d1[0] + d1[2]; e++)
-					locs.add(new Location(t, e));
-				t = d1[1] + d1[3];
+				for (int e = d1[0]; e < d1[0] + d1[2]; e++){
+					locs.add(new Location(t, e));}
+				t = d1[1] + d1[3]-1;
 			}
 			int s = d1[0];
 			for (int c = 0; c < 2; c++) {
 				for (int d = d1[1]; d < d1[1] + d1[3]; d++)
 					locs.add(new Location(d, s));
-				s = d1[0] + d1[2];
+				s = d1[0] + d1[2]-1;
 			}
 
 			// second room, get inner border
@@ -88,13 +88,13 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			for (int b = 0; b < 2; b++) {
 				for (int e = d2[0]; e < d2[0] + d2[2]; e++)
 					locs1.add(new Location(t, e));
-				t = d2[1] + d2[3];
+				t = d2[1] + d2[3]-1;
 			}
 			s = d2[0];
 			for (int c = 0; c < 2; c++) {
 				for (int d = d2[1]; d < d2[1] + d2[3]; d++)
 					locs1.add(new Location(d, s));
-				s = d2[0] + d2[2];
+				s = d2[0] + d2[2]-1;
 			}
 
 			Collections.shuffle(locs);
@@ -122,13 +122,13 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			for (int b = 0; b < 2; b++) {
 				for (int e = d1[0]; e < d1[0] + d1[2]; e++)
 					locs.add(new Location(t, e));
-				t = d1[1] + d1[3];
+				t = d1[1] + d1[3]-1;
 			}
 			int s = d1[0];
 			for (int c = 0; c < 2; c++) {
 				for (int d = d1[1]; d < d1[1] + d1[3]; d++)
 					locs.add(new Location(d, s));
-				s = d1[0] + d1[2];
+				s = d1[0] + d1[2]-1;
 			}
 
 			// second room, get inner border
@@ -136,13 +136,13 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			for (int b = 0; b < 2; b++) {
 				for (int e = d2[0]; e < d2[0] + d2[2]; e++)
 					locs1.add(new Location(t, e));
-				t = d2[1] + d2[3];
+				t = d2[1] + d2[3]-1;
 			}
 			s = d2[0];
 			for (int c = 0; c < 2; c++) {
 				for (int d = d2[1]; d < d2[1] + d2[3]; d++)
 					locs1.add(new Location(d, s));
-				s = d2[0] + d2[2];
+				s = d2[0] + d2[2]-1;
 			}
 
 		}
@@ -207,11 +207,11 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 				// Location temp;
 				for (int i = 0; i < head.size(); i++) {// for (Location lo :
 														// head) {
-					if (chance < 8
+					if (chance < 9
 							&& l.getDirectionToward(head.get(i)) == point) {
 						chosen = head.get(i);
 						break;
-					} else if (chance >= 8
+					} else if (chance >= 9
 							&& l.getDirectionToward(head.get(i)) == point) {
 						head.remove(head.get(i));
 						chosen = head.get(0);
@@ -270,6 +270,14 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 //			System.out.println();
 //		}
 //		System.out.println("done");
+	}
+
+	public ArrayList<Room> getRooms() {
+		return rooms;
+	}
+
+	public int getNumberofRooms() {
+		return numberofRooms;
 	}
 
 	private void initRooms() {
