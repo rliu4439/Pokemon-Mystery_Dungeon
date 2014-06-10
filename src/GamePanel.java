@@ -265,17 +265,19 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 					// g.draw3DRect(r * 10, c * 10, 10, 10, true);
 				} else {
 					// System.out.println("got here");
-					g.drawImage(stairs,  counterr* 60, counterc * 60, 60, 60, null);
+					g.drawImage(stairs, counterr * 60, counterc * 60, 60, 60,
+							null);
 				}
-				
+
 				if (grid.get(new Location(r, c)) instanceof Pokemon) {
-					 // System.out.println("Pokemon here");
-					 Pokemon p = (Pokemon) grid.get(new Location(r, c));
-					 g.drawImage(floor, counterr * 60, counterc * 60, 60, 60, null);
-					 p.draw(g, counterr * 60, counterc * 60);
-//					 g.draw3DRect(r * 60, c * 60, 60, 60, true);
-					
-					 }
+					// System.out.println("Pokemon here");
+					Pokemon p = (Pokemon) grid.get(new Location(r, c));
+					g.drawImage(floor, counterr * 60, counterc * 60, 60, 60,
+							null);
+					p.draw(g, counterr * 60, counterc * 60);
+					// g.draw3DRect(r * 60, c * 60, 60, 60, true);
+
+				}
 				counterc++;
 			}
 			counterr++;
