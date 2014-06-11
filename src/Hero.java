@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import com.sun.org.apache.xpath.internal.operations.Or;
 
 public class Hero extends Pokemon {
@@ -77,19 +79,21 @@ public class Hero extends Pokemon {
 	}
 
 	public void checkStatus() {
-		if (hp <= 0) {
+		if (main.hp <= 0) {
 			System.out.println("Game over");
+			 JOptionPane.showMessageDialog(null,
+			 "Game Over");
 		} else if (stamina < 0) {
-			hp--;
+			main.hp--;
 		} else if (stamina > 0 && hp < main.topHp) {
-			hp++;
+			main.hp++;
 		}
 		Location current = main.getLocation();
 		int row = current.getRow();
 		int col = current.getCol();
-		if (land[row][col].equals("S")) {// what to do if stairs
-
-		}
+//		if (land[row][col].equals("S")) {// what to do if stairs
+//
+//		}
 
 	}
 
@@ -141,25 +145,25 @@ public class Hero extends Pokemon {
 				Location l = new Location(row, col);
 				if (grid.isValid(l)) {
 					main.moveTo(new Location(row, col));
-					System.out.println("Now the current location is "
-							+ main.getLocation());
+//					System.out.println("Now the current location is "
+//							+ main.getLocation());
 				}
 
 			}
 		}
-		// checkStatus();
+		 checkStatus();
 	}
 
 	public void moveLeft() {
 		main.setDirection(270);
-		System.out.println("Direction is now " + main.getDirection());
+//		System.out.println("Direction is now " + main.getDirection());
 		Location current = main.getLocation();
 		int row = current.getRow();
 		int col = current.getCol() - 1;
 		Object a = grid.get(new Location(row, col));
-		System.out.println("Current Location is " + main.getLocation());
+//		System.out.println("Current Location is " + main.getLocation());
 		if (land[row][col].equals("W") == false) {
-			System.out.println(a);
+//			System.out.println(a);
 			if (a == null || a instanceof Items) {
 				if (a instanceof Items) {
 					if (a instanceof Apple) {
@@ -174,26 +178,26 @@ public class Hero extends Pokemon {
 				Location l = new Location(row, col);
 				if (grid.isValid(l)) {
 					main.moveTo(new Location(row, col));
-					System.out.println("Now the current location is "
-							+ main.getLocation());
+//					System.out.println("Now the current location is "
+//							+ main.getLocation());
 				}
 			}
 		}
-		// checkStatus();
+		 checkStatus();
 
 	}
 
 	public void moveUp() {
 		main.setDirection(0);
-		System.out.println("Direction is now " + main.getDirection());
+//		System.out.println("Direction is now " + main.getDirection());
 
 		Location current = main.getLocation();
 		int row = current.getRow() - 1;
 		int col = current.getCol();
 		Object a = grid.get(new Location(row, col));
-		System.out.println("Current Location is " + main.getLocation());
+//		System.out.println("Current Location is " + main.getLocation());
 		if (land[row][col].equals("W") == false) {
-			System.out.println(a);
+//			System.out.println(a);
 			if (a == null || a instanceof Items) {
 				if (a instanceof Items) {
 					if (a instanceof Apple) {
@@ -208,12 +212,12 @@ public class Hero extends Pokemon {
 				Location l = new Location(row, col);
 				if (grid.isValid(l)) {
 					main.moveTo(new Location(row, col));
-					System.out.println("Now the current location is "
-							+ main.getLocation());
+//					System.out.println("Now the current location is "
+//							+ main.getLocation());
 				}
 			}
 		}
-		// checkStatus();
+		 checkStatus();
 
 	}
 
@@ -227,14 +231,14 @@ public class Hero extends Pokemon {
 		// System.out.println();
 		// }
 		main.setDirection(180);
-		System.out.println("Direction is now " + main.getDirection());
+//		System.out.println("Direction is now " + main.getDirection());
 
 		Location current = main.getLocation();
 		// System.out.println("Current Location is "+current.getRow()+" "+current.getCol());
 		int row = current.getRow() + 1;
 		int col = current.getCol();
 		Object a = grid.get(new Location(row, col));
-		System.out.println("Current Location is " + main.getLocation());
+//		System.out.println("Current Location is " + main.getLocation());
 		if (land[row][col].equals("W") == false) {
 			System.out.println(a);
 			if (a == null || a instanceof Items) {
@@ -251,11 +255,19 @@ public class Hero extends Pokemon {
 				Location l=new Location(row,col);
 				if(grid.isValid(l)){
 					main.moveTo(new Location(row,col));
-					System.out.println("Now the current location is "+ main.getLocation());
+//					System.out.println("Now the current location is "+ main.getLocation());
 				}
 			}
 		}
-		// checkStatus();
+		 checkStatus();
 
+	}
+
+	public Pokemon getMain() {
+		return main;
+	}
+
+	public void setMain(Pokemon main) {
+		this.main = main;
 	}
 }

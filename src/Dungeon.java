@@ -84,7 +84,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 	}
 
 	private void initCorridors() {
-		System.out.println("going into initCorridors");
+//		System.out.println("going into initCorridors");
 		ArrayList<Location> locs = new ArrayList<Location>();
 		ArrayList<Location> locs1 = new ArrayList<Location>();
 		for (int a = 0; a < rooms.size(); a++) {
@@ -190,7 +190,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 	}
 
 	private ArrayList<Location> placeCorridors(Location l, Location l1) {
-		System.out.println("going into placecorridors");
+//		System.out.println("going into placecorridors");
 		ArrayList<Location> spaces = new ArrayList<Location>();
 		spaces.add(l);
 		while (!l.equals(l1)) {
@@ -260,7 +260,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 	}
 
 	private void placeRoom(int width, int length) {
-		System.out.println("going into placeroom");
+//		System.out.println("going into placeroom");
 		Random rand = new Random();
 		Room r = null;
 		int b = 0;
@@ -282,7 +282,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 
 		}
 
-		System.out.println("Chance to build room completed");
+//		System.out.println("Chance to build room completed");
 
 		if (b != 1000000) {
 			rooms.add(r);
@@ -317,14 +317,14 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 	}
 
 	private void initRooms() {
-		System.out.println("Going into init Rooms");
+//		System.out.println("Going into init Rooms");
 		Random rand = new Random();
 		int a = dungeon.getNumRows() * dungeon.getNumCols();
 		int numOfRooms = rand.nextInt(a / 1000) + 6;
 		numberofRooms = 0;
 		while (numberofRooms < numOfRooms) {
-			int w = (int) (Math.random() * 10 + 5); // width
-			int l = (int) (Math.random() * 10 + 5); // length
+			int w = (int) (Math.random() * 5 + 5); // width
+			int l = (int) (Math.random() * 5 + 5); // length
 			placeRoom(w, l);
 		}
 
