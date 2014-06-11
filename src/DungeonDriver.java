@@ -34,9 +34,10 @@ public class DungeonDriver {
 		ItemHolder i = new ItemHolder();
 		GamePanel g = new GamePanel(i);
 		i.setGamePanel(g);
+		InfoScreen a= new InfoScreen(g);
+		g.setInfo(a);
 		jf.add(g,BorderLayout.LINE_START);
 		jf.add(i,BorderLayout.LINE_END);
-		Info a= new Info(g);
 		jf.add(a,BorderLayout.PAGE_END);
 		jf.pack();
 		jf.setVisible(true);

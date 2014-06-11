@@ -41,7 +41,9 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	private static Image wall;
 	private static Image floor;
 	private static Image stairs;
+	private static Image error;
 	ItemHolder i;
+	InfoScreen info;
 
 	public GamePanel(ItemHolder i2) {
 		// tester t= new tester();
@@ -51,6 +53,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			wall = ImageIO.read(new File("src/image/Wall.png"));
 			floor = ImageIO.read(new File("src/image/Floor.png"));// reads in
 			stairs = ImageIO.read(new File("src/image/Stairs.png")); // pictures
+			error= ImageIO.read(new File("src/image/error.jpg")); 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -84,7 +87,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			}
 		}
 
-		this.setPreferredSize(new Dimension(750, 750));
+		this.setPreferredSize(new Dimension(700, 700));
 
 	}
 
@@ -145,12 +148,12 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		// JOptionPane.showMessageDialog(null,
 		// "Welcome to Pokemon Mystery Dungeon!");
 		// choosePokemon();
-		for (int i = 0; i < numEnemies; i++) {
-			addEnemy();
-		}
-		for (int i = 0; i < numItems; i++) {
-			addItem();
-		}
+//		for (int i = 0; i < numEnemies; i++) {
+//			addEnemy();
+//		}
+//		for (int i = 0; i < numItems; i++) {
+//			addItem();
+//		}
 		Pokemon p = new Mudkip(false, land);// used for testing
 		hero = new Hero(p, land);
 		Location l = (openSpaces.get((int) (Math.random() * openSpaces.size())));
@@ -164,6 +167,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		int pick = (int) (Math.random() * openSpaces.size());
 		Location l = openSpaces.get(pick);
 		land[l.getRow()][l.getCol()] = "S";
+		System.out.println("added stairs to "+l.getRow()+" "+l.getCol());
 		openSpaces.remove(l);
 	}
 
@@ -251,7 +255,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		System.out.println(current);
 		int counterr = 0;
 		int counterc = 0;
-		for (int r = row - 4; r < row + 5; r++) {
+		for (int r = row - 4; r < row + 5; r++) {// gets 4 above and 4 below hero
 			for (int c = col - 4; c < col + 5; c++) {
 				if (land[r][c].equals("C") || land[r][c].equals("R")) {
 					System.out.println("Looking at " + r + " " + c);
@@ -259,13 +263,18 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 							null);
 					// g.draw3DRect(r * 10, c * 10, 10, 10, true);
 				} else if (land[r][c].equals("W")) {
-
+					System.out.println("Looking at " + r + " " + c);
 					g.drawImage(wall, counterc * 60, counterr * 60, 60, 60,
 							null);
 					// g.draw3DRect(r * 10, c * 10, 10, 10, true);
-				} else {
+				} else if  (land[r][c].equals("S")){
 					// System.out.println("got here");
-					g.drawImage(stairs, counterr * 60, counterc * 60, 60, 60,
+					System.out.println("Location of stairs is "+ r+" "+c);
+					g.drawImage(stairs, counterc * 60, counterr * 60, 60, 60,
+							null);
+				}
+				else{
+					g.drawImage(error, counterc * 60, counterr * 60, 60, 60,
 							null);
 				}
 
@@ -278,6 +287,12 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 					// g.draw3DRect(r * 60, c * 60, 60, 60, true);
 
 				}
+//				 else if (grid.get(new Location(r, c)) instanceof Items) {
+//				 Items i = (Items) grid.get(new Location(r, c));
+//				 g.drawImage(floor, counterr * 60, counterr * 60, 60, 60, null);
+//				 i.draw(g, counterr * 60, counterr * 60);
+//				
+//				 }
 				counterc++;
 			}
 			counterr++;
@@ -303,7 +318,6 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		this.getActionMap().put("moveLeft", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				System.out.println("moving left");
 				hero.moveLeft();
 				repaint();
@@ -332,6 +346,14 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			}
 		});
 
+	}
+
+	public InfoScreen getInfo() {
+		return info;
+	}
+
+	public void setInfo(InfoScreen info) {
+		this.info = info;
 	}
 
 }

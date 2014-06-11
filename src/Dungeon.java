@@ -259,9 +259,11 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		Random rand = new Random();
 		Room r = null;
 		int b = 0;
+		int min=5;
+		int max=dungeon.getNumCols() - width-4;
 		for (int a = 0; a < 1000000; a++) {
-			int x = rand.nextInt(dungeon.getNumCols() - width - 4) + 3;
-			int y = rand.nextInt(dungeon.getNumRows() - length - 4) + 3;
+			int x = rand.nextInt((max - min) + 1) + min;
+			int y=rand.nextInt((max - min) + 1) + min;
 			// System.out.println(dungeon.getNumCols() + " "
 			// + dungeon.getNumRows() + " " + x + " " + y);
 			r = new Room(x, y, width, length);
@@ -312,11 +314,11 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		System.out.println("Going into init Rooms");
 		Random rand = new Random();
 		int a = dungeon.getNumRows() * dungeon.getNumCols();
-		int numOfRooms = rand.nextInt(a / 1000) + 4;
+		int numOfRooms = rand.nextInt(a / 1000) + 6;
 		numberofRooms = 0;
 		while (numberofRooms < numOfRooms) {
-			int w = (int) (Math.random() * 12 + 8); // width
-			int l = (int) (Math.random() * 12 + 8); // length
+			int w = (int) (Math.random() * 10 + 5); // width
+			int l = (int) (Math.random() * 10 + 5); // length
 			placeRoom(w, l);
 		}
 
