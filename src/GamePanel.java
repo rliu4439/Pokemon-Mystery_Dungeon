@@ -34,7 +34,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	ActorWorld world;
 	BoundedGrid grid;
 	String[][] land;
-	int numEnemies = 40;
+	int numEnemies = 10;
 	int numItems = 50;
 	int floorLevel = 1;
 	int numSteps = 0;// number of steps taken by main character
@@ -156,9 +156,12 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		// JOptionPane.showMessageDialog(null,
 		// "Welcome to Pokemon Mystery Dungeon!");
 		// choosePokemon();
+		int counter=0;
 		 for (int i = 0; i < numEnemies; i++) {
 		 addEnemy();
+		 counter++;
 		 }
+		 System.out.println("Made "+counter+" enemy Pokemon");
 		for (int i = 0; i < numItems; i++) {
 			addItem();
 		}
@@ -256,20 +259,20 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		for (int r = row - 4; r < row + 5; r++) {// gets 4 above and 4 below
 													// hero
 			for (int c = col - 4; c < col + 5; c++) {
-				System.out.println("counter r is " +counterr+" counter c is "+counterc);
+//				System.out.println("counter r is " +counterr+" counter c is "+counterc);
 				if (land[r][c].equals("C") || land[r][c].equals("R")) {
-					System.out.println("Looking at " + r + " " + c);
+//					System.out.println("Looking at " + r + " " + c);
 					g.drawImage(floor, counterc * 60, counterr * 60, 60, 60,
 							null);
 					// g.draw3DRect(r * 10, c * 10, 10, 10, true);
 				} else if (land[r][c].equals("W")) {
-					System.out.println("Looking at " + r + " " + c);
+//					System.out.println("Looking at " + r + " " + c);
 					g.drawImage(wall, counterc * 60, counterr * 60, 60, 60,
 							null);
 					// g.draw3DRect(r * 10, c * 10, 10, 10, true);
 				} else if (land[r][c].equals("S")) {
 					// System.out.println("got here");
-					System.out.println("Location of stairs is " + r + " " + c);
+//					System.out.println("Location of stairs is " + r + " " + c);
 					g.drawImage(stairs, counterc * 60, counterr * 60, 60, 60,
 							null);
 				} else {
@@ -288,12 +291,12 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				} 
 				else if (grid.get(new Location(r, c)) instanceof Items) {
 					
-					System.out.println("Found an item at " + r + " " + c);
+//					System.out.println("Found an item at " + r + " " + c);
 					Items i = (Items) grid.get(new Location(r, c));
 					// g.drawImage(floor, counterc * 60, counterr * 60, 60, 60,
 					// null);
 					i.draw(g, counterc * 60, counterr * 60);
-					System.out.println("Drawimg at "+counterr+" "+counterc);
+//					System.out.println("Drawimg at "+counterr+" "+counterc);
 
 				}
 				counterc++;
@@ -313,6 +316,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				// TODO Auto-generated method stub
 				hero.moveRight();
 				System.out.println("moving right");
+				moveEnemies();
 				repaint();
 			}
 
@@ -323,6 +327,8 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("moving left");
 				hero.moveLeft();
+				moveEnemies();
+
 				repaint();
 			}
 		});
@@ -333,6 +339,8 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				// TODO Auto-generated method stub
 				System.out.println("moving up");
 				hero.moveUp();
+				moveEnemies();
+
 				repaint();
 			}
 
@@ -345,6 +353,8 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			public void actionPerformed(ActionEvent e) {
 				hero.moveBack();
 				System.out.println("moving down");
+				moveEnemies();
+				System.out.println("Finished moving enemies");
 				repaint();
 			}
 		});

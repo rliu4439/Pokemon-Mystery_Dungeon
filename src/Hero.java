@@ -109,12 +109,8 @@ GamePanel panel;
 		g.draw3DRect(col, row, 60, 60, false);
 		main.draw(g, row, col);
 	
-//		g.drawImage(currentImage, col,row, 60, 60, null);
-//	}
 
 		System.out.println("Direction is "+main.getDirection());
-//		g.setColor(Color.MAGENTA);
-//		g.draw3DRect(col, row, 10, 10, false);
 	}
 
 	public void moveRight() {

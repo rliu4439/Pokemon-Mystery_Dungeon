@@ -238,7 +238,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 														// head) {
 					if (chance < 9
 							&& l.getDirectionToward(head.get(i)) == point) {
-						System.out.println("head is " + head.size());
+//						System.out.println("head is " + head.size());
 
 						chosen = head.get(i);
 
@@ -246,7 +246,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 					} else if (chance >= 9//don't need this
 							&& l.getDirectionToward(head.get(i)) == point) {
 						head.remove(head.get(i));
-						System.out.println("head is " + head.size());
+//						System.out.println("head is " + head.size());
 						chosen = head.get(0);
 						break;
 					}

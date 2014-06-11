@@ -119,10 +119,10 @@ public abstract class Pokemon extends Actor {
 			if (g.isValid(l) && (land[l.getRow()][l.getCol()].equals("W")) == false) {// if the new location is valid and it isn't a wall, move toward it
 				this.setDirection(direct);
 				Location current = this.getLocation();
-				if (g.get(l).equals(null)) {
+				if (g.get(l)==(null)) {
 					this.moveTo(l);
 					stop=true;
-				} else {
+				} else if(g.get(l)instanceof Pokemon){
 					this.attack((Pokemon) g.get(l));
 					stop = true;
 
@@ -137,7 +137,6 @@ public abstract class Pokemon extends Actor {
 			Location current = this.getLocation();
 			int choose = ran.nextInt(l.size());
 			Location go = l.get(choose);
-			String temp = (String) g.get(go);
 			this.moveTo(go);
 		
 		}
@@ -158,6 +157,7 @@ public abstract class Pokemon extends Actor {
 		// TODO Auto-generated method stub
 		ArrayList<Location> locs = new ArrayList<>();
 		Location l = this.getLocation();
+		System.out.println("current Enemy location is "+l);
 		int minRow, maxRow;
 		int minCol, maxCol;
 		minRow = l.getRow() - 2;
