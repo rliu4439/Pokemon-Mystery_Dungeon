@@ -97,6 +97,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		this.setPreferredSize(new Dimension(700, 700));
 
 	}
+
 	public void startGame() {
 		// JOptionPane.showMessageDialog(null,
 		// "Welcome to Pokemon Mystery Dungeon!");
@@ -181,6 +182,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	public Hero getHero() {
 		return hero;
 	}
+
 	public ArrayList<Location> openLocations() {
 		ArrayList<Location> open = new ArrayList<>();
 		for (int row = 0; row < land.length; row++) {
@@ -222,19 +224,22 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		}
 
 	}
+
 	public void moveEnemies() {
-		System.out.println();
+
 		for (Pokemon p : enemies) {
-			System.out.println("Precheck valid? "+ grid.isValid(p.getLocation()));
+			System.out.println("Currently at moveEnemies");
+			System.out.println(p.getLocation());
+			System.out.println("Precheck valid? "
+					+ grid.isValid(p.getLocation()));
 			System.out.println("Moving " + p);
+
+		}
+		for (Pokemon p : enemies) {
 			p.move();
 		}
 	}
 
-	
-
-
-	
 	private void choosePokemon() {
 		PersonalityTest test = new PersonalityTest(this.land);
 		Pokemon p = test.chooseCharacter();
@@ -250,7 +255,9 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	}
 
 	private void drawDungeon(Graphics g) {
+		System.out.println("At draw Dungeon");
 		Location current = hero.main.getLocation();
+		System.out.println("current is "+current);
 		int row = current.getRow();
 		int col = current.getCol();
 		System.out.println(current);

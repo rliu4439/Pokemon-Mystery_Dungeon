@@ -96,6 +96,7 @@ public abstract class Pokemon extends Actor {
 	}
 
 	public void move() {
+		System.out.println("In move");
 		BoundedGrid g = (BoundedGrid) this.getGrid();
 		boolean stop = false;
 		Location begin=this.getLocation();
@@ -123,6 +124,7 @@ public abstract class Pokemon extends Actor {
 				Location current = this.getLocation();
 				if (g.get(l)==(null)) {
 					this.moveTo(l);
+					
 					stop=true;
 					System.out.println("Moved from "+begin+ " to "+ this.getLocation());
 				} else if(g.get(l)instanceof Pokemon){
@@ -132,6 +134,7 @@ public abstract class Pokemon extends Actor {
 
 				}
 			} else {
+				System.out.println("removing location");
 				a.remove(l);// if the location is not valid, then look for a new spot
 			}
 		}
@@ -146,6 +149,18 @@ public abstract class Pokemon extends Actor {
 				this.moveTo(go);
 				System.out.println("Moved from "+begin+ " to "+ this.getLocation());
 
+//			}else{
+//				l.remove(go);
+//				boolean s=false;
+//				 choose = ran.nextInt(l.size());
+//				 go = l.get(choose);
+//				 while(s==false){
+//					 if(g.isValid(go) && land[go.getRow()][go.getCol()].equals("W")==false){
+//							this.moveTo(go);
+//							System.out.println("Moved from "+begin+ " to "+ this.getLocation());
+//
+//						}
+//				 }
 			}
 		
 		}
@@ -154,6 +169,7 @@ public abstract class Pokemon extends Actor {
 	}
 
 	public double distanceFrom(Location loc) {
+		System.out.println("In distance from");
 		Location here = this.getLocation();
 		int a = loc.getCol() - here.getCol();
 		int b = loc.getRow() - here.getRow();
@@ -163,10 +179,11 @@ public abstract class Pokemon extends Actor {
 	}
 
 	private ArrayList<Location> getPokemon(BoundedGrid g) {// returns all
-															// non-enemy Pokemon
+										System.out.println("In getPokemon");					// non-enemy Pokemon
 		// TODO Auto-generated method stub
 		ArrayList<Location> locs = new ArrayList<>();
 		Location l = this.getLocation();
+		System.out.println("L is "+l);
 //		System.out.println("current Enemy location is "+l);
 		int minRow, maxRow;
 		int minCol, maxCol;
