@@ -43,7 +43,7 @@ public class Hero extends Pokemon {
 	public void eatFood(Items i) {
 		Items a = null;
 		if (i instanceof Apple && items.get(0).getNumInBag() > 0) {
-			System.out.println("This was an apple");
+//			System.out.println("This was an apple");
 			a = (Apple) i;
 			items.get(0).remove();
 			panel.getItemHolder().redrawButtons();
@@ -61,8 +61,8 @@ public class Hero extends Pokemon {
 		}
 		addHP(a.getHealthChange());
 		addStamina(a.getStaminaChange());
-		System.out.println("There are " + items.get(0).getNumInBag()
-				+ " apples left");
+//		System.out.println("There are " + items.get(0).getNumInBag()
+//				+ " apples left");
 
 	}
 
@@ -80,14 +80,14 @@ public class Hero extends Pokemon {
 
 	public void checkStatus() {
 		if (main.hp <= 0) {
-			System.out.println("Game over");
+//			System.out.println("Game over");
 			 JOptionPane.showMessageDialog(null,
-			 "Game Over");
-		} else if (stamina < 0) {
-			main.hp--;
-		} else if (stamina > 0 && hp < main.topHp) {
-			main.hp++;
-		}
+			 "Game Over");}
+//		} else if (stamina < 0) {
+//			main.hp--;
+//		} else if (stamina > 0 && hp < main.topHp) {
+//			main.hp++;
+//		}
 		Location current = main.getLocation();
 		int row = current.getRow();
 		int col = current.getCol();
@@ -111,7 +111,6 @@ public class Hero extends Pokemon {
 
 	@Override
 	public void draw(Graphics g, int row, int col) {
-		System.out.println(main.getDirection());
 		g.setColor(Color.MAGENTA);
 		g.draw3DRect(col, row, 60, 60, false);
 		main.draw(g, row, col);
@@ -121,15 +120,15 @@ public class Hero extends Pokemon {
 
 	public void moveRight() {
 		main.setDirection(90);
-		System.out.println("Direction is now " + main.getDirection());
+//		System.out.println("Direction is now " + main.getDirection());
 		Location current = main.getLocation();
 		int row = current.getRow();
 		int col = current.getCol() + 1;
 		Object a = grid.get(new Location(row, col));
-		System.out.println("Current Location is " + main.getLocation());
+//		System.out.println("Current Location is " + main.getLocation());
 		if (land[row][col].equals("W") == false
 				&& grid.isValid(new Location(row, col))) {
-			System.out.println(a);
+//			System.out.println(a);
 			if (a == null || a instanceof Items) {
 				if (a instanceof Items) {
 					if (a instanceof Apple) {
@@ -240,7 +239,7 @@ public class Hero extends Pokemon {
 		Object a = grid.get(new Location(row, col));
 //		System.out.println("Current Location is " + main.getLocation());
 		if (land[row][col].equals("W") == false) {
-			System.out.println(a);
+//			System.out.println(a);
 			if (a == null || a instanceof Items) {
 				if (a instanceof Items) {
 					if (a instanceof Apple) {

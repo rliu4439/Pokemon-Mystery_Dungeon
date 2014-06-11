@@ -74,8 +74,8 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		ArrayList<Room> roo = d.getRooms();
 		boolean reDo = d.checkRooms();
 		while (reDo == true) {
-			System.out.println("need to redo");
-			System.out.println("Checking");
+//			System.out.println("need to redo");
+//			System.out.println("Checking");
 			d = new Dungeon(50, 50);
 			reDo = d.checkRooms();
 
@@ -229,14 +229,6 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 
 	public void moveEnemies(ArrayList<Pokemon>friendly) {
 
-//		for (Pokemon p : enemies) {
-//			System.out.println("Currently at moveEnemies");
-//			System.out.println(p.getLocation());
-//			System.out.println("Precheck valid? "
-//					+ grid.isValid(p.getLocation()));
-//			System.out.println("Moving " + p);
-//
-//		}
 		for (Pokemon p : enemies) {
 			p.move(friendly);
 		}

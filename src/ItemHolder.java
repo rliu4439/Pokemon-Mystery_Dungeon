@@ -42,7 +42,7 @@ public class ItemHolder extends JPanel implements ActionListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		System.out.println("drawing");
+//		System.out.println("drawing");
 
 	}
 
