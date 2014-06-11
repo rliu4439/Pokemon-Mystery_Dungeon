@@ -92,11 +92,13 @@ public abstract class Pokemon extends Actor {
 		if (attack - defense > 0) {
 			p.setHp(hp - (attack - defense));
 		}
+		return;
 	}
 
 	public void move() {
 		BoundedGrid g = (BoundedGrid) this.getGrid();
 		boolean stop = false;
+		Location begin=this.getLocation();
 		ArrayList<Location> a = getPokemon(g);// gets the location of all
 												// pokemon that are not enemy so
 												// it can attack them
@@ -115,31 +117,39 @@ public abstract class Pokemon extends Actor {
 			}
 
 			int direct = this.getLocation().getDirectionToward(go);
-			Location l = getLocation().getAdjacentLocation(direct);
+			Location l = this.getLocation().getAdjacentLocation(direct);
 			if (g.isValid(l) && (land[l.getRow()][l.getCol()].equals("W")) == false) {// if the new location is valid and it isn't a wall, move toward it
 				this.setDirection(direct);
 				Location current = this.getLocation();
 				if (g.get(l)==(null)) {
 					this.moveTo(l);
 					stop=true;
+					System.out.println("Moved from "+begin+ " to "+ this.getLocation());
 				} else if(g.get(l)instanceof Pokemon){
 					this.attack((Pokemon) g.get(l));
 					stop = true;
+					System.out.println("Didn't move, attacking hero. Past loc is equal to begin? "+ begin.equals(this.getLocation()));
 
 				}
 			} else {
 				a.remove(l);// if the location is not valid, then look for a new spot
 			}
 		}
+		
 		if (stop == false) {// if you never moved, move to a random location
 			Random ran = new Random();
 			ArrayList<Location> l = g.getValidAdjacentLocations(getLocation());
 			Location current = this.getLocation();
 			int choose = ran.nextInt(l.size());
 			Location go = l.get(choose);
-			this.moveTo(go);
+			if(g.isValid(go) && land[go.getRow()][go.getCol()].equals("W")==false){
+				this.moveTo(go);
+				System.out.println("Moved from "+begin+ " to "+ this.getLocation());
+
+			}
 		
 		}
+		System.out.println("After moving, my location is valid? "+g.isValid(getLocation()));
 
 	}
 
@@ -157,7 +167,7 @@ public abstract class Pokemon extends Actor {
 		// TODO Auto-generated method stub
 		ArrayList<Location> locs = new ArrayList<>();
 		Location l = this.getLocation();
-		System.out.println("current Enemy location is "+l);
+//		System.out.println("current Enemy location is "+l);
 		int minRow, maxRow;
 		int minCol, maxCol;
 		minRow = l.getRow() - 2;

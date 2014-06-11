@@ -104,7 +104,10 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	}
 
 	public void moveEnemies() {
+		System.out.println();
 		for (Pokemon p : enemies) {
+			System.out.println("Precheck valid? "+grid.isValid(p.getLocation()));
+			System.out.println("Moving "+p);
 			p.move();
 		}
 	}
