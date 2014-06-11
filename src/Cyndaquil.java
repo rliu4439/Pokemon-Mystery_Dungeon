@@ -42,7 +42,7 @@ public class Cyndaquil extends Pokemon {
 	}
 
 	@Override
-	public void draw(Graphics g, int row, int col) {
+	public void draw(Graphics g, int col, int row) {
 		// TODO Auto-generated method stub
 		int direction = this.getDirection();
 		if (direction == Location.EAST) {

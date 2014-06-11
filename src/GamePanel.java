@@ -42,12 +42,20 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	private static Image floor;
 	private static Image stairs;
 	private static Image error;
-	ItemHolder i;
+	ItemHolder itemHolder;
 	InfoScreen info;
+
+	public ItemHolder getItemHolder() {
+		return itemHolder;
+	}
+
+	public void setItemHolder(ItemHolder itemHolder) {
+		this.itemHolder = itemHolder;
+	}
 
 	public GamePanel(ItemHolder i2) {
 		// tester t= new tester();
-		i = i2;
+		itemHolder = i2;
 		setUpKeyMappings();
 		try {
 			wall = ImageIO.read(new File("src/image/Wall.png"));
@@ -148,9 +156,9 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		// JOptionPane.showMessageDialog(null,
 		// "Welcome to Pokemon Mystery Dungeon!");
 		// choosePokemon();
-		// for (int i = 0; i < numEnemies; i++) {
-		// addEnemy();
-		// }
+		 for (int i = 0; i < numEnemies; i++) {
+		 addEnemy();
+		 }
 		for (int i = 0; i < numItems; i++) {
 			addItem();
 		}
@@ -160,6 +168,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		world.add(openSpaces.get((int) (Math.random() * openSpaces.size())),
 				hero.main);
 		hero.setGrid(grid);
+		hero.setPanel(this);
 		addStairs();
 	}
 
@@ -234,27 +243,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 
 	}
 
-	// } else {
-	// // System.out.println("got here");
-	// g.drawImage(stairs, r * 60, c * 60, 60, 60, null);
-	// }
-
-	// if (grid.get(new Location(r, c)) instanceof Pokemon) {
-	// // System.out.println("Pokemon here");
-	// Pokemon p = (Pokemon) grid.get(new Location(r, c));
-	// g.drawImage(floor, r * 60, c * 60, 60, 60, null);
-	// p.draw(g, r * 60, c * 60);
-	// g.draw3DRect(r * 60, c * 60, 60, 60, true);
-	//
-	// }
-	//
-	// else if (grid.get(new Location(r, c)) instanceof Items) {
-	// Items i = (Items) grid.get(new Location(r, c));
-	// g.drawImage(floor, r * 60, c * 60, 60, 60, null);
-	// i.draw(g, r * 60, c * 60);
-	// g.draw3DRect(r * 60, c * 60, 60, 60, true);
-	//
-	// }
+	
 	private void drawDungeon(Graphics g) {
 		// TODO Auto-generated method stub]
 		// System.out.println("Drawing dungeon");
@@ -267,6 +256,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		for (int r = row - 4; r < row + 5; r++) {// gets 4 above and 4 below
 													// hero
 			for (int c = col - 4; c < col + 5; c++) {
+				System.out.println("counter r is " +counterr+" counter c is "+counterc);
 				if (land[r][c].equals("C") || land[r][c].equals("R")) {
 					System.out.println("Looking at " + r + " " + c);
 					g.drawImage(floor, counterc * 60, counterr * 60, 60, 60,
@@ -294,13 +284,16 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 					// null);
 					p.draw(g, counterc * 60, counterr * 60);
 					// g.draw3DRect(r * 60, c * 60, 60, 60, true);
-
-				} else if (grid.get(new Location(r, c)) instanceof Items) {
+					
+				} 
+				else if (grid.get(new Location(r, c)) instanceof Items) {
+					
 					System.out.println("Found an item at " + r + " " + c);
 					Items i = (Items) grid.get(new Location(r, c));
 					// g.drawImage(floor, counterc * 60, counterr * 60, 60, 60,
 					// null);
 					i.draw(g, counterc * 60, counterr * 60);
+					System.out.println("Drawimg at "+counterr+" "+counterc);
 
 				}
 				counterc++;

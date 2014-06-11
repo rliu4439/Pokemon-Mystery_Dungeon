@@ -58,27 +58,27 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 
 	public boolean checkRooms() {
 		boolean reDo = false;
-		System.out.println("going to check rooms");
+		// System.out.println("going to check rooms");
 		for (Room r : rooms) {
-			System.out
-					.println("Checking room " + r.corridorConnection(dungeon));
+			// System.out
+			// .println("Checking room " + r.corridorConnection(dungeon));
 			if (r.corridorConnection(dungeon) == false) {
 				reDo = true;
 
 			}
 		}
-//		while (reDo == true) {
-//			generateDungeon();
-//			reDo = false;
-//			for (Room r : rooms) {
-//				System.out.println("ReChecking room "
-//						+ r.corridorConnection(dungeon));
-//				if (r.corridorConnection(dungeon) == false) {
-//					reDo = true;
-//
-//				}
-//			}
-//		}
+		// while (reDo == true) {
+		// generateDungeon();
+		// reDo = false;
+		// for (Room r : rooms) {
+		// System.out.println("ReChecking room "
+		// + r.corridorConnection(dungeon));
+		// if (r.corridorConnection(dungeon) == false) {
+		// reDo = true;
+		//
+		// }
+		// }
+		// }
 		return reDo;
 
 	}
@@ -90,9 +90,9 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		for (int a = 0; a < rooms.size(); a++) {
 			Collections.shuffle(rooms);
 			Room r1 = rooms.get(0);
-			System.out.println("Y: " + r1.getY());
+			// System.out.println("Y: " + r1.getY());
 			Room r2 = rooms.get(1);
-			System.out.println("Y: " + (r2.getY()));
+			// System.out.println("Y: " + (r2.getY()));
 			int[] d1 = r1.getDimensions();
 			int[] d2 = r2.getDimensions();
 
@@ -226,22 +226,27 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 			}
 			Location chosen = null;
 			Collections.shuffle(head);
-			if (point % 10 != 0)// when adding locs, possible to have none that
-								// are divisible by 10
+			if (point % 10 != 0) {// when adding locs, possible to have none
+									// that
+									// are divisible by 10
 				chosen = head.get(0);
-			else {
+			} else {
 				Random rand = new Random();
-				int chance = rand.nextInt(10) + 1; // 70% straight, 15% side
+				int chance = 5;//rand.nextInt(10) + 1; // 70% straight, 15% side
 				// Location temp;
 				for (int i = 0; i < head.size(); i++) {// for (Location lo :
 														// head) {
 					if (chance < 9
 							&& l.getDirectionToward(head.get(i)) == point) {
+						System.out.println("head is " + head.size());
+
 						chosen = head.get(i);
+
 						break;
-					} else if (chance >= 9
+					} else if (chance >= 9//don't need this
 							&& l.getDirectionToward(head.get(i)) == point) {
 						head.remove(head.get(i));
+						System.out.println("head is " + head.size());
 						chosen = head.get(0);
 						break;
 					}
@@ -259,11 +264,12 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		Random rand = new Random();
 		Room r = null;
 		int b = 0;
-		int min=5;
-		int max=dungeon.getNumCols()-width-4;
+		int min = 5;
+		int maxx = dungeon.getNumCols() - width - 4;
+		int maxy = dungeon.getNumRows() - length - 4;
 		for (int a = 0; a < 1000000; a++) {
-			int x = rand.nextInt((max - min) + 1) + min;
-			int y=rand.nextInt((max - min) + 1) + min;
+			int x = rand.nextInt((maxx - min) + 1) + min;
+			int y = rand.nextInt((maxy - min) + 1) + min;
 			// System.out.println(dungeon.getNumCols() + " "
 			// + dungeon.getNumRows() + " " + x + " " + y);
 			r = new Room(x, y, width, length);
@@ -286,7 +292,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 				// System.out.println("x is "+r.getX());
 				for (int c = r.getY(); c < length + r.getY(); c++) {
 					Location loc = new Location(c, a);
-					 System.out.println("x is "+a+" y is "+c);
+					// System.out.println("x is "+a+" y is "+c);
 					dungeon.put(loc, "R");
 
 					roomLocs.add(loc);

@@ -18,7 +18,7 @@ public class Hero extends Pokemon {
 	Pokemon main;
 	BoundedGrid grid;
 	String[][] land;
-
+GamePanel panel;
 	public Hero(Pokemon p, String[][]la) {
 		main = p;
 		land = this.getLand();
@@ -31,20 +31,25 @@ public class Hero extends Pokemon {
 	public void setGrid(BoundedGrid g){
 		grid=g;
 	}
-
+	public void setPanel(GamePanel p){
+		panel=p;
+	}
 	public void eatFood(Items i) {
 		Items a = null;
 		if (i instanceof Apple && items.get(0).getNumInBag() > 0) {
 			System.out.println("This was an apple");
 			a = (Apple) i;
 			items.get(0).remove();
+			panel.getItemHolder().redrawButtons();
 
 		} else if (i instanceof GrimyFood && items.get(1).getNumInBag() > 0) {
 			a = (GrimyFood) i;
 			items.get(1).remove();
+			panel.getItemHolder().redrawButtons();
 		} else if (i instanceof OranBerry && items.get(2).getNumInBag() > 0) {
 			a = (OranBerry) i;
 			items.get(2).remove();
+			panel.getItemHolder().redrawButtons();
 		} else {
 			return;
 		}
@@ -100,7 +105,12 @@ public class Hero extends Pokemon {
 	public void draw(Graphics g, int row, int col) {
 		// TODO Auto-generated method stub
 		System.out.println(main.getDirection());
+		g.setColor(Color.MAGENTA);
+		g.draw3DRect(col, row, 60, 60, false);
 		main.draw(g, row, col);
+	
+//		g.drawImage(currentImage, col,row, 60, 60, null);
+//	}
 
 		System.out.println("Direction is "+main.getDirection());
 //		g.setColor(Color.MAGENTA);
@@ -129,7 +139,9 @@ public class Hero extends Pokemon {
 					else if( a instanceof OranBerry){
 						items.get(2).add();
 					}
+					
 				}
+				panel.getItemHolder().redrawButtons();
 				main.moveTo(new Location(row,col));
 				System.out.println("Now the current location is "+ main.getLocation());
 			}
@@ -160,6 +172,7 @@ public class Hero extends Pokemon {
 						items.get(2).add();
 					}
 				}
+				panel.getItemHolder().redrawButtons();
 				main.moveTo(new Location(row,col));
 				System.out.println("Now the current location is "+ main.getLocation());
 			}
@@ -193,6 +206,7 @@ public class Hero extends Pokemon {
 						items.get(2).add();
 					}
 				}
+				panel.getItemHolder().redrawButtons();
 				main.moveTo(new Location(row,col));
 				System.out.println("Now the current location is "+ main.getLocation());
 			}
@@ -234,6 +248,7 @@ public class Hero extends Pokemon {
 						items.get(2).add();
 					}
 				}
+				panel.getItemHolder().redrawButtons();
 				 main.moveTo(new Location(row,col));
 				System.out.println("Now the current location is "+ main.getLocation());
 			}

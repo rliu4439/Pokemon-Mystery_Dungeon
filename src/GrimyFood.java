@@ -23,7 +23,7 @@ public class GrimyFood extends Items {
 	}
 
 	@Override
-	public void draw(Graphics g, int row, int col) {
+	public void draw(Graphics g, int col, int row) {
 		// TODO Auto-generated method stub
 		g.drawImage(img, col, row, 60, 60, null);
 	}
