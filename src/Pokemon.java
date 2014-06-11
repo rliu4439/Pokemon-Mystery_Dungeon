@@ -164,7 +164,7 @@ public abstract class Pokemon extends Actor {
 			}
 		
 		}
-		System.out.println("After moving, my location is valid? "+g.isValid(getLocation()));
+		System.out.println("After moving, my location is valid? "+getLocation());
 
 	}
 
