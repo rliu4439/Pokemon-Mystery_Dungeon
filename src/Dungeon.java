@@ -260,7 +260,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 		Room r = null;
 		int b = 0;
 		int min=5;
-		int max=dungeon.getNumCols() - width-4;
+		int max=dungeon.getNumCols()-width-4;
 		for (int a = 0; a < 1000000; a++) {
 			int x = rand.nextInt((max - min) + 1) + min;
 			int y=rand.nextInt((max - min) + 1) + min;
@@ -286,7 +286,7 @@ public class Dungeon {// "R" represents Room, "W" represents wall
 				// System.out.println("x is "+r.getX());
 				for (int c = r.getY(); c < length + r.getY(); c++) {
 					Location loc = new Location(c, a);
-					// System.out.println("x is "+a+" y is "+c);
+					 System.out.println("x is "+a+" y is "+c);
 					dungeon.put(loc, "R");
 
 					roomLocs.add(loc);

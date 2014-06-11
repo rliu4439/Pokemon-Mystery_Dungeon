@@ -53,7 +53,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			wall = ImageIO.read(new File("src/image/Wall.png"));
 			floor = ImageIO.read(new File("src/image/Floor.png"));// reads in
 			stairs = ImageIO.read(new File("src/image/Stairs.png")); // pictures
-			error= ImageIO.read(new File("src/image/error.jpg")); 
+			error = ImageIO.read(new File("src/image/error.jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -148,12 +148,12 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		// JOptionPane.showMessageDialog(null,
 		// "Welcome to Pokemon Mystery Dungeon!");
 		// choosePokemon();
-//		for (int i = 0; i < numEnemies; i++) {
-//			addEnemy();
-//		}
-//		for (int i = 0; i < numItems; i++) {
-//			addItem();
-//		}
+		// for (int i = 0; i < numEnemies; i++) {
+		// addEnemy();
+		// }
+		for (int i = 0; i < numItems; i++) {
+			addItem();
+		}
 		Pokemon p = new Mudkip(false, land);// used for testing
 		hero = new Hero(p, land);
 		Location l = (openSpaces.get((int) (Math.random() * openSpaces.size())));
@@ -164,11 +164,20 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	}
 
 	private void addStairs() {
-		int pick = (int) (Math.random() * openSpaces.size());
-		Location l = openSpaces.get(pick);
-		land[l.getRow()][l.getCol()] = "S";
-		System.out.println("added stairs to "+l.getRow()+" "+l.getCol());
-		openSpaces.remove(l);
+		boolean pick=true;
+		
+		while(pick==true){
+			int pickNum = (int) (Math.random() * openSpaces.size());
+			Location l = openSpaces.get(pickNum);
+			if(	land[l.getRow()][l.getCol()].equals("R")){
+				land[l.getRow()][l.getCol()] = "S";
+				System.out.println("added stairs to " + l.getRow() + " " + l.getCol());
+				openSpaces.remove(l);
+				pick=false;
+			}
+			
+		}
+		
 	}
 
 	private void addEnemy() {
@@ -255,7 +264,8 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		System.out.println(current);
 		int counterr = 0;
 		int counterc = 0;
-		for (int r = row - 4; r < row + 5; r++) {// gets 4 above and 4 below hero
+		for (int r = row - 4; r < row + 5; r++) {// gets 4 above and 4 below
+													// hero
 			for (int c = col - 4; c < col + 5; c++) {
 				if (land[r][c].equals("C") || land[r][c].equals("R")) {
 					System.out.println("Looking at " + r + " " + c);
@@ -267,13 +277,12 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 					g.drawImage(wall, counterc * 60, counterr * 60, 60, 60,
 							null);
 					// g.draw3DRect(r * 10, c * 10, 10, 10, true);
-				} else if  (land[r][c].equals("S")){
+				} else if (land[r][c].equals("S")) {
 					// System.out.println("got here");
-					System.out.println("Location of stairs is "+ r+" "+c);
+					System.out.println("Location of stairs is " + r + " " + c);
 					g.drawImage(stairs, counterc * 60, counterr * 60, 60, 60,
 							null);
-				}
-				else{
+				} else {
 					g.drawImage(error, counterc * 60, counterr * 60, 60, 60,
 							null);
 				}
@@ -281,18 +290,19 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				if (grid.get(new Location(r, c)) instanceof Pokemon) {
 					// System.out.println("Pokemon here");
 					Pokemon p = (Pokemon) grid.get(new Location(r, c));
-					g.drawImage(floor, counterr * 60, counterc * 60, 60, 60,
-							null);
-					p.draw(g, counterr * 60, counterc * 60);
+					// g.drawImage(floor, counterc * 60, counterr * 60, 60, 60,
+					// null);
+					p.draw(g, counterc * 60, counterr * 60);
 					// g.draw3DRect(r * 60, c * 60, 60, 60, true);
 
+				} else if (grid.get(new Location(r, c)) instanceof Items) {
+					System.out.println("Found an item at " + r + " " + c);
+					Items i = (Items) grid.get(new Location(r, c));
+					// g.drawImage(floor, counterc * 60, counterr * 60, 60, 60,
+					// null);
+					i.draw(g, counterc * 60, counterr * 60);
+
 				}
-//				 else if (grid.get(new Location(r, c)) instanceof Items) {
-//				 Items i = (Items) grid.get(new Location(r, c));
-//				 g.drawImage(floor, counterr * 60, counterr * 60, 60, 60, null);
-//				 i.draw(g, counterr * 60, counterr * 60);
-//				
-//				 }
 				counterc++;
 			}
 			counterr++;
