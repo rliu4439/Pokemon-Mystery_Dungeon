@@ -269,10 +269,4 @@ public class Hero extends Pokemon {
 	public void setMain(Pokemon main) {
 		this.main = main;
 	}
-
-	public void attack() {
-		int direct=this.getDirection();
-		
-		
-	}
 }

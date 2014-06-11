@@ -360,18 +360,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				repaint();
 			}
 		});
-		this.getInputMap().put(KeyStroke.getKeyStroke("SPACE"), "attack");
 
-		this.getActionMap().put("attack", new AbstractAction() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				hero.attack();
-//				System.out.println("moving down");
-				moveEnemies(friendly);
-//				System.out.println("Finished moving enemies");
-				repaint();
-			}
-		});
 	}
 
 	public InfoScreen getInfo() {
