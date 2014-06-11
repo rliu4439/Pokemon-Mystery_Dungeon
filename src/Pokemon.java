@@ -102,7 +102,7 @@ public abstract class Pokemon extends Actor {
 		ArrayList<Location> a = getPokemon(g);// gets the location of all
 												// pokemon that are not enemy so
 												// it can attack them
-		while (a.size() > 0 || stop == true) {//while there are spaces to go to or the pokemon moved
+		while (a.size() > 0 && stop == false) {//while there are spaces to go to or the pokemon moved
 			Location go = a.get(0);
 			double max = distanceFrom(go);
 			for (Location l : a) {
