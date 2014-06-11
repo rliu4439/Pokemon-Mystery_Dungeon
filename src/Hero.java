@@ -73,7 +73,7 @@ public class Hero extends Pokemon {
 	private void addHP(int healthChange) {
 		// TODO Auto-generated method stub
 		main.setHp(main.getHp() + healthChange);
-		if (healthChange > main.topHp) {
+		if (main.getHp() > main.topHp) {
 			main.setHp(main.topHp);
 		}
 	}
@@ -268,5 +268,11 @@ public class Hero extends Pokemon {
 
 	public void setMain(Pokemon main) {
 		this.main = main;
+	}
+
+	public void attack() {
+		int direct=this.getDirection();
+		
+		
 	}
 }

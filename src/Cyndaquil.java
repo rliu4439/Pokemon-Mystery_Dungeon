@@ -17,9 +17,9 @@ public class Cyndaquil extends Pokemon {
 	private static Image left;
 	private static Image right;
 	private Image currentImage;
-
+	private Image attack;
 	public Cyndaquil(boolean enemy, String[][] land) {
-		super(enemy, 12, 3, 2, 1, land);
+		super(enemy, 12, 4, 2, 1, land);
 		getImages();
 	}
 
@@ -34,6 +34,9 @@ public class Cyndaquil extends Pokemon {
 						"src/image/cyndaquil/cyndaquil-left.png"));
 				right = ImageIO.read(new File(
 						"src/image/cyndaquil/cyndaquil-right.png"));
+				attack = ImageIO.read(new File(
+						"src/image/cyndaquil/attack.png"));
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -44,16 +47,21 @@ public class Cyndaquil extends Pokemon {
 	@Override
 	public void draw(Graphics g, int col, int row) {
 		// TODO Auto-generated method stub
-		int direction = this.getDirection();
-		if (direction == Location.EAST) {
-			this.currentImage = right;
-		} else if (direction == Location.WEST) {
-			currentImage = left;
-		} else if (direction == Location.NORTH) {
-			currentImage = back;
-		} else {
-			currentImage = front;
+		if(super.isAttackImg()==true){
+			this.currentImage=attack;
+		}else{
+			int direction = this.getDirection();
+			if (direction == Location.EAST) {
+				this.currentImage = right;
+			} else if (direction == Location.WEST) {
+				currentImage = left;
+			} else if (direction == Location.NORTH) {
+				currentImage = back;
+			} else {
+				currentImage = front;
+			}
 		}
+		
 		g.drawImage(currentImage, col,row, 60, 60, null);
 	}
 }

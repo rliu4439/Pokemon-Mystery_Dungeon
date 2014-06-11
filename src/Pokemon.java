@@ -15,6 +15,7 @@ public abstract class Pokemon extends Actor {
 	protected int defense;
 	protected boolean enemy;
 	protected int x = 0;
+	private boolean attackImg=false;
 	private String[][] land;// String is the type of the last spot eg.
 							// corridor or room
 	private int dir; // dir = direction, stick with definitions as defined by
@@ -27,14 +28,23 @@ public abstract class Pokemon extends Actor {
 		this.topHp = hp;
 		this.attack = attack;
 		this.defense = defense;
-
+		
 		this.land = land;
 
+	}
+
+	public boolean isAttackImg() {
+		return attackImg;
+	}
+
+	public void setAttackImg(boolean attackImg) {
+		this.attackImg = attackImg;
 	}
 
 	public String[][] getLand() {
 		return land;
 	}
+	
 
 	public Pokemon() {
 	};
@@ -92,10 +102,13 @@ public abstract class Pokemon extends Actor {
 		int defense = p.getDefense();
 		int attack = this.getAttack();
 		int hp = p.getHp();
+		int attackpoints=attack-defense;
+		System.out.println("attack is "+ attack + " defense is "+defense );
 		if (attack - defense > 0) {
-			int attackpoints=attack-defense;
-			System.out.println("attack points is "+attackpoints);
+			
+			
 			p.setHp(hp-attackpoints);
+			System.out.println("The hero hp after attack is "+p.getHp());
 			
 		}
 		return;
@@ -106,6 +119,7 @@ public abstract class Pokemon extends Actor {
 		boolean stop = false;
 		ArrayList<Location> a = getPokemon(g);
 		ArrayList<Location> moveTowards = new ArrayList<Location>();// gets the location of all
+//		System.out.println(a.size());
 			// pokemon that are not enemy so
 //		System.out.println("Hero hp is "+friendly.get(0).hp);
 //		System.out.println("top hp is "+friendly.get(0).topHp);
@@ -119,20 +133,25 @@ public abstract class Pokemon extends Actor {
 						this.attack(h);
 						System.out.println(this +" Attacking the Hero");
 						System.out.println("Hero hp is "+h.hp);
+						this.setAttackImg(true);
 					}
 				}
 			}
 			else if (this.distanceFrom(a.get(0))>=2){
+				
 				if (!(land[getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))).getRow()][getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))).getCol()].equals("W")) && !(g.get(getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0)))) instanceof Pokemon)){
 					moveTo(getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))));
+					this.setDirection(getLocation().getDirectionToward(a.get(0)));
 //					System.out.println("Moved Directly Towards Hero");
 				}
 				else if (!(land[getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))+45).getRow()][getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))+45).getCol()].equals("W")) && !(g.get(getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))+45)) instanceof Pokemon)){
 					moveTo(getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))+45));
+					this.setDirection(getLocation().getDirectionToward(a.get(0))+45);
 //					System.out.println("Moved Direction + 45 Towards Hero");
 				}
 				else if (!(land[getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))-45).getRow()][getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))-45).getCol()].equals("W")) && !(g.get(getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))-45)) instanceof Pokemon)){
 					moveTo(getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))-45));
+					this.setDirection(getLocation().getDirectionToward(a.get(0))-45);
 //					System.out.println("Moved Direction - 45 Towards Hero");
 				}
 			}

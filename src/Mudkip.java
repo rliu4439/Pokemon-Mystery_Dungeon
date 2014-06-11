@@ -17,7 +17,7 @@ public class Mudkip extends Pokemon {
 	private static Image left;
 	private static Image right;
 	private Image currentImage;
-
+	private static Image attack;
 	public Mudkip(boolean enemy, String[][] land) {
 
 		super(enemy, 14, 2, 3, 1, land);
@@ -35,6 +35,8 @@ public class Mudkip extends Pokemon {
 						.read(new File("src/image/mudkip/mudkip-left.png"));
 				right = ImageIO.read(new File(
 						"src/image/mudkip/mudkip-right.png"));
+				attack=ImageIO.read(new File(
+						"src/image/mudkip/attack.png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -53,22 +55,27 @@ public class Mudkip extends Pokemon {
 	@Override
 	public void draw(Graphics g, int col, int row) {
 		// TODO Auto-generated method stub
-
-		int direction = this.getDirection();
-//		System.out.println("Current is "+direction);
-		if (direction == 90) {
-			this.currentImage = right;
-//			System.out.println("Changed to right");
-		} else if (direction == 270) {
-//			System.out.println("Changed to left");
-			currentImage = left;
-		} else if (direction == 0) {
-			currentImage = back;
-//			System.out.println("Changed to back");
-		} else {
-			currentImage = front;
-//			System.out.println("Changed to front");
+		if(super.isAttackImg()==true){
+			this.currentImage=attack;
 		}
+		else{
+			int direction = this.getDirection();
+//			System.out.println("Current is "+direction);
+			if (direction == 90) {
+				this.currentImage = right;
+//				System.out.println("Changed to right");
+			} else if (direction == 270) {
+//				System.out.println("Changed to left");
+				currentImage = left;
+			} else if (direction == 0) {
+				currentImage = back;
+//				System.out.println("Changed to back");
+			} else {
+				currentImage = front;
+//				System.out.println("Changed to front");
+			}
+		}
+		
 		g.drawImage(currentImage, col,row, 60, 60, null);
 	}
 }

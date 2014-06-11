@@ -18,6 +18,7 @@ public class Pichu extends Pokemon {
 	private static Image left;
 	private static Image right;
 	private Image currentImage;
+	private static Image attack;
 
 	public Pichu(boolean enemy, String[][] land) {
 		super(enemy, 10, 4, 1, 1, land);
@@ -35,6 +36,7 @@ public class Pichu extends Pokemon {
 						.read(new File("src/image/pichu/pichu-left 2.png"));
 				right = ImageIO.read(new File(
 						"src/image/pichu/pichu-right 2.png"));
+				attack = ImageIO.read(new File("src/image/pichu/attack.png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -45,17 +47,22 @@ public class Pichu extends Pokemon {
 	@Override
 	public void draw(Graphics g, int col, int row) {
 		// TODO Auto-generated method stub
-		int direction = this.getDirection();
-		if (direction == Location.EAST) {
-			this.currentImage = right;
-		} else if (direction == Location.WEST) {
-			currentImage = left;
-		} else if (direction == Location.NORTH) {
-			currentImage = back;
-		} else {
-			currentImage = front;
+		if (super.isAttackImg() == true) {
+			this.currentImage = attack;
+		}else{
+			int direction = this.getDirection();
+			if (direction == Location.EAST) {
+				this.currentImage = right;
+			} else if (direction == Location.WEST) {
+				currentImage = left;
+			} else if (direction == Location.NORTH) {
+				currentImage = back;
+			} else {
+				currentImage = front;
+			}
 		}
-		g.drawImage(currentImage, col,row, 60, 60, null);
 		
+		g.drawImage(currentImage, col, row, 60, 60, null);
+
 	}
 }
