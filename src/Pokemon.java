@@ -126,7 +126,7 @@ public abstract class Pokemon extends Actor {
 					stop=true;
 					System.out.println("Moved from "+begin+ " to "+ this.getLocation());
 				} else if(g.get(l)instanceof Pokemon){
-					this.attack((Pokemon) g.get(l));
+//					this.attack((Pokemon) g.get(l));
 					stop = true;
 					System.out.println("Didn't move, attacking hero. Past loc is equal to begin? "+ begin.equals(this.getLocation()));
 

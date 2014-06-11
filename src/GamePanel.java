@@ -94,77 +94,19 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				openSpaces.add(l.get(i));
 			}
 		}
-
 		this.setPreferredSize(new Dimension(700, 700));
 
 	}
-
-	public Hero getHero() {
-		return hero;
-	}
-
-	public void moveEnemies() {
-		System.out.println();
-		for (Pokemon p : enemies) {
-			System.out.println("Precheck valid? "+grid.isValid(p.getLocation()));
-			System.out.println("Moving "+p);
-			p.move();
-		}
-	}
-
-	public ArrayList<Location> openLocations() {
-		ArrayList<Location> open = new ArrayList<>();
-		for (int row = 0; row < land.length; row++) {
-			for (int col = 0; col < land[0].length; col++) {
-				if (land[row][col].equals("W") == false) {
-					open.add(new Location(row, col));
-				}
-			}
-		}
-		return open;
-	}
-
-	public void addItem() {
-		int pick = (int) (Math.random() * openSpaces.size());
-		// System.out.println("openspaces is size " + openSpaces.size());
-		Location l = openSpaces.get(pick);
-		int choose = (int) (Math.random() * 3);
-		// System.out.println(choose);
-		switch (choose) {
-		case 0:
-			Apple a = new Apple();
-			world.add(l, a);
-			// System.out.println("added apple");
-			openSpaces.remove(l);
-
-			break;
-		case 1:
-			GrimyFood f = new GrimyFood();
-			world.add(l, f);
-			openSpaces.remove(l);
-
-			break;
-		case 2:
-			OranBerry o = new OranBerry();
-
-			world.add(l, o);
-			openSpaces.remove(l);
-
-			break;
-		}
-
-	}
-
 	public void startGame() {
 		// JOptionPane.showMessageDialog(null,
 		// "Welcome to Pokemon Mystery Dungeon!");
 		// choosePokemon();
-		int counter=0;
-		 for (int i = 0; i < numEnemies; i++) {
-		 addEnemy();
-		 counter++;
-		 }
-		 System.out.println("Made "+counter+" enemy Pokemon");
+		int counter = 0;
+		for (int i = 0; i < numEnemies; i++) {
+			addEnemy();
+			counter++;
+		}
+		System.out.println("Made " + counter + " enemy Pokemon");
 		for (int i = 0; i < numItems; i++) {
 			addItem();
 		}
@@ -179,20 +121,21 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	}
 
 	private void addStairs() {
-		boolean pick=true;
-		
-		while(pick==true){
+		boolean pick = true;
+
+		while (pick == true) {
 			int pickNum = (int) (Math.random() * openSpaces.size());
 			Location l = openSpaces.get(pickNum);
-			if(	land[l.getRow()][l.getCol()].equals("R")){
+			if (land[l.getRow()][l.getCol()].equals("R")) {
 				land[l.getRow()][l.getCol()] = "S";
-				System.out.println("added stairs to " + l.getRow() + " " + l.getCol());
+				System.out.println("added stairs to " + l.getRow() + " "
+						+ l.getCol());
 				openSpaces.remove(l);
-				pick=false;
+				pick = false;
 			}
-			
+
 		}
-		
+
 	}
 
 	private void addEnemy() {
@@ -235,6 +178,63 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 
 	}
 
+	public Hero getHero() {
+		return hero;
+	}
+	public ArrayList<Location> openLocations() {
+		ArrayList<Location> open = new ArrayList<>();
+		for (int row = 0; row < land.length; row++) {
+			for (int col = 0; col < land[0].length; col++) {
+				if (land[row][col].equals("W") == false) {
+					open.add(new Location(row, col));
+				}
+			}
+		}
+		return open;
+	}
+
+	public void addItem() {
+		int pick = (int) (Math.random() * openSpaces.size());
+		// System.out.println("openspaces is size " + openSpaces.size());
+		Location l = openSpaces.get(pick);
+		int choose = (int) (Math.random() * 3);
+		// System.out.println(choose);
+		switch (choose) {
+		case 0:
+			Apple a = new Apple();
+			world.add(l, a);
+			openSpaces.remove(l);
+
+			break;
+		case 1:
+			GrimyFood f = new GrimyFood();
+			world.add(l, f);
+			openSpaces.remove(l);
+
+			break;
+		case 2:
+			OranBerry o = new OranBerry();
+
+			world.add(l, o);
+			openSpaces.remove(l);
+
+			break;
+		}
+
+	}
+	public void moveEnemies() {
+		System.out.println();
+		for (Pokemon p : enemies) {
+			System.out.println("Precheck valid? "+ grid.isValid(p.getLocation()));
+			System.out.println("Moving " + p);
+			p.move();
+		}
+	}
+
+	
+
+
+	
 	private void choosePokemon() {
 		PersonalityTest test = new PersonalityTest(this.land);
 		Pokemon p = test.chooseCharacter();
@@ -249,10 +249,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 
 	}
 
-	
 	private void drawDungeon(Graphics g) {
-		// TODO Auto-generated method stub]
-		// System.out.println("Drawing dungeon");
 		Location current = hero.main.getLocation();
 		int row = current.getRow();
 		int col = current.getCol();
@@ -262,20 +259,22 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		for (int r = row - 4; r < row + 5; r++) {// gets 4 above and 4 below
 													// hero
 			for (int c = col - 4; c < col + 5; c++) {
-//				System.out.println("counter r is " +counterr+" counter c is "+counterc);
+				// System.out.println("counter r is "
+				// +counterr+" counter c is "+counterc);
 				if (land[r][c].equals("C") || land[r][c].equals("R")) {
-//					System.out.println("Looking at " + r + " " + c);
+					// System.out.println("Looking at " + r + " " + c);
 					g.drawImage(floor, counterc * 60, counterr * 60, 60, 60,
 							null);
 					// g.draw3DRect(r * 10, c * 10, 10, 10, true);
 				} else if (land[r][c].equals("W")) {
-//					System.out.println("Looking at " + r + " " + c);
+					// System.out.println("Looking at " + r + " " + c);
 					g.drawImage(wall, counterc * 60, counterr * 60, 60, 60,
 							null);
 					// g.draw3DRect(r * 10, c * 10, 10, 10, true);
 				} else if (land[r][c].equals("S")) {
 					// System.out.println("got here");
-//					System.out.println("Location of stairs is " + r + " " + c);
+					// System.out.println("Location of stairs is " + r + " " +
+					// c);
 					g.drawImage(stairs, counterc * 60, counterr * 60, 60, 60,
 							null);
 				} else {
@@ -290,16 +289,15 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 					// null);
 					p.draw(g, counterc * 60, counterr * 60);
 					// g.draw3DRect(r * 60, c * 60, 60, 60, true);
-					
-				} 
-				else if (grid.get(new Location(r, c)) instanceof Items) {
-					
-//					System.out.println("Found an item at " + r + " " + c);
+
+				} else if (grid.get(new Location(r, c)) instanceof Items) {
+
+					// System.out.println("Found an item at " + r + " " + c);
 					Items i = (Items) grid.get(new Location(r, c));
 					// g.drawImage(floor, counterc * 60, counterr * 60, 60, 60,
 					// null);
 					i.draw(g, counterc * 60, counterr * 60);
-//					System.out.println("Drawimg at "+counterr+" "+counterc);
+					// System.out.println("Drawimg at "+counterr+" "+counterc);
 
 				}
 				counterc++;

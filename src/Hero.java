@@ -103,7 +103,6 @@ GamePanel panel;
 
 	@Override
 	public void draw(Graphics g, int row, int col) {
-		// TODO Auto-generated method stub
 		System.out.println(main.getDirection());
 		g.setColor(Color.MAGENTA);
 		g.draw3DRect(col, row, 60, 60, false);
@@ -114,7 +113,6 @@ GamePanel panel;
 	}
 
 	public void moveRight() {
-		// TODO Auto-generated method stub
 		main.setDirection(90);
 		System.out.println("Direction is now "+main.getDirection());
 		Location current = main.getLocation();
@@ -138,15 +136,18 @@ GamePanel panel;
 					
 				}
 				panel.getItemHolder().redrawButtons();
-				main.moveTo(new Location(row,col));
-				System.out.println("Now the current location is "+ main.getLocation());
+				Location l=new Location(row,col);
+				if(grid.isValid(l)){
+					main.moveTo(new Location(row,col));
+					System.out.println("Now the current location is "+ main.getLocation());
+				}
+				
 			}
 		}
 		checkStatus();
 	}
 
 	public void moveLeft() {
-		// TODO Auto-generated method stub
 		main.setDirection(270);
 		System.out.println("Direction is now "+main.getDirection());
 		Location current = main.getLocation();
