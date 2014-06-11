@@ -31,6 +31,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	ArrayList<Location> corridors;// need to place corridors/rooms after pokemon
 									// move
 	ArrayList<Pokemon> enemies = new ArrayList<>();
+	ArrayList <Pokemon> friendly=new ArrayList<>();
 	ActorWorld world;
 	BoundedGrid grid;
 	String[][] land;
@@ -118,6 +119,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				hero.main);
 		hero.setGrid(grid);
 		hero.setPanel(this);
+		friendly.add(hero.main);
 		addStairs();
 	}
 
@@ -225,7 +227,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 
 	}
 
-	public void moveEnemies() {
+	public void moveEnemies(ArrayList<Pokemon>friendly) {
 
 		for (Pokemon p : enemies) {
 			System.out.println("Currently at moveEnemies");
@@ -236,7 +238,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 
 		}
 		for (Pokemon p : enemies) {
-			p.move();
+			p.move(friendly);
 		}
 	}
 
@@ -324,7 +326,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				// TODO Auto-generated method stub
 				hero.moveRight();
 				System.out.println("moving right");
-				moveEnemies();
+				moveEnemies(friendly);
 				repaint();
 			}
 
@@ -335,7 +337,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("moving left");
 				hero.moveLeft();
-				moveEnemies();
+				moveEnemies(friendly);
 
 				repaint();
 			}
@@ -347,7 +349,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				// TODO Auto-generated method stub
 				System.out.println("moving up");
 				hero.moveUp();
-				moveEnemies();
+				moveEnemies(friendly);
 
 				repaint();
 			}
@@ -361,7 +363,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			public void actionPerformed(ActionEvent e) {
 				hero.moveBack();
 				System.out.println("moving down");
-				moveEnemies();
+				moveEnemies(friendly);
 				System.out.println("Finished moving enemies");
 				repaint();
 			}
