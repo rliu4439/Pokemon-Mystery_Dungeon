@@ -82,10 +82,10 @@ public class Hero extends Pokemon {
 		if (main.hp <= 0) {
 //			System.out.println("Game over");
 			 JOptionPane.showMessageDialog(null,
-			 "Game Over");}
-//		} else if (stamina < 0) {
-//			main.hp--;
-//		} else if (stamina > 0 && hp < main.topHp) {
+			 "Game Over");
+		} else if (stamina < 0) {
+			main.hp--;}
+//		else if (stamina > 0 && hp < main.topHp) {
 //			main.hp++;
 //		}
 		Location current = main.getLocation();
@@ -150,7 +150,7 @@ public class Hero extends Pokemon {
 
 			}
 		}
-		 checkStatus();
+//		 checkStatus();
 	}
 
 	public void moveLeft() {
@@ -182,7 +182,7 @@ public class Hero extends Pokemon {
 				}
 			}
 		}
-		 checkStatus();
+//		 checkStatus();
 
 	}
 
@@ -216,7 +216,7 @@ public class Hero extends Pokemon {
 				}
 			}
 		}
-		 checkStatus();
+//		 checkStatus();
 
 	}
 
@@ -258,7 +258,7 @@ public class Hero extends Pokemon {
 				}
 			}
 		}
-		 checkStatus();
+//		 checkStatus();
 
 	}
 

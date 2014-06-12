@@ -368,8 +368,8 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if (hero.getGrid().get(hero.getLocation().getAdjacentLocation(hero.getDirection())) instanceof Pokemon)
-					hero.attack((Pokemon) hero.getGrid().get(hero.getLocation().getAdjacentLocation(hero.getDirection())));
+				if (hero.main.getGrid().get(hero.getMain().getLocation().getAdjacentLocation(hero.main.getDirection())) instanceof Pokemon)
+					hero.attack((Pokemon) hero.main.getGrid().get(hero.main.getLocation().getAdjacentLocation(hero.main.getDirection())));
 //				System.out.println("moving right");
 				moveEnemies(friendly);
 				hero.checkStatus();

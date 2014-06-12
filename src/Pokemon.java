@@ -111,6 +111,7 @@ public abstract class Pokemon extends Actor {
 			System.out.println("The hero hp after attack is " + p.getHp());
 		}
 		int direct = p.getLocation().getDirectionToward(getLocation());
+		System.out.println("DIrect is "+direct);
 		p.setDirection(direct);
 		return;
 	}
@@ -123,16 +124,33 @@ public abstract class Pokemon extends Actor {
 		ArrayList<Location> moveTowards = new ArrayList<Location>();// gets the
 																	// location
 																	// of all
-		// System.out.println(a.size());
-		// pokemon that are not enemy so
-		// System.out.println("Hero hp is "+friendly.get(0).hp);
-		// System.out.println("top hp is "+friendly.get(0).topHp);
-		// it can attack them
 
 		if (a.size() > 0) {
-			System.out.println("a size is more than 0");
+			System.out.println("a size is more than 0");}
+		
+		 if (a.size() == 0 || followSteps >= 10 || recoverSteps > 0) {
+			this.setAttackImg(false);
+			if (followSteps >= 10) {
+				recoverSteps = 5;
+				followSteps = 0;
+			}
+			if (recoverSteps > 0)
+				recoverSteps--;
+			ArrayList<Location> b = g
+					.getEmptyAdjacentLocations(getLocation());
+			for (int z = 0; z < b.size(); z++) {
+				if (land[b.get(z).getRow()][b.get(z).getCol()].equals("W")) {
+					b.remove(z);
+					z--;
+				}
+			}
+			if (b.size() > 0) {
+				moveTo(b.get((int) (Math.random() * b.size())));
+				// System.out.println("Moved Randomly");
+			}
+		}
 
-			if (a.size() > 0 && followSteps < 10 && recoverSteps == 0) {
+			else if (a.size() > 0 && followSteps < 10 && recoverSteps == 0) {
 				followSteps++;
 
 				if (this.distanceFrom(a.get(0)) < 2) {
@@ -197,30 +215,10 @@ public abstract class Pokemon extends Actor {
 						// System.out.println("Moved Direction - 45 Towards Hero");
 					}
 				}
-			} else if (a.size() == 0 || followSteps >= 10 || recoverSteps > 0) {
-				this.setAttackImg(false);
-				if (followSteps >= 10) {
-					recoverSteps = 5;
-					followSteps = 0;
-				}
-				if (recoverSteps > 0)
-					recoverSteps--;
-				ArrayList<Location> b = g
-						.getEmptyAdjacentLocations(getLocation());
-				for (int z = 0; z < b.size(); z++) {
-					if (land[b.get(z).getRow()][b.get(z).getCol()].equals("W")) {
-						b.remove(z);
-						z--;
-					}
-				}
-				if (b.size() > 0) {
-					moveTo(b.get((int) (Math.random() * b.size())));
-					// System.out.println("Moved Randomly");
-				}
-			}
+			} 
 
 		}
-	}
+	
 
 	public double distanceFrom(Location loc) {
 		// System.out.println("In distance from");
