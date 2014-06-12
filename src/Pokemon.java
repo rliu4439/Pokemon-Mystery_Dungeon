@@ -17,6 +17,7 @@ public abstract class Pokemon extends Actor {
 	protected boolean enemy;
 	protected int x = 0;
 	private boolean attackImg = false;
+	ArrayList<Pokemon> friend;
 	private String[][] land;// String is the type of the last spot eg.
 							// corridor or room
 	private int dir; // dir = direction, stick with definitions as defined by
@@ -97,8 +98,6 @@ public abstract class Pokemon extends Actor {
 
 	public void attack(Pokemon p) {
 		System.out.println(p+ " current hp is "+p.getHp());
-		// System.out.println("Hero hp is "+friendly.get(0).hp);
-		// System.out.println("top hp is "+friendly.get(0).topHp);
 		int defense = p.getDefense();
 		int attack = this.getAttack();
 		int hp = p.getHp();
@@ -120,6 +119,7 @@ public abstract class Pokemon extends Actor {
 	}
 
 	public void move(ArrayList<Pokemon> friendly) {
+		friend=friendly;
 		BoundedGrid g = (BoundedGrid) this.getGrid(); // Move randomly if hero
 														// is not near
 		boolean stop = false;
@@ -128,8 +128,6 @@ public abstract class Pokemon extends Actor {
 																	// location
 																	// of all
 
-		if (a.size() > 0) {
-			System.out.println("a size is more than 0");}
 		
 		 if (a.size() == 0 || followSteps >= 10 || recoverSteps > 0) {
 			this.setAttackImg(false);
@@ -153,9 +151,9 @@ public abstract class Pokemon extends Actor {
 			}
 		}
 
-			else if (a.size() > 0 && followSteps < 10 && recoverSteps == 0) {
+			else if (a.size() > 0){// && followSteps < 10 && recoverSteps == 0) {
 				followSteps++;
-
+				System.out.println(this +" a size is more than 0");
 				if (this.distanceFrom(a.get(0)) < 2) {
 					System.out.println("Distance from hero is less than 2");
 					ArrayList<Location> b = g
@@ -163,11 +161,15 @@ public abstract class Pokemon extends Actor {
 					for (Location l : b) {
 						if (g.get(l) instanceof Pokemon
 								&& (((Pokemon) g.get(l)).isEnemy() == false)) {
+							
 							Pokemon h = (Pokemon) g.get(l);
-							this.attack(h);
-							System.out.println(this + " Attacking the Hero");
-							System.out.println("Hero hp is " + h.hp);
-							this.setAttackImg(true);
+							if(this.getLocation().getDirectionToward(h.getLocation())==0||this.getLocation().getDirectionToward(h.getLocation())==90||this.getLocation().getDirectionToward(h.getLocation())==180||this.getLocation().getDirectionToward(h.getLocation())==270){
+								this.attack(h);
+								System.out.println(this + " Attacking the Hero");
+								System.out.println("Hero hp is " + h.hp);
+								this.setAttackImg(true);
+							}
+							
 						}
 					}
 				} else if (this.distanceFrom(a.get(0)) >= 2) {
@@ -246,8 +248,12 @@ public abstract class Pokemon extends Actor {
 		maxRow = l.getRow() + 4;
 		minCol = l.getCol() - 4;
 		maxCol = l.getRow() + 4;
+		System.out.println("Current loc is "+l);
+		System.out.println("hero loc is "+ friend.get(0));
+		System.out.println(" x is from "+minCol+" to "+maxCol+" y is from "+minRow+" to "+maxRow);
 		if (minRow < 0) {
 			minRow = 0;
+			
 		}
 		if (maxRow >= g.getNumRows()) {
 			maxRow = g.getNumRows() - 1;
