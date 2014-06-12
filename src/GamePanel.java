@@ -55,7 +55,6 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	}
 
 	public GamePanel(ItemHolder i2) {
-		// tester t= new tester();
 		itemHolder = i2;
 		setUpKeyMappings();
 		try {
@@ -68,37 +67,9 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		}
 		Pokemon p = new Mudkip(false, land);// used for testing
 		hero = new Hero(p, land, this);
-		
+
 		nextLevel();
 
-		// boolean check = false;
-		// Dungeon d;
-		//
-		// d = new Dungeon(50, 50);// creates a dungeon
-		// ArrayList<Room> roo = d.getRooms();
-		// boolean reDo = d.checkRooms();
-		// while (reDo == true) {
-		// // System.out.println("need to redo");
-		// // System.out.println("Checking");
-		// d = new Dungeon(50, 50);
-		// reDo = d.checkRooms();
-		//
-		// }
-		//
-		// land = d.getDungeon();// / change to land
-		// openSpaces = openLocations();// gets locations of the rooms/corridors
-		//
-		// grid = new BoundedGrid<>(land.length, land[1].length);
-		// world = new ActorWorld(grid);
-		//
-		// startGame();
-		//
-		// ArrayList<ArrayList<Location>> a = d.getCorridors();
-		// for (ArrayList<Location> l : a) {
-		// for (int i = 0; i < l.size(); i++) {
-		// openSpaces.add(l.get(i));
-		// }
-		// }
 		this.setPreferredSize(new Dimension(700, 700));
 
 	}
@@ -118,7 +89,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 
 		land = d.getDungeon();// / change to land
 		openSpaces = openLocations();// gets locations of the rooms/corridors
-hero.setLand(this.land);
+		hero.setLand(this.land);
 		grid = new BoundedGrid<>(land.length, land[1].length);
 		world = new ActorWorld(grid);
 
@@ -131,7 +102,7 @@ hero.setLand(this.land);
 		for (int i = 0; i < numItems; i++) {
 			addItem();
 		}
-		
+
 		Location l = (openSpaces.get((int) (Math.random() * openSpaces.size())));
 		world.add(openSpaces.get((int) (Math.random() * openSpaces.size())),
 				hero.main);
@@ -152,26 +123,9 @@ hero.setLand(this.land);
 		// JOptionPane.showMessageDialog(null,
 		// "Welcome to Pokemon Mystery Dungeon!");
 		// choosePokemon();
-		// int counter = 0;
-		// for (int i = 0; i < numEnemies; i++) {
-		// addEnemy();
-		// counter++;
-		// }
-		// // System.out.println("Made " + counter + " enemy Pokemon");
-		// for (int i = 0; i < numItems; i++) {
-		// addItem();
-		// }
 		Pokemon p = new Mudkip(false, land);// used for testing
 		hero = new Hero(p, land, this);
-		
-		// Location l = (openSpaces.get((int) (Math.random() *
-		// openSpaces.size())));
-		// world.add(openSpaces.get((int) (Math.random() * openSpaces.size())),
-		// hero.main);
-		// hero.setGrid(grid);
-		// hero.setPanel(this);
-		// friendly.add(hero.main);
-		// addStairs();
+
 	}
 
 	private void addStairs() {
@@ -182,8 +136,6 @@ hero.setLand(this.land);
 			Location l = openSpaces.get(pickNum);
 			if (land[l.getRow()][l.getCol()].equals("R")) {
 				land[l.getRow()][l.getCol()] = "S";
-				// System.out.println("added stairs to " + l.getRow() + " "
-				// + l.getCol());
 				openSpaces.remove(l);
 				pick = false;
 			}
@@ -193,7 +145,6 @@ hero.setLand(this.land);
 	}
 
 	private void addEnemy() {
-		// TODO Auto-generated method stub
 		int pick = (int) (Math.random() * openSpaces.size());
 		// System.out.println("openspaces is size " + openSpaces.size());
 		Location l = openSpaces.get(pick);
@@ -288,6 +239,7 @@ hero.setLand(this.land);
 				enemies.get(i).removeSelfFromGrid();
 				System.out.println("removed " + enemies.get(i));
 				enemies.remove(enemies.get(i));
+				hero.increaseXP();
 
 			}
 		}

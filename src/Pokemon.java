@@ -56,14 +56,7 @@ public abstract class Pokemon extends Actor {
 		return level;
 	}
 
-	public void levelUp() {
-		level++;
-		topHp += 5;
-		attack += 2;
-		defense += 2;
-		hp = topHp;
-	}
-
+	
 	public int getHp() {
 		return hp;
 	}

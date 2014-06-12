@@ -22,6 +22,9 @@ public class Hero extends Pokemon {
 	BoundedGrid grid;
 	String[][] land;
 	GamePanel panel;
+	int level = 1;
+	int counter = 0;
+	int xp = 0;
 
 	public Hero(Pokemon p, String[][] la, GamePanel pa) {
 		main = p;
@@ -32,6 +35,14 @@ public class Hero extends Pokemon {
 		items.add(new OranBerry());
 		this.setPanel(pa);
 		this.land = la;
+	}
+
+	public void levelUp() {
+		level++;
+		main.topHp += 5;
+		main.attack += 2;
+		main.defense += 2;
+		main.hp = main.topHp;
 	}
 
 	public String[][] getLand() {
@@ -48,6 +59,10 @@ public class Hero extends Pokemon {
 
 	public void setPanel(GamePanel p) {
 		panel = p;
+	}
+
+	public void increaseXP() {
+		xp += 5;
 	}
 
 	public void eatFood(Items i) {
@@ -86,17 +101,46 @@ public class Hero extends Pokemon {
 		}
 	}
 
+	public int getXp() {
+		return xp;
+	}
+
+	public int getStamina() {
+		return stamina;
+	}
+
 	public void checkStatus() {
+		System.out.println("level up");
+		if (xp >= level * 20) {
+			
+			levelUp();
+			stamina = 100;
+			System.out.println("Hp has changed to "+main.getHp());
+			System.out.println("Attack has changed to "+main.attack);
+			System.out.println("Defense is now "+main.getDefense());
+			System.out.println("Stamina is now "+stamina);
+			Location current = main.getLocation();
+			int row = current.getRow();
+			int col = current.getCol();
+			if (land[row][col].equals("S") == true) {
+				stage++;
+				this.main.removeSelfFromGrid();
+				this.panel.nextLevel();
+			}
+			panel.getItemHolder().redrawButtons();
+			xp=0;
+			return;
+		}
+		counter++;
 		staminaLoss();
 		if (main.hp <= 0) {
 			// System.out.println("Game over");
 			JOptionPane.showMessageDialog(null, "Game Over");
-		} else if (stamina <=0) {
+		} else if (stamina <= 0) {
 			main.hp--;
+		} else if (stamina > 0 && hp < main.topHp && counter % 2 == 0) {
+			addHP(1);
 		}
-		 else if (stamina > 0 && hp < main.topHp) {
-		 addHP(1);
-		 }
 		Location current = main.getLocation();
 		int row = current.getRow();
 		int col = current.getCol();
@@ -106,7 +150,7 @@ public class Hero extends Pokemon {
 			this.panel.nextLevel();
 		}
 		panel.getItemHolder().redrawButtons();
-		
+
 	}
 
 	private void addStamina(int staminaChange) {
@@ -119,10 +163,10 @@ public class Hero extends Pokemon {
 
 	public void staminaLoss() {
 		stamina--;
-		if(stamina<=0){
-			stamina=0;
+		if (stamina <= 0) {
+			stamina = 0;
 		}
-		
+
 	}
 
 	@Override
@@ -166,7 +210,7 @@ public class Hero extends Pokemon {
 				Location l = new Location(row, col);
 				if (grid.isValid(l)) {
 					main.moveTo(new Location(row, col));
-				System.out.println("moved");
+					System.out.println("moved");
 					// System.out.println("Now the current location is "
 					// + main.getLocation());
 				}

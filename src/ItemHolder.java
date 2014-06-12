@@ -33,13 +33,15 @@ public class ItemHolder extends JPanel implements ActionListener {
 	JLabel health;
 	JLabel stamina;
 	JLabel stage;
+	JLabel xp;
+	JLabel nextXP;
 	Hero h;
 
 	// Button
 	public ItemHolder() {
 		this.setOpaque(true);
 		this.setBackground(Color.WHITE);
-		this.setPreferredSize(new Dimension(200, 500));
+		this.setPreferredSize(new Dimension(275, 500));
 		this.setLayout(new FlowLayout());
 	
 	}
@@ -47,8 +49,6 @@ public class ItemHolder extends JPanel implements ActionListener {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.BLUE);
-		g.drawString("This is a test", 0, 0);
 
 	}
 
@@ -63,9 +63,17 @@ public class ItemHolder extends JPanel implements ActionListener {
 		health=new JLabel( "Current hp is "+h.getMain().hp );
 		health.setFont(new Font("Serif", Font.PLAIN, 20));
 		this.add(health);
+		
 		stamina= new JLabel("Current stamina is  "+h.stamina);
 		stamina.setFont(new Font("Serif", Font.PLAIN, 20));
 		this.add(stamina);
+		xp=new JLabel("Current XP is "+h.getXp());
+		xp.setFont(new Font("Serif", Font.PLAIN, 20));
+		this.add(xp);
+		int xpNeeded=(h.level*20-h.getXp());
+		nextXP=new JLabel(xpNeeded+" XP points until next level up");
+		nextXP.setFont(new Font("Serif", Font.PLAIN, 20));
+		this.add(nextXP);
 		stage = new JLabel("You are on level " + h.getStage());
 		stage.setFont(new Font("Serif", Font.PLAIN, 20));
 		this.add(stage);
@@ -91,10 +99,24 @@ public class ItemHolder extends JPanel implements ActionListener {
 		apple.setText("Eat Apple: Quantity " + items.get(0).getNumInBag());
 		Grimy.setText("Eat Grimyfood: Quantity " + items.get(1).getNumInBag());
 		Oran.setText("Eat Oran Berry: Quantity " + items.get(2).getNumInBag());
+		if(h.getMain().getHp()<10){
+			health.setForeground(Color.RED);
+		}
+		else if (h.getMain().getHp()>=10){
+			health.setForeground(Color.BLACK);
+		}
+		if(panel.getHero().getStamina()<10){
+			stamina.setForeground(Color.RED);
+		}
+		else if(panel.getHero().getStamina()>=10){
+			stamina.setForeground(Color.BLACK);
+		}
 		health.setText("Current hp is "+h.getMain().hp);
 		stamina.setText("Current stamina is  "+h.stamina);
 		stage.setText("You are on level " + h.getStage());
-
+		xp.setText("Current XP is "+h.getXp());
+		int xpNeeded=(h.level*20-h.getXp());
+		nextXP.setText(xpNeeded+" XP points until next level up");
 	}
 
 	@Override
