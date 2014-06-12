@@ -137,7 +137,7 @@ for(Location l:locs){
 			System.out.println("Hero hp is " + h.hp);
 			this.setAttackImg(true);
 			System.out.println("attack image is "+attackImg);
-			return;-
+			return;
 		}
 	}
 }

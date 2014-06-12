@@ -71,8 +71,6 @@ public class Hero extends Pokemon {
 		}
 		addHP(a.getHealthChange());
 		addStamina(a.getStaminaChange());
-		// System.out.println("There are " + items.get(0).getNumInBag()
-		// + " apples left");
 
 	}
 
@@ -96,9 +94,9 @@ public class Hero extends Pokemon {
 		} else if (stamina <=0) {
 			main.hp--;
 		}
-		// else if (stamina > 0 && hp < main.topHp) {
-		// main.hp++;
-		// }
+		 else if (stamina > 0 && hp < main.topHp) {
+		 addHP(1);
+		 }
 		Location current = main.getLocation();
 		int row = current.getRow();
 		int col = current.getCol();
@@ -108,6 +106,7 @@ public class Hero extends Pokemon {
 			this.panel.nextLevel();
 		}
 		panel.getItemHolder().redrawButtons();
+		
 	}
 
 	private void addStamina(int staminaChange) {
