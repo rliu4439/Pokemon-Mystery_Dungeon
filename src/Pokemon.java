@@ -248,9 +248,9 @@ public abstract class Pokemon extends Actor {
 		maxRow = l.getRow() + 4;
 		minCol = l.getCol() - 4;
 		maxCol = l.getRow() + 4;
-		System.out.println("Current loc is "+l);
-		System.out.println("hero loc is "+ friend.get(0));
-		System.out.println(" x is from "+minCol+" to "+maxCol+" y is from "+minRow+" to "+maxRow);
+//		System.out.println("Current loc is "+l);
+//		System.out.println("hero loc is "+ friend.get(0));
+//		System.out.println(" x is from "+minCol+" to "+maxCol+" y is from "+minRow+" to "+maxRow);
 		if (minRow < 0) {
 			minRow = 0;
 			

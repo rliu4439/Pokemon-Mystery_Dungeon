@@ -35,7 +35,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	ActorWorld world;
 	BoundedGrid grid;
 	String[][] land;
-	int numEnemies = 12;
+	int numEnemies = 3;
 	int numItems = 50;
 	int floorLevel = 1;
 	int numSteps = 0;// number of steps taken by main character
@@ -98,6 +98,53 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		this.setPreferredSize(new Dimension(700, 700));
 
 	}
+	
+	public void nextLevel() {
+		boolean check = false;
+		Dungeon d;
+
+		d = new Dungeon(50, 50);// creates a dungeon
+		ArrayList<Room> roo = d.getRooms();
+		boolean reDo = d.checkRooms();
+		while (reDo == true) {
+//			System.out.println("need to redo");
+//			System.out.println("Checking");
+			d = new Dungeon(50, 50);
+			reDo = d.checkRooms();
+
+		}
+
+		land = d.getDungeon();// / change to land
+		openSpaces = openLocations();// gets locations of the rooms/corridors
+
+		grid = new BoundedGrid<>(land.length, land[1].length);
+		world = new ActorWorld(grid);
+
+		int counter = 0;
+		for (int i = 0; i < numEnemies; i++) {
+			addEnemy();
+			counter++;
+		}
+//		System.out.println("Made " + counter + " enemy Pokemon");
+		for (int i = 0; i < numItems; i++) {
+			addItem();
+		}
+		
+		Location l = (openSpaces.get((int) (Math.random() * openSpaces.size())));
+		world.add(openSpaces.get((int) (Math.random() * openSpaces.size())),
+				hero.main);
+		hero.setGrid(grid);
+		hero.setPanel(this); 
+		friendly.add(hero.main);
+		addStairs();
+		
+		ArrayList<ArrayList<Location>> a = d.getCorridors();
+		for (ArrayList<Location> lo : a) {
+			for (int i = 0; i < lo.size(); i++) {
+				openSpaces.add(lo.get(i));
+			}
+		}
+	}
 
 	public void startGame() {
 		// JOptionPane.showMessageDialog(null,
@@ -113,7 +160,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			addItem();
 		}
 		Pokemon p = new Mudkip(false, land);// used for testing
-		hero = new Hero(p, land);
+		hero = new Hero(p, land, this);
 		Location l = (openSpaces.get((int) (Math.random() * openSpaces.size())));
 		world.add(openSpaces.get((int) (Math.random() * openSpaces.size())),
 				hero.main);
@@ -245,7 +292,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	private void choosePokemon() {
 		PersonalityTest test = new PersonalityTest(this.land);
 		Pokemon p = test.chooseCharacter();
-		hero = new Hero(p, land);
+		hero = new Hero(p, land, this);
 
 	}
 
@@ -325,7 +372,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				hero.moveRight();
-//				System.out.println("moving right");
+				System.out.println("moving right");
 				moveEnemies(friendly);
 				hero.checkStatus();
 				repaint();

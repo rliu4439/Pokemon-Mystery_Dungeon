@@ -32,6 +32,7 @@ public class ItemHolder extends JPanel implements ActionListener {
 	JButton Oran;
 	JLabel health;
 	JLabel stamina;
+	JLabel stage;
 	Hero h;
 
 	// Button
@@ -65,6 +66,9 @@ public class ItemHolder extends JPanel implements ActionListener {
 		stamina= new JLabel("Current stamina is  "+h.stamina);
 		stamina.setFont(new Font("Serif", Font.PLAIN, 20));
 		this.add(stamina);
+		stage = new JLabel("You are on level " + h.getStage());
+		stage.setFont(new Font("Serif", Font.PLAIN, 20));
+		this.add(stage);
 		items = panel.getHero().getItems();
 		apple = new JButton("Eat Apple: Quantity " + items.get(0).getNumInBag());
 		Grimy = new JButton("Eat Grimyfood: Quantity "

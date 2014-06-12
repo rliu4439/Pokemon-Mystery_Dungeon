@@ -17,18 +17,20 @@ public class Hero extends Pokemon {
 												// item
 	int stamina = 100;
 	int steps = 0;
+	int stage = 1;
 	Pokemon main;
 	BoundedGrid grid;
 	String[][] land;
 	GamePanel panel;
 
-	public Hero(Pokemon p, String[][] la) {
+	public Hero(Pokemon p, String[][] la, GamePanel pa) {
 		main = p;
 		land = this.getLand();
 		main.setEnemy(false);
 		items.add(new Apple());
 		items.add(new GrimyFood());
 		items.add(new OranBerry());
+		this.setPanel(pa);
 		this.land = la;
 	}
 
@@ -43,7 +45,7 @@ public class Hero extends Pokemon {
 	public void eatFood(Items i) {
 		Items a = null;
 		if (i instanceof Apple && items.get(0).getNumInBag() > 0) {
-//			System.out.println("This was an apple");
+			// System.out.println("This was an apple");
 			a = (Apple) i;
 			items.get(0).remove();
 			panel.getItemHolder().redrawButtons();
@@ -61,8 +63,8 @@ public class Hero extends Pokemon {
 		}
 		addHP(a.getHealthChange());
 		addStamina(a.getStaminaChange());
-//		System.out.println("There are " + items.get(0).getNumInBag()
-//				+ " apples left");
+		// System.out.println("There are " + items.get(0).getNumInBag()
+		// + " apples left");
 
 	}
 
@@ -80,21 +82,22 @@ public class Hero extends Pokemon {
 
 	public void checkStatus() {
 		if (main.hp <= 0) {
-//			System.out.println("Game over");
-			 JOptionPane.showMessageDialog(null,
-			 "Game Over");
+			// System.out.println("Game over");
+			JOptionPane.showMessageDialog(null, "Game Over");
 		} else if (stamina < 0) {
-			main.hp--;}
-//		else if (stamina > 0 && hp < main.topHp) {
-//			main.hp++;
-//		}
+			main.hp--;
+		}
+		// else if (stamina > 0 && hp < main.topHp) {
+		// main.hp++;
+		// }
 		Location current = main.getLocation();
 		int row = current.getRow();
 		int col = current.getCol();
-//		if (land[row][col].equals("S")) {// what to do if stairs
-//
-//		}
-
+		if (land[row][col].equals("S") == true) {
+			stage++;
+			this.main.removeSelfFromGrid();
+			this.panel.nextLevel();
+		}
 	}
 
 	private void addStamina(int staminaChange) {
@@ -120,15 +123,20 @@ public class Hero extends Pokemon {
 
 	public void moveRight() {
 		main.setDirection(90);
-//		System.out.println("Direction is now " + main.getDirection());
+		// System.out.println("Direction is now " + main.getDirection());
 		Location current = main.getLocation();
 		int row = current.getRow();
 		int col = current.getCol() + 1;
 		Object a = grid.get(new Location(row, col));
-//		System.out.println("Current Location is " + main.getLocation());
+		// System.out.println("Current Location is " + main.getLocation());
 		if (land[row][col].equals("W") == false
 				&& grid.isValid(new Location(row, col))) {
-//			System.out.println(a);
+			// if (land[row][col].equals("S") == true){
+			// stage++;
+			// this.removeSelfFromGrid();
+			// this.panel.nextLevel();
+			// }
+			// System.out.println(a);
 			if (a == null || a instanceof Items) {
 				if (a instanceof Items) {
 					if (a instanceof Apple) {
@@ -144,25 +152,31 @@ public class Hero extends Pokemon {
 				Location l = new Location(row, col);
 				if (grid.isValid(l)) {
 					main.moveTo(new Location(row, col));
-//					System.out.println("Now the current location is "
-//							+ main.getLocation());
+					// System.out.println("Now the current location is "
+					// + main.getLocation());
 				}
 
 			}
 		}
-//		 checkStatus();
+
+		// checkStatus();
 	}
 
 	public void moveLeft() {
 		main.setDirection(270);
-//		System.out.println("Direction is now " + main.getDirection());
+		// System.out.println("Direction is now " + main.getDirection());
 		Location current = main.getLocation();
 		int row = current.getRow();
 		int col = current.getCol() - 1;
 		Object a = grid.get(new Location(row, col));
-//		System.out.println("Current Location is " + main.getLocation());
+		// System.out.println("Current Location is " + main.getLocation());
 		if (land[row][col].equals("W") == false) {
-//			System.out.println(a);
+			// System.out.println(a);
+			// if (land[row][col].equals("S") == true){
+			// stage++;
+			// // this.removeSelfFromGrid();
+			// this.panel.nextLevel();
+			// }
 			if (a == null || a instanceof Items) {
 				if (a instanceof Items) {
 					if (a instanceof Apple) {
@@ -177,26 +191,31 @@ public class Hero extends Pokemon {
 				Location l = new Location(row, col);
 				if (grid.isValid(l)) {
 					main.moveTo(new Location(row, col));
-//					System.out.println("Now the current location is "
-//							+ main.getLocation());
+					// System.out.println("Now the current location is "
+					// + main.getLocation());
 				}
 			}
 		}
-//		 checkStatus();
+		// checkStatus();
 
 	}
 
 	public void moveUp() {
 		main.setDirection(0);
-//		System.out.println("Direction is now " + main.getDirection());
+		// System.out.println("Direction is now " + main.getDirection());
 
 		Location current = main.getLocation();
 		int row = current.getRow() - 1;
 		int col = current.getCol();
 		Object a = grid.get(new Location(row, col));
-//		System.out.println("Current Location is " + main.getLocation());
+		// System.out.println("Current Location is " + main.getLocation());
 		if (land[row][col].equals("W") == false) {
-//			System.out.println(a);
+			// System.out.println(a);
+			// if (land[row][col].equals("S") == true){
+			// stage++;
+			// // this.removeSelfFromGrid();
+			// this.panel.nextLevel();
+			// }
 			if (a == null || a instanceof Items) {
 				if (a instanceof Items) {
 					if (a instanceof Apple) {
@@ -211,12 +230,12 @@ public class Hero extends Pokemon {
 				Location l = new Location(row, col);
 				if (grid.isValid(l)) {
 					main.moveTo(new Location(row, col));
-//					System.out.println("Now the current location is "
-//							+ main.getLocation());
+					// System.out.println("Now the current location is "
+					// + main.getLocation());
 				}
 			}
 		}
-//		 checkStatus();
+		// checkStatus();
 
 	}
 
@@ -230,16 +249,21 @@ public class Hero extends Pokemon {
 		// System.out.println();
 		// }
 		main.setDirection(180);
-//		System.out.println("Direction is now " + main.getDirection());
+		// System.out.println("Direction is now " + main.getDirection());
 
 		Location current = main.getLocation();
 		// System.out.println("Current Location is "+current.getRow()+" "+current.getCol());
 		int row = current.getRow() + 1;
 		int col = current.getCol();
 		Object a = grid.get(new Location(row, col));
-//		System.out.println("Current Location is " + main.getLocation());
+		// System.out.println("Current Location is " + main.getLocation());
 		if (land[row][col].equals("W") == false) {
-//			System.out.println(a);
+			// System.out.println(a);
+			// if (land[row][col].equals("S") == true){
+			// stage++;
+			// // this.removeSelfFromGrid();
+			// this.panel.nextLevel();
+			// }
 			if (a == null || a instanceof Items) {
 				if (a instanceof Items) {
 					if (a instanceof Apple) {
@@ -251,15 +275,20 @@ public class Hero extends Pokemon {
 					}
 				}
 				panel.getItemHolder().redrawButtons();
-				Location l=new Location(row,col);
-				if(grid.isValid(l)){
-					main.moveTo(new Location(row,col));
-//					System.out.println("Now the current location is "+ main.getLocation());
+				Location l = new Location(row, col);
+				if (grid.isValid(l)) {
+					main.moveTo(new Location(row, col));
+					// System.out.println("Now the current location is "+
+					// main.getLocation());
 				}
 			}
 		}
-//		 checkStatus();
+		// checkStatus();
 
+	}
+
+	public int getStage() {
+		return stage;
 	}
 
 	public Pokemon getMain() {
