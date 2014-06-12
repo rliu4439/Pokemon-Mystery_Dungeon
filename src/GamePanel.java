@@ -232,6 +232,14 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		for (Pokemon p : enemies) {
 			p.move(friendly);
 		}
+		for(int i=0;i<enemies.size();i++){
+			if(enemies.get(i).getHp()<=0&& enemies.get(i).isEnemy()==true){
+				enemies.get(i).removeSelfFromGrid();
+				System.out.println("removed "+enemies.get(i));
+				enemies.remove(enemies.get(i));
+				
+			}
+		}
 	}
 
 	private void choosePokemon() {

@@ -20,7 +20,7 @@ public class Mudkip extends Pokemon {
 	private static Image attack;
 	public Mudkip(boolean enemy, String[][] land) {
 
-		super(enemy, 14, 2, 3, 1, land);
+		super(enemy, 100, 6, 3, 1, land);
 		getImages();
 	}
 

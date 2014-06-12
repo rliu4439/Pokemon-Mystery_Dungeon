@@ -96,6 +96,7 @@ public abstract class Pokemon extends Actor {
 	}
 
 	public void attack(Pokemon p) {
+		System.out.println(p+ " current hp is "+p.getHp());
 		// System.out.println("Hero hp is "+friendly.get(0).hp);
 		// System.out.println("top hp is "+friendly.get(0).topHp);
 		int defense = p.getDefense();
@@ -105,13 +106,16 @@ public abstract class Pokemon extends Actor {
 		System.out.println("attack is " + attack + " defense is " + defense);
 		if (attack - defense > 0) {
 			p.setHp(hp - attackpoints);
+			System.out.println(p+ " was attacked, hp is now "+p.getHp());
 		} else if (attack - defense <= 0) {
 			p.setHp(hp - 1);
-			System.out.println("The hero hp after attack is " + p.getHp());
+//			System.out.println("The hp after attack is " + p.getHp());
+			System.out.println(p+ " was attacked, hp is now "+p.getHp());
 		}
 		int direct = p.getLocation().getDirectionToward(getLocation());
-		System.out.println("DIrect is "+direct);
+		System.out.println("Direct is "+direct);
 		p.setDirection(direct);
+		
 		return;
 	}
 
