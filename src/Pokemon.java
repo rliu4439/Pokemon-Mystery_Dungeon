@@ -13,6 +13,7 @@ public abstract class Pokemon extends Actor {
 	protected int hp;
 	protected int attack;
 	protected int defense;
+	protected int followSteps = 0, recoverSteps = 0;
 	protected boolean enemy;
 	protected int x = 0;
 	private boolean attackImg=false;
