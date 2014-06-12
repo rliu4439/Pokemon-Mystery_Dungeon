@@ -16,7 +16,7 @@ public abstract class Pokemon extends Actor {
 	protected int followSteps = 0, recoverSteps = 0;
 	protected boolean enemy;
 	protected int x = 0;
-	private boolean attackImg=false;
+	private boolean attackImg = false;
 	private String[][] land;// String is the type of the last spot eg.
 							// corridor or room
 	private int dir; // dir = direction, stick with definitions as defined by
@@ -29,7 +29,7 @@ public abstract class Pokemon extends Actor {
 		this.topHp = hp;
 		this.attack = attack;
 		this.defense = defense;
-		
+
 		this.land = land;
 
 	}
@@ -45,7 +45,6 @@ public abstract class Pokemon extends Actor {
 	public String[][] getLand() {
 		return land;
 	}
-	
 
 	public Pokemon() {
 	};
@@ -97,102 +96,134 @@ public abstract class Pokemon extends Actor {
 	}
 
 	public void attack(Pokemon p) {
-//		System.out.println("Hero hp is "+friendly.get(0).hp);
-//		System.out.println("top hp is "+friendly.get(0).topHp);
-		System.out.println("Attcking hero");
+		// System.out.println("Hero hp is "+friendly.get(0).hp);
+		// System.out.println("top hp is "+friendly.get(0).topHp);
+		System.out.println("Attacking hero");
 		int defense = p.getDefense();
 		int attack = this.getAttack();
 		int hp = p.getHp();
-		int attackpoints=attack-defense;
-		System.out.println("attack is "+ attack + " defense is "+defense );
+		int attackpoints = attack - defense;
+		System.out.println("attack is " + attack + " defense is " + defense);
 		if (attack - defense > 0) {
-			
-			
-			p.setHp(hp-attackpoints);
-			System.out.println("The hero hp after attack is "+p.getHp());
-			
+			p.setHp(hp - attackpoints);
+		} else if (attack - defense <= 0) {
+			p.setHp(hp - 1);
+			System.out.println("The hero hp after attack is " + p.getHp());
 		}
-		int direct=p.getLocation().getDirectionToward(getLocation());
+		int direct = p.getLocation().getDirectionToward(getLocation());
 		p.setDirection(direct);
 		return;
 	}
 
 	public void move(ArrayList<Pokemon> friendly) {
-		BoundedGrid g = (BoundedGrid) this.getGrid();	//Move randomly if hero is not near
+		BoundedGrid g = (BoundedGrid) this.getGrid(); // Move randomly if hero
+														// is not near
 		boolean stop = false;
 		ArrayList<Location> a = getPokemon(g);
-		ArrayList<Location> moveTowards = new ArrayList<Location>();// gets the location of all
-//		System.out.println(a.size());
-			// pokemon that are not enemy so
-//		System.out.println("Hero hp is "+friendly.get(0).hp);
-//		System.out.println("top hp is "+friendly.get(0).topHp);
-// it can attack them
-<<<<<<< HEAD
-		if (a.size()>0){
+		ArrayList<Location> moveTowards = new ArrayList<Location>();// gets the
+																	// location
+																	// of all
+		// System.out.println(a.size());
+		// pokemon that are not enemy so
+		// System.out.println("Hero hp is "+friendly.get(0).hp);
+		// System.out.println("top hp is "+friendly.get(0).topHp);
+		// it can attack them
+
+		if (a.size() > 0) {
 			System.out.println("a size is more than 0");
-=======
-		if (a.size()>0 && followSteps < 10 && recoverSteps == 0){
-			followSteps++;
->>>>>>> 16dfdc515c0b0ee00c128203cb6b6d7bd956990e
-			if (this.distanceFrom(a.get(0)) < 2){
-				System.out.println("Distance from hero is less than 2");
-			ArrayList<Location>	b = g.getOccupiedAdjacentLocations(getLocation());
-				for (Location l:b){
-					if (g.get(l) instanceof Pokemon && (((Pokemon) g.get(l)).isEnemy()==false)){	
-						Pokemon h= (Pokemon) g.get(l);
-						this.attack(h);
-						System.out.println(this +" Attacking the Hero");
-						System.out.println("Hero hp is "+h.hp);
-						this.setAttackImg(true);
+
+			if (a.size() > 0 && followSteps < 10 && recoverSteps == 0) {
+				followSteps++;
+
+				if (this.distanceFrom(a.get(0)) < 2) {
+					System.out.println("Distance from hero is less than 2");
+					ArrayList<Location> b = g
+							.getOccupiedAdjacentLocations(getLocation());
+					for (Location l : b) {
+						if (g.get(l) instanceof Pokemon
+								&& (((Pokemon) g.get(l)).isEnemy() == false)) {
+							Pokemon h = (Pokemon) g.get(l);
+							this.attack(h);
+							System.out.println(this + " Attacking the Hero");
+							System.out.println("Hero hp is " + h.hp);
+							this.setAttackImg(true);
+						}
+					}
+				} else if (this.distanceFrom(a.get(0)) >= 2) {
+					this.setAttackImg(false);
+					if (!(land[getLocation().getAdjacentLocation(
+							getLocation().getDirectionToward(a.get(0)))
+							.getRow()][getLocation().getAdjacentLocation(
+							getLocation().getDirectionToward(a.get(0)))
+							.getCol()].equals("W"))
+							&& !(g.get(getLocation().getAdjacentLocation(
+									getLocation().getDirectionToward(a.get(0)))) instanceof Pokemon)) {
+						moveTo(getLocation().getAdjacentLocation(
+								getLocation().getDirectionToward(a.get(0))));
+						this.setDirection(getLocation().getDirectionToward(
+								a.get(0)));
+						// System.out.println("Moved Directly Towards Hero");
+					} else if (!(land[getLocation().getAdjacentLocation(
+							getLocation().getDirectionToward(a.get(0)) + 45)
+							.getRow()][getLocation().getAdjacentLocation(
+							getLocation().getDirectionToward(a.get(0)) + 45)
+							.getCol()].equals("W"))
+							&& !(g.get(getLocation()
+									.getAdjacentLocation(
+											getLocation().getDirectionToward(
+													a.get(0)) + 45)) instanceof Pokemon)) {
+						moveTo(getLocation()
+								.getAdjacentLocation(
+										getLocation().getDirectionToward(
+												a.get(0)) + 45));
+						this.setDirection(getLocation().getDirectionToward(
+								a.get(0)) + 45);
+						// System.out.println("Moved Direction + 45 Towards Hero");
+					} else if (!(land[getLocation().getAdjacentLocation(
+							getLocation().getDirectionToward(a.get(0)) - 45)
+							.getRow()][getLocation().getAdjacentLocation(
+							getLocation().getDirectionToward(a.get(0)) - 45)
+							.getCol()].equals("W"))
+							&& !(g.get(getLocation()
+									.getAdjacentLocation(
+											getLocation().getDirectionToward(
+													a.get(0)) - 45)) instanceof Pokemon)) {
+						moveTo(getLocation()
+								.getAdjacentLocation(
+										getLocation().getDirectionToward(
+												a.get(0)) - 45));
+						this.setDirection(getLocation().getDirectionToward(
+								a.get(0)) - 45);
+						// System.out.println("Moved Direction - 45 Towards Hero");
 					}
 				}
-			}
-			else if (this.distanceFrom(a.get(0))>=2){
-				
-				if (!(land[getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))).getRow()][getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))).getCol()].equals("W")) && !(g.get(getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0)))) instanceof Pokemon)){
-					moveTo(getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))));
-					this.setDirection(getLocation().getDirectionToward(a.get(0)));
-//					System.out.println("Moved Directly Towards Hero");
+			} else if (a.size() == 0 || followSteps >= 10 || recoverSteps > 0) {
+				this.setAttackImg(false);
+				if (followSteps >= 10) {
+					recoverSteps = 5;
+					followSteps = 0;
 				}
-				else if (!(land[getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))+45).getRow()][getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))+45).getCol()].equals("W")) && !(g.get(getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))+45)) instanceof Pokemon)){
-					moveTo(getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))+45));
-					this.setDirection(getLocation().getDirectionToward(a.get(0))+45);
-//					System.out.println("Moved Direction + 45 Towards Hero");
+				if (recoverSteps > 0)
+					recoverSteps--;
+				ArrayList<Location> b = g
+						.getEmptyAdjacentLocations(getLocation());
+				for (int z = 0; z < b.size(); z++) {
+					if (land[b.get(z).getRow()][b.get(z).getCol()].equals("W")) {
+						b.remove(z);
+						z--;
+					}
 				}
-				else if (!(land[getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))-45).getRow()][getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))-45).getCol()].equals("W")) && !(g.get(getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))-45)) instanceof Pokemon)){
-					moveTo(getLocation().getAdjacentLocation(getLocation().getDirectionToward(a.get(0))-45));
-					this.setDirection(getLocation().getDirectionToward(a.get(0))-45);
-//					System.out.println("Moved Direction - 45 Towards Hero");
-				}
-			}
-		}
-		else if (a.size()==0 || followSteps >= 10 || recoverSteps > 0){
-			if (followSteps >= 10){
-				recoverSteps = 5;
-				followSteps = 0;
-			}
-			if (recoverSteps > 0)
-				recoverSteps--;
-			ArrayList<Location>	b = g.getEmptyAdjacentLocations(getLocation());
-			for (int z = 0; z< b.size(); z++){
-				if (land [b.get(z).getRow()][b.get(z).getCol()].equals("W")){
-					b.remove(z);
-					z--;
+				if (b.size() > 0) {
+					moveTo(b.get((int) (Math.random() * b.size())));
+					// System.out.println("Moved Randomly");
 				}
 			}
-			if (b.size()>0){
-				moveTo(b.get((int)(Math.random()*b.size())));
-//				System.out.println("Moved Randomly");
-			}
-		}
 
+		}
 	}
 
-	
-	
-
 	public double distanceFrom(Location loc) {
-//		System.out.println("In distance from");
+		// System.out.println("In distance from");
 		Location here = this.getLocation();
 		int a = loc.getCol() - here.getCol();
 		int b = loc.getRow() - here.getRow();
@@ -202,11 +233,11 @@ public abstract class Pokemon extends Actor {
 	}
 
 	private ArrayList<Location> getPokemon(BoundedGrid g) {// returns all
-//		System.out.println("In getPokemon"); // non-enemy Pokemon
+		// System.out.println("In getPokemon"); // non-enemy Pokemon
 		// TODO Auto-generated method stub
 		ArrayList<Location> locs = new ArrayList<>();
 		Location l = this.getLocation();
-//		System.out.println("L is " + l);
+		// System.out.println("L is " + l);
 		// System.out.println("current Enemy location is "+l);
 		int minRow, maxRow;
 		int minCol, maxCol;

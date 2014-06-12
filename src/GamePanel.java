@@ -319,6 +319,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				hero.moveRight();
 //				System.out.println("moving right");
 				moveEnemies(friendly);
+				hero.checkStatus();
 				repaint();
 			}
 
@@ -330,7 +331,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 //				System.out.println("moving left");
 				hero.moveLeft();
 				moveEnemies(friendly);
-
+				hero.checkStatus();
 				repaint();
 			}
 		});
@@ -342,7 +343,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 //				System.out.println("moving up");
 				hero.moveUp();
 				moveEnemies(friendly);
-
+				hero.checkStatus();
 				repaint();
 			}
 
@@ -357,10 +358,25 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 //				System.out.println("moving down");
 				moveEnemies(friendly);
 //				System.out.println("Finished moving enemies");
+				hero.checkStatus();
 				repaint();
 			}
 		});
 
+		this.getInputMap().put(KeyStroke.getKeyStroke("SPACE"), "attack");
+		this.getActionMap().put("attack", new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if (hero.getGrid().get(hero.getLocation().getAdjacentLocation(hero.getDirection())) instanceof Pokemon)
+					hero.attack((Pokemon) hero.getGrid().get(hero.getLocation().getAdjacentLocation(hero.getDirection())));
+//				System.out.println("moving right");
+				moveEnemies(friendly);
+				hero.checkStatus();
+				repaint();
+			}
+
+		});
 	}
 
 	public InfoScreen getInfo() {

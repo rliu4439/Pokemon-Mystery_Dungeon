@@ -1,4 +1,3 @@
-/image
 /Apple.class
 /Cyndaquil.class
 /Dungeon.class
@@ -21,4 +20,6 @@
 /Pikachu.class
 /Pokemon.class
 /Room.class
+/image
 /tester.class
+/GamePanel$5.class

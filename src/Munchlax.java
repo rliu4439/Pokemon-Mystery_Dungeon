@@ -20,7 +20,7 @@ public class Munchlax extends Pokemon {
 	private Image currentImage;
 	private static Image attack;
 	public Munchlax(boolean enemy,String[][] land) {
-		super(enemy, 16, 2, 3, 1,land);
+		super(enemy, 16, 1, 3, 1,land);
 		getImages();
 	}
 
