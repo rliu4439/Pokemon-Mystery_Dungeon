@@ -13,6 +13,7 @@ public abstract class Pokemon extends Actor {
 	protected int hp;
 	protected int attack;
 	protected int defense;
+	protected int followSteps = 0, recoverSteps = 0;
 	protected boolean enemy;
 	protected int x = 0;
 	private boolean attackImg=false;
@@ -126,8 +127,13 @@ public abstract class Pokemon extends Actor {
 //		System.out.println("Hero hp is "+friendly.get(0).hp);
 //		System.out.println("top hp is "+friendly.get(0).topHp);
 // it can attack them
+<<<<<<< HEAD
 		if (a.size()>0){
 			System.out.println("a size is more than 0");
+=======
+		if (a.size()>0 && followSteps < 10 && recoverSteps == 0){
+			followSteps++;
+>>>>>>> 16dfdc515c0b0ee00c128203cb6b6d7bd956990e
 			if (this.distanceFrom(a.get(0)) < 2){
 				System.out.println("Distance from hero is less than 2");
 			ArrayList<Location>	b = g.getOccupiedAdjacentLocations(getLocation());
@@ -160,7 +166,13 @@ public abstract class Pokemon extends Actor {
 				}
 			}
 		}
-		else if (a.size()==0){
+		else if (a.size()==0 || followSteps >= 10 || recoverSteps > 0){
+			if (followSteps >= 10){
+				recoverSteps = 5;
+				followSteps = 0;
+			}
+			if (recoverSteps > 0)
+				recoverSteps--;
 			ArrayList<Location>	b = g.getEmptyAdjacentLocations(getLocation());
 			for (int z = 0; z< b.size(); z++){
 				if (land [b.get(z).getRow()][b.get(z).getCol()].equals("W")){
