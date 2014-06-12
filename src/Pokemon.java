@@ -127,7 +127,9 @@ public abstract class Pokemon extends Actor {
 //		System.out.println("top hp is "+friendly.get(0).topHp);
 // it can attack them
 		if (a.size()>0){
+			System.out.println("a size is more than 0");
 			if (this.distanceFrom(a.get(0)) < 2){
+				System.out.println("Distance from hero is less than 2");
 			ArrayList<Location>	b = g.getOccupiedAdjacentLocations(getLocation());
 				for (Location l:b){
 					if (g.get(l) instanceof Pokemon && (((Pokemon) g.get(l)).isEnemy()==false)){	
