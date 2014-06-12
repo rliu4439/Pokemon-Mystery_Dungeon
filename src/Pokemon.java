@@ -98,7 +98,6 @@ public abstract class Pokemon extends Actor {
 	public void attack(Pokemon p) {
 		// System.out.println("Hero hp is "+friendly.get(0).hp);
 		// System.out.println("top hp is "+friendly.get(0).topHp);
-		System.out.println("Attacking hero");
 		int defense = p.getDefense();
 		int attack = this.getAttack();
 		int hp = p.getHp();
