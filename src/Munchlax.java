@@ -38,23 +38,31 @@ public class Munchlax extends Pokemon {
 			}
 		}
 	}
+
 	@Override
 	public void draw(Graphics g, int col, int row) {
 		// TODO Auto-generated method stub
 		if(super.isAttackImg()==true){
 			this.currentImage=attack;
-		}else{
+		}
+		else{
 			int direction = this.getDirection();
-			if (direction == Location.EAST) {
+//			System.out.println("Current is "+direction);
+			if (direction == 90) {
 				this.currentImage = right;
-			} else if (direction == Location.WEST) {
+//				System.out.println("Changed to right");
+			} else if (direction == 270) {
+//				System.out.println("Changed to left");
 				currentImage = left;
-			} else if (direction == Location.NORTH) {
+			} else if (direction == 0) {
 				currentImage = back;
+//				System.out.println("Changed to back");
 			} else {
 				currentImage = front;
+//				System.out.println("Changed to front");
 			}
 		}
 		
-		g.drawImage(currentImage, col,row, 60, 60, null);	}
+		g.drawImage(currentImage, col,row, 60, 60, null);
+	}
 }

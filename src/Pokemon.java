@@ -111,6 +111,8 @@ public abstract class Pokemon extends Actor {
 			System.out.println("The hero hp after attack is "+p.getHp());
 			
 		}
+		int direct=p.getLocation().getDirectionToward(getLocation());
+		p.setDirection(direct);
 		return;
 	}
 
