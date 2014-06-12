@@ -31,7 +31,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	ArrayList<Location> corridors;// need to place corridors/rooms after pokemon
 									// move
 	ArrayList<Pokemon> enemies = new ArrayList<>();
-	ArrayList <Pokemon> friendly=new ArrayList<>();
+	ArrayList<Pokemon> friendly = new ArrayList<>();
 	ActorWorld world;
 	BoundedGrid grid;
 	String[][] land;
@@ -66,39 +66,43 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		Pokemon p = new Mudkip(false, land);// used for testing
+		hero = new Hero(p, land, this);
+		
+		nextLevel();
 
-		boolean check = false;
-		Dungeon d;
-
-		d = new Dungeon(50, 50);// creates a dungeon
-		ArrayList<Room> roo = d.getRooms();
-		boolean reDo = d.checkRooms();
-		while (reDo == true) {
-//			System.out.println("need to redo");
-//			System.out.println("Checking");
-			d = new Dungeon(50, 50);
-			reDo = d.checkRooms();
-
-		}
-
-		land = d.getDungeon();// / change to land
-		openSpaces = openLocations();// gets locations of the rooms/corridors
-
-		grid = new BoundedGrid<>(land.length, land[1].length);
-		world = new ActorWorld(grid);
-
-		startGame();
-
-		ArrayList<ArrayList<Location>> a = d.getCorridors();
-		for (ArrayList<Location> l : a) {
-			for (int i = 0; i < l.size(); i++) {
-				openSpaces.add(l.get(i));
-			}
-		}
+		// boolean check = false;
+		// Dungeon d;
+		//
+		// d = new Dungeon(50, 50);// creates a dungeon
+		// ArrayList<Room> roo = d.getRooms();
+		// boolean reDo = d.checkRooms();
+		// while (reDo == true) {
+		// // System.out.println("need to redo");
+		// // System.out.println("Checking");
+		// d = new Dungeon(50, 50);
+		// reDo = d.checkRooms();
+		//
+		// }
+		//
+		// land = d.getDungeon();// / change to land
+		// openSpaces = openLocations();// gets locations of the rooms/corridors
+		//
+		// grid = new BoundedGrid<>(land.length, land[1].length);
+		// world = new ActorWorld(grid);
+		//
+		// startGame();
+		//
+		// ArrayList<ArrayList<Location>> a = d.getCorridors();
+		// for (ArrayList<Location> l : a) {
+		// for (int i = 0; i < l.size(); i++) {
+		// openSpaces.add(l.get(i));
+		// }
+		// }
 		this.setPreferredSize(new Dimension(700, 700));
 
 	}
-	
+
 	public void nextLevel() {
 		boolean check = false;
 		Dungeon d;
@@ -107,8 +111,6 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		ArrayList<Room> roo = d.getRooms();
 		boolean reDo = d.checkRooms();
 		while (reDo == true) {
-//			System.out.println("need to redo");
-//			System.out.println("Checking");
 			d = new Dungeon(50, 50);
 			reDo = d.checkRooms();
 
@@ -116,7 +118,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 
 		land = d.getDungeon();// / change to land
 		openSpaces = openLocations();// gets locations of the rooms/corridors
-
+hero.setLand(this.land);
 		grid = new BoundedGrid<>(land.length, land[1].length);
 		world = new ActorWorld(grid);
 
@@ -125,7 +127,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			addEnemy();
 			counter++;
 		}
-//		System.out.println("Made " + counter + " enemy Pokemon");
+		// System.out.println("Made " + counter + " enemy Pokemon");
 		for (int i = 0; i < numItems; i++) {
 			addItem();
 		}
@@ -134,10 +136,10 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		world.add(openSpaces.get((int) (Math.random() * openSpaces.size())),
 				hero.main);
 		hero.setGrid(grid);
-		hero.setPanel(this); 
-		friendly.add(hero.main);
+		hero.setPanel(this);
+
 		addStairs();
-		
+
 		ArrayList<ArrayList<Location>> a = d.getCorridors();
 		for (ArrayList<Location> lo : a) {
 			for (int i = 0; i < lo.size(); i++) {
@@ -150,24 +152,26 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		// JOptionPane.showMessageDialog(null,
 		// "Welcome to Pokemon Mystery Dungeon!");
 		// choosePokemon();
-		int counter = 0;
-		for (int i = 0; i < numEnemies; i++) {
-			addEnemy();
-			counter++;
-		}
-//		System.out.println("Made " + counter + " enemy Pokemon");
-		for (int i = 0; i < numItems; i++) {
-			addItem();
-		}
+		// int counter = 0;
+		// for (int i = 0; i < numEnemies; i++) {
+		// addEnemy();
+		// counter++;
+		// }
+		// // System.out.println("Made " + counter + " enemy Pokemon");
+		// for (int i = 0; i < numItems; i++) {
+		// addItem();
+		// }
 		Pokemon p = new Mudkip(false, land);// used for testing
 		hero = new Hero(p, land, this);
-		Location l = (openSpaces.get((int) (Math.random() * openSpaces.size())));
-		world.add(openSpaces.get((int) (Math.random() * openSpaces.size())),
-				hero.main);
-		hero.setGrid(grid);
-		hero.setPanel(this);
-		friendly.add(hero.main);
-		addStairs();
+		
+		// Location l = (openSpaces.get((int) (Math.random() *
+		// openSpaces.size())));
+		// world.add(openSpaces.get((int) (Math.random() * openSpaces.size())),
+		// hero.main);
+		// hero.setGrid(grid);
+		// hero.setPanel(this);
+		// friendly.add(hero.main);
+		// addStairs();
 	}
 
 	private void addStairs() {
@@ -178,8 +182,8 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			Location l = openSpaces.get(pickNum);
 			if (land[l.getRow()][l.getCol()].equals("R")) {
 				land[l.getRow()][l.getCol()] = "S";
-//				System.out.println("added stairs to " + l.getRow() + " "
-//						+ l.getCol());
+				// System.out.println("added stairs to " + l.getRow() + " "
+				// + l.getCol());
 				openSpaces.remove(l);
 				pick = false;
 			}
@@ -274,17 +278,17 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 
 	}
 
-	public void moveEnemies(ArrayList<Pokemon>friendly) {
+	public void moveEnemies(ArrayList<Pokemon> friendly) {
 
 		for (Pokemon p : enemies) {
 			p.move(friendly);
 		}
-		for(int i=0;i<enemies.size();i++){
-			if(enemies.get(i).getHp()<=0&& enemies.get(i).isEnemy()==true){
+		for (int i = 0; i < enemies.size(); i++) {
+			if (enemies.get(i).getHp() <= 0 && enemies.get(i).isEnemy() == true) {
 				enemies.get(i).removeSelfFromGrid();
-				System.out.println("removed "+enemies.get(i));
+				System.out.println("removed " + enemies.get(i));
 				enemies.remove(enemies.get(i));
-				
+
 			}
 		}
 	}
@@ -304,12 +308,12 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	}
 
 	private void drawDungeon(Graphics g) {
-//		System.out.println("At draw Dungeon");
+		// System.out.println("At draw Dungeon");
 		Location current = hero.main.getLocation();
-//		System.out.println("current is "+current);
+		// System.out.println("current is "+current);
 		int row = current.getRow();
 		int col = current.getCol();
-//		System.out.println(current);
+		// System.out.println(current);
 		int counterr = 0;
 		int counterc = 0;
 		for (int r = row - 4; r < row + 5; r++) {// gets 4 above and 4 below
@@ -383,7 +387,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		this.getActionMap().put("moveLeft", new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				System.out.println("moving left");
+				// System.out.println("moving left");
 				hero.moveLeft();
 				moveEnemies(friendly);
 				hero.checkStatus();
@@ -395,7 +399,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-//				System.out.println("moving up");
+				// System.out.println("moving up");
 				hero.moveUp();
 				moveEnemies(friendly);
 				hero.checkStatus();
@@ -410,9 +414,9 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				hero.moveBack();
-//				System.out.println("moving down");
+				// System.out.println("moving down");
 				moveEnemies(friendly);
-//				System.out.println("Finished moving enemies");
+				// System.out.println("Finished moving enemies");
 				hero.checkStatus();
 				repaint();
 			}
@@ -423,9 +427,13 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if (hero.main.getGrid().get(hero.getMain().getLocation().getAdjacentLocation(hero.main.getDirection())) instanceof Pokemon)
-					hero.main.attack((Pokemon) hero.main.getGrid().get(hero.main.getLocation().getAdjacentLocation(hero.main.getDirection())));
-//				System.out.println("moving right");
+				if (hero.main.getGrid().get(
+						hero.getMain().getLocation()
+								.getAdjacentLocation(hero.main.getDirection())) instanceof Pokemon)
+					hero.main.attack((Pokemon) hero.main.getGrid().get(
+							hero.main.getLocation().getAdjacentLocation(
+									hero.main.getDirection())));
+				// System.out.println("moving right");
 				moveEnemies(friendly);
 				hero.checkStatus();
 				repaint();

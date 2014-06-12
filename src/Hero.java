@@ -34,6 +34,14 @@ public class Hero extends Pokemon {
 		this.land = la;
 	}
 
+	public String[][] getLand() {
+		return land;
+	}
+
+	public void setLand(String[][] land) {
+		this.land = land;
+	}
+
 	public void setGrid(BoundedGrid g) {
 		grid = g;
 	}
@@ -81,10 +89,11 @@ public class Hero extends Pokemon {
 	}
 
 	public void checkStatus() {
+		staminaLoss();
 		if (main.hp <= 0) {
 			// System.out.println("Game over");
 			JOptionPane.showMessageDialog(null, "Game Over");
-		} else if (stamina < 0) {
+		} else if (stamina <=0) {
 			main.hp--;
 		}
 		// else if (stamina > 0 && hp < main.topHp) {
@@ -98,6 +107,7 @@ public class Hero extends Pokemon {
 			this.main.removeSelfFromGrid();
 			this.panel.nextLevel();
 		}
+		panel.getItemHolder().redrawButtons();
 	}
 
 	private void addStamina(int staminaChange) {
@@ -110,6 +120,10 @@ public class Hero extends Pokemon {
 
 	public void staminaLoss() {
 		stamina--;
+		if(stamina<=0){
+			stamina=0;
+		}
+		
 	}
 
 	@Override
@@ -119,6 +133,7 @@ public class Hero extends Pokemon {
 		main.draw(g, row, col);
 
 		System.out.println("Direction is " + main.getDirection());
+		panel.getItemHolder().redrawButtons();
 	}
 
 	public void moveRight() {
@@ -152,6 +167,7 @@ public class Hero extends Pokemon {
 				Location l = new Location(row, col);
 				if (grid.isValid(l)) {
 					main.moveTo(new Location(row, col));
+				System.out.println("moved");
 					// System.out.println("Now the current location is "
 					// + main.getLocation());
 				}
@@ -191,6 +207,7 @@ public class Hero extends Pokemon {
 				Location l = new Location(row, col);
 				if (grid.isValid(l)) {
 					main.moveTo(new Location(row, col));
+					System.out.println("moved");
 					// System.out.println("Now the current location is "
 					// + main.getLocation());
 				}
@@ -230,6 +247,7 @@ public class Hero extends Pokemon {
 				Location l = new Location(row, col);
 				if (grid.isValid(l)) {
 					main.moveTo(new Location(row, col));
+					System.out.println("moved");
 					// System.out.println("Now the current location is "
 					// + main.getLocation());
 				}
@@ -278,6 +296,7 @@ public class Hero extends Pokemon {
 				Location l = new Location(row, col);
 				if (grid.isValid(l)) {
 					main.moveTo(new Location(row, col));
+					System.out.println("moved");
 					// System.out.println("Now the current location is "+
 					// main.getLocation());
 				}

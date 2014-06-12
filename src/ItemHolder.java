@@ -93,6 +93,7 @@ public class ItemHolder extends JPanel implements ActionListener {
 		Oran.setText("Eat Oran Berry: Quantity " + items.get(2).getNumInBag());
 		health.setText("Current hp is "+h.getMain().hp);
 		stamina.setText("Current stamina is  "+h.stamina);
+		stage.setText("You are on level " + h.getStage());
 
 	}
 

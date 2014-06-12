@@ -127,8 +127,21 @@ public abstract class Pokemon extends Actor {
 		ArrayList<Location> moveTowards = new ArrayList<Location>();// gets the
 																	// location
 																	// of all
-
-		
+ArrayList<Location> locs=g.getOccupiedAdjacentLocations(getLocation());
+for(Location l:locs){
+	if(g.get(l) instanceof Pokemon && ((Pokemon) g.get(l)).isEnemy()==false){
+		Pokemon h=(Pokemon) g.get(l);
+		if(this.getLocation().getDirectionToward(h.getLocation())==0||this.getLocation().getDirectionToward(h.getLocation())==90||this.getLocation().getDirectionToward(h.getLocation())==180||this.getLocation().getDirectionToward(h.getLocation())==270){
+			this.attack(h);
+			System.out.println(this + " Attacking the Hero");
+			System.out.println("Hero hp is " + h.hp);
+			this.setAttackImg(true);
+			System.out.println("attack image is "+attackImg);
+			return;-
+		}
+	}
+}
+	
 		 if (a.size() == 0 || followSteps >= 10 || recoverSteps > 0) {
 			this.setAttackImg(false);
 			if (followSteps >= 10) {
