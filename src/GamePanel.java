@@ -35,8 +35,8 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	ActorWorld world;
 	BoundedGrid grid;
 	String[][] land;
-	int numEnemies = 4;
-	int numItems = 50;
+	int numEnemies = 5;
+	int numItems = 10;
 	int floorLevel = 1;
 	int numSteps = 0;// number of steps taken by main character
 	private static Image wall;
@@ -83,7 +83,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		boolean check = false;
 		Dungeon d;
 
-		d = new Dungeon(50, 50);// creates a dungeon
+		d = new Dungeon(60,60);// creates a dungeon
 		ArrayList<Room> roo = d.getRooms();
 		boolean reDo = d.checkRooms();
 		while (reDo == true) {
@@ -99,11 +99,11 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		world = new ActorWorld(grid);
 
 		int counter = 0;
-		for (int i = 0; i < numEnemies; i++) {
+		for (int i = 0; i < numEnemies*floorLevel; i++) {
 			addEnemy();
 			counter++;
 		}
-		for (int i = 0; i < numItems; i++) {
+		for (int i = 0; i < numItems+floorLevel; i++) {
 			addItem();
 		}
 

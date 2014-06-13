@@ -24,7 +24,7 @@ public class Hero extends Pokemon {
 	GamePanel panel;
 	int level = 1;
 	int counter = 0;
-	int xp = 15;
+	int xp = 0;
 	boolean check = false;
 
 	public Hero(Pokemon p, String[][] la, GamePanel pa) {
@@ -139,13 +139,14 @@ public class Hero extends Pokemon {
 		if (xp >= level * 20) {
 
 			levelUp();
-			this.panel.getInfo().writeText("Level up!");
 			this.panel.getInfo().writeText(
 					"Your hp has increased to " + main.getHp());
 			this.panel.getInfo().writeText(
 					"Your attack has increased to " + main.attack);
 			this.panel.getInfo().writeText(
 					"Your defense is now " + main.getDefense());
+			this.panel.getInfo().writeText("Level up!");
+
 			stamina = 100;
 			System.out.println("Hp has changed to " + main.getHp());
 			System.out.println("Attack has changed to " + main.attack);
