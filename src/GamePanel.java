@@ -45,7 +45,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	private static Image error;
 	ItemHolder itemHolder;
 	InfoScreen info;
-	boolean firstStage = true;
+//	boolean firstStage = true;
 	
 	public ItemHolder getItemHolder() {
 		return itemHolder;
@@ -76,13 +76,16 @@ startGame();
 	}
 
 	public void nextLevel() {
-		if (!firstStage)
+//		if (!firstStage)
 			this.getInfo().writeText("You moved to the next stage!");
-		else
-			firstStage = false;
-		boolean check = false;
+//		else
+//			firstStage = false;
+//		boolean check = false;
 		Dungeon d;
-
+		floorLevel++;
+		if (floorLevel == 6)
+			 JOptionPane.showMessageDialog(null,
+					 "Great Job! You beat the game (as it is right now). If you want you can continue.");
 		d = new Dungeon(60,60);// creates a dungeon
 		ArrayList<Room> roo = d.getRooms();
 		boolean reDo = d.checkRooms();
@@ -126,12 +129,12 @@ startGame();
 
 	public void startGame() {
 		 JOptionPane.showMessageDialog(null,
-		 "Welcome to Pokemon Mystery Dungeon!");
-			if (!firstStage)
-				this.getInfo().writeText("You moved to the next stage!");
-			else
-				firstStage = false;
-			boolean check = false;
+		 "Welcome to Pokemon Mystery Dungeon! Reach the 6th stage to beat the game!");
+//			if (!firstStage)
+//				this.getInfo().writeText("You moved to the next stage!");
+//			else
+//				firstStage = false;
+//			boolean check = false;
 			Dungeon d;
 
 			d = new Dungeon(60,60);// creates a dungeon
@@ -198,7 +201,7 @@ startGame();
 		// System.out.println("openspaces is size " + openSpaces.size());
 		Location l = openSpaces.get(pick);
 		// System.out.println(l);
-		int choose = 0;//(int) (Math.random() * 4);
+		int choose = (int) (Math.random() * 4);
 		// System.out.println(choose);
 		switch (choose) {
 		case 0:
