@@ -48,26 +48,27 @@ public class Cyndaquil extends Pokemon {
 	@Override
 	public void draw(Graphics g, int col, int row) {
 		// TODO Auto-generated method stub
-//		if (super.isAttackImg() == true) {
-//			this.currentImage = attack;
-//		} else {
+		if(super.isAttackImg()==true){
+			this.currentImage=attack;
+		}
+		else{
 			int direction = this.getDirection();
-			// System.out.println("Current is "+direction);
+//			System.out.println("Current is "+direction);
 			if (direction == 90) {
 				this.currentImage = right;
-				// System.out.println("Changed to right");
+//				System.out.println("Changed to right");
 			} else if (direction == 270) {
-				// System.out.println("Changed to left");
+//				System.out.println("Changed to left");
 				currentImage = left;
 			} else if (direction == 0) {
 				currentImage = back;
-				// System.out.println("Changed to back");
+//				System.out.println("Changed to back");
 			} else {
 				currentImage = front;
-				// System.out.println("Changed to front");
-//			}
+//				System.out.println("Changed to front");
+			}
 		}
-
-		g.drawImage(currentImage, col, row, 60, 60, null);
+		
+		g.drawImage(currentImage, col,row, 60, 60, null);
 	}
 }
