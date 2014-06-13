@@ -98,23 +98,23 @@ public class PersonalityTest {
 			}
 		}
 		in.close();
-		if (counter == 0) {
-			Pokemon a = new Pichu(false, land);
-			JOptionPane.showMessageDialog(null, "You would be a Pichu!");
-			return a;
-		} else if (counter == 1 || counter == 4) {
-			JOptionPane.showMessageDialog(null, "You would be a Munchlax!");
-			Pokemon a = new Munchlax(false, land);
-			return a;
-		} else if (counter == 2 || counter == 3) {
-			Pokemon a = new Mudkip(false, land);
-			JOptionPane.showMessageDialog(null, "You would be a Mudkip!");
-			return a;
-		} else if (counter == 5) {
-			Pokemon a = new Cyndaquil(false, land);
-			JOptionPane.showMessageDialog(null, "You would be a Cyndaquil!");
-			return a;
-		}
+//		if (counter == 0) {
+//			Pokemon a = new Pichu(false, land);
+//			JOptionPane.showMessageDialog(null, "You would be a Pichu!");
+//			return a;
+//		} else if (counter == 1 || counter == 4) {
+//			JOptionPane.showMessageDialog(null, "You would be a Munchlax!");
+//			Pokemon a = new Munchlax(false, land);
+//			return a;
+//		} else if (counter == 2 || counter == 3) {
+//			Pokemon a = new Mudkip(false, land);
+//			JOptionPane.showMessageDialog(null, "You would be a Mudkip!");
+//			return a;
+//		} else if (counter == 5) {
+//			Pokemon a = new Cyndaquil(false, land);
+//			JOptionPane.showMessageDialog(null, "You would be a Cyndaquil!");
+//			return a;
+//		}
 
 		return null;
 

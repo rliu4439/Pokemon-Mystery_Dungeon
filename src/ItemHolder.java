@@ -99,10 +99,10 @@ public class ItemHolder extends JPanel implements ActionListener {
 		apple.setText("Eat Apple: Quantity " + items.get(0).getNumInBag());
 		Grimy.setText("Eat Grimyfood: Quantity " + items.get(1).getNumInBag());
 		Oran.setText("Eat Oran Berry: Quantity " + items.get(2).getNumInBag());
-		if(h.getMain().getHp()<10){
+		if(h.getMain().getHp()<6){
 			health.setForeground(Color.RED);
 		}
-		else if (h.getMain().getHp()>=10){
+		else if (h.getMain().getHp()>=6){
 			health.setForeground(Color.BLACK);
 		}
 		if(panel.getHero().getStamina()<10){

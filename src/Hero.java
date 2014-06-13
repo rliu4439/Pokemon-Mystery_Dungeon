@@ -25,6 +25,7 @@ public class Hero extends Pokemon {
 	int level = 1;
 	int counter = 0;
 	int xp = 0;
+	boolean check = false;
 
 	public Hero(Pokemon p, String[][] la, GamePanel pa) {
 		main = p;
@@ -70,15 +71,39 @@ public class Hero extends Pokemon {
 		if (i instanceof Apple && items.get(0).getNumInBag() > 0) {
 			// System.out.println("This was an apple");
 			a = (Apple) i;
+			if (this.getStamina() < 50)
+				this.panel.getInfo().writeText(
+						"You just ate an apple and gained 50 stamina points!");
+			else
+				this.panel.getInfo().writeText(
+						"You just ate an apple and filled your stamina!");
 			items.get(0).remove();
 			panel.getItemHolder().redrawButtons();
 
 		} else if (i instanceof GrimyFood && items.get(1).getNumInBag() > 0) {
 			a = (GrimyFood) i;
+			if (this.getStamina() < 50)
+				this.panel
+						.getInfo()
+						.writeText(
+								"You just ate grimy food, lost 5 health points, but gained 10 stamina points!");
+			else
+				this.panel
+						.getInfo()
+						.writeText(
+								"You just ate grimy food, lost 5 health points, but filled your stamina!");
 			items.get(1).remove();
 			panel.getItemHolder().redrawButtons();
 		} else if (i instanceof OranBerry && items.get(2).getNumInBag() > 0) {
 			a = (OranBerry) i;
+			if (this.getHp() + 10 < this.topHp)
+				this.panel
+						.getInfo()
+						.writeText(
+								"You just ate an oran berry and healed by 10 health points!");
+			else
+				this.panel.getInfo().writeText(
+						"You just ate an oran berry and healed completely!");
 			items.get(2).remove();
 			panel.getItemHolder().redrawButtons();
 		} else {
@@ -112,13 +137,13 @@ public class Hero extends Pokemon {
 	public void checkStatus() {
 		System.out.println("level up");
 		if (xp >= level * 20) {
-			
+
 			levelUp();
 			stamina = 100;
-			System.out.println("Hp has changed to "+main.getHp());
-			System.out.println("Attack has changed to "+main.attack);
-			System.out.println("Defense is now "+main.getDefense());
-			System.out.println("Stamina is now "+stamina);
+			System.out.println("Hp has changed to " + main.getHp());
+			System.out.println("Attack has changed to " + main.attack);
+			System.out.println("Defense is now " + main.getDefense());
+			System.out.println("Stamina is now " + stamina);
 			Location current = main.getLocation();
 			int row = current.getRow();
 			int col = current.getCol();
@@ -128,18 +153,30 @@ public class Hero extends Pokemon {
 				this.panel.nextLevel();
 			}
 			panel.getItemHolder().redrawButtons();
-			xp=0;
+			xp = 0;
 			return;
 		}
 		counter++;
-		staminaLoss();
+
 		if (main.hp <= 0) {
 			// System.out.println("Game over");
 			JOptionPane.showMessageDialog(null, "Game Over");
 		} else if (stamina <= 0) {
 			main.hp--;
-		} else if (stamina > 0 && hp < main.topHp && counter % 2 == 0) {
+		} else if (stamina > 0 && hp < main.topHp && counter % 15 == 0) {
 			addHP(1);
+			staminaLoss();
+			if (stamina == 10)
+				this.panel.getInfo()
+						.writeText("Your stamina is running low...");
+			if (stamina == 5)
+				this.panel.getInfo().writeText("YOUR STAMINA IS REALLY LOW!!!");
+		}
+		if (main.hp > 5 && !check)
+			check = true;
+		if (main.hp <= 5 && check) {
+			this.panel.getInfo().writeText("YOUR HEALTH IS REALLY LOW!!!");
+			check = false;
 		}
 		Location current = main.getLocation();
 		int row = current.getRow();
@@ -196,16 +233,20 @@ public class Hero extends Pokemon {
 			// }
 			// System.out.println(a);
 			if (a == null || a instanceof Items) {
-				if (a instanceof Items) {
-					if (a instanceof Apple) {
-						items.get(0).add();
-					} else if (a instanceof GrimyFood) {
-						items.get(1).add();
-					} else if (a instanceof OranBerry) {
-						items.get(2).add();
-					}
-
+				if (a instanceof Apple) {
+					items.get(0).add();
+					this.panel.getInfo().writeText(
+							"You just picked up an apple!");
+				} else if (a instanceof GrimyFood) {
+					items.get(1).add();
+					this.panel.getInfo().writeText(
+							"You just picked up grimy food!");
+				} else if (a instanceof OranBerry) {
+					items.get(2).add();
+					this.panel.getInfo().writeText(
+							"You just picked up an oran berry!");
 				}
+
 				panel.getItemHolder().redrawButtons();
 				Location l = new Location(row, col);
 				if (grid.isValid(l)) {
@@ -237,14 +278,18 @@ public class Hero extends Pokemon {
 			// this.panel.nextLevel();
 			// }
 			if (a == null || a instanceof Items) {
-				if (a instanceof Items) {
-					if (a instanceof Apple) {
-						items.get(0).add();
-					} else if (a instanceof GrimyFood) {
-						items.get(1).add();
-					} else if (a instanceof OranBerry) {
-						items.get(2).add();
-					}
+				if (a instanceof Apple) {
+					items.get(0).add();
+					this.panel.getInfo().writeText(
+							"You just picked up an apple!");
+				} else if (a instanceof GrimyFood) {
+					items.get(1).add();
+					this.panel.getInfo().writeText(
+							"You just picked up grimy food!");
+				} else if (a instanceof OranBerry) {
+					items.get(2).add();
+					this.panel.getInfo().writeText(
+							"You just picked up an oran berry!");
 				}
 				panel.getItemHolder().redrawButtons();
 				Location l = new Location(row, col);
@@ -277,14 +322,18 @@ public class Hero extends Pokemon {
 			// this.panel.nextLevel();
 			// }
 			if (a == null || a instanceof Items) {
-				if (a instanceof Items) {
-					if (a instanceof Apple) {
-						items.get(0).add();
-					} else if (a instanceof GrimyFood) {
-						items.get(1).add();
-					} else if (a instanceof OranBerry) {
-						items.get(2).add();
-					}
+				if (a instanceof Apple) {
+					items.get(0).add();
+					this.panel.getInfo().writeText(
+							"You just picked up an apple!");
+				} else if (a instanceof GrimyFood) {
+					items.get(1).add();
+					this.panel.getInfo().writeText(
+							"You just picked up grimy food!");
+				} else if (a instanceof OranBerry) {
+					items.get(2).add();
+					this.panel.getInfo().writeText(
+							"You just picked up an oran berry!");
 				}
 				panel.getItemHolder().redrawButtons();
 				Location l = new Location(row, col);
@@ -326,14 +375,18 @@ public class Hero extends Pokemon {
 			// this.panel.nextLevel();
 			// }
 			if (a == null || a instanceof Items) {
-				if (a instanceof Items) {
-					if (a instanceof Apple) {
-						items.get(0).add();
-					} else if (a instanceof GrimyFood) {
-						items.get(1).add();
-					} else if (a instanceof OranBerry) {
-						items.get(2).add();
-					}
+				if (a instanceof Apple) {
+					items.get(0).add();
+					this.panel.getInfo().writeText(
+							"You just picked up an apple!");
+				} else if (a instanceof GrimyFood) {
+					items.get(1).add();
+					this.panel.getInfo().writeText(
+							"You just picked up grimy food!");
+				} else if (a instanceof OranBerry) {
+					items.get(2).add();
+					this.panel.getInfo().writeText(
+							"You just picked up an oran berry!");
 				}
 				panel.getItemHolder().redrawButtons();
 				Location l = new Location(row, col);

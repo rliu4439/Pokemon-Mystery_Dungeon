@@ -19,8 +19,8 @@ public class Munchlax extends Pokemon {
 	private static Image right;
 	private Image currentImage;
 	private static Image attack;
-	public Munchlax(boolean enemy,String[][] land) {
-		super(enemy, 16, 1, 3, 1,land);
+	public Munchlax(boolean enemy,String[][] land, GamePanel panel) {
+		super(enemy, 16, 1, 3, 1,land, "Munchlax", panel);
 		getImages();
 	}
 

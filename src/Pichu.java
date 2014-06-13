@@ -20,8 +20,8 @@ public class Pichu extends Pokemon {
 	private Image currentImage;
 	private static Image attack;
 
-	public Pichu(boolean enemy, String[][] land) {
-		super(enemy, 10, 4, 1, 1, land);
+	public Pichu(boolean enemy, String[][] land, GamePanel panel) {
+		super(enemy, 10, 4, 1, 1, land, "Pichu", panel);
 		getImages();
 	}
 

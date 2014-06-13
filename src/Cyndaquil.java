@@ -19,8 +19,8 @@ public class Cyndaquil extends Pokemon {
 	private Image currentImage;
 	private Image attack;
 
-	public Cyndaquil(boolean enemy, String[][] land) {
-		super(enemy, 12, 3, 2, 1, land);
+	public Cyndaquil(boolean enemy, String[][] land, GamePanel panel) {
+		super(enemy, 12, 3, 2, 1, land, "Cyndaquil", panel);
 		getImages();
 	}
 

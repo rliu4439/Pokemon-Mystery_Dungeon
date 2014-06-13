@@ -45,7 +45,8 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	private static Image error;
 	ItemHolder itemHolder;
 	InfoScreen info;
-
+	boolean firstStage = true;
+	
 	public ItemHolder getItemHolder() {
 		return itemHolder;
 	}
@@ -65,16 +66,20 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Pokemon p = new Mudkip(false, land);// used for testing
+		Pokemon p = new Mudkip(false, land, this);// used for testing
 		hero = new Hero(p, land, this);
 
 		nextLevel();
 
-		this.setPreferredSize(new Dimension(700, 700));
+		this.setPreferredSize(new Dimension(600, 600));
 
 	}
 
 	public void nextLevel() {
+		if (!firstStage)
+			this.getInfo().writeText("You moved to the next stage!");
+		else
+			firstStage = false;
 		boolean check = false;
 		Dungeon d;
 
@@ -123,7 +128,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		// JOptionPane.showMessageDialog(null,
 		// "Welcome to Pokemon Mystery Dungeon!");
 		// choosePokemon();
-		Pokemon p = new Mudkip(false, land);// used for testing
+		Pokemon p = new Mudkip(false, land, this);// used for testing
 		hero = new Hero(p, land, this);
 
 	}
@@ -153,27 +158,27 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		// System.out.println(choose);
 		switch (choose) {
 		case 0:
-			Cyndaquil a = new Cyndaquil(true, land);
+			Cyndaquil a = new Cyndaquil(true, land, this);
 			world.add(l, a);
 			openSpaces.remove(l);
 			enemies.add(a);
 			break;
 		case 1:
-			Mudkip m = new Mudkip(true, land);
+			Mudkip m = new Mudkip(true, land, this);
 			world.add(l, m);
 			// System.out.println("Pokemon here");
 			openSpaces.remove(l);
 			enemies.add(m);
 			break;
 		case 2:
-			Munchlax mu = new Munchlax(true, land);
+			Munchlax mu = new Munchlax(true, land, this);
 			world.add(l, mu);
 			// System.out.println("Pokemon here");
 			openSpaces.remove(l);
 			enemies.add(mu);
 			break;
 		case 3:
-			Pichu p = new Pichu(true, land);
+			Pichu p = new Pichu(true, land, this);
 			world.add(l, p);
 			openSpaces.remove(l);
 			enemies.add(p);
