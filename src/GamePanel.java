@@ -66,10 +66,10 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Pokemon p = new Mudkip(false, land, this);// used for testing
-		hero = new Hero(p, land, this);
-
-		nextLevel();
+//		Pokemon p = new Mudkip(false, land, this);// used for testing
+//		hero = new Hero(p, land, this);
+startGame();
+//		nextLevel();
 
 		this.setPreferredSize(new Dimension(600, 600));
 
@@ -125,11 +125,55 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	}
 
 	public void startGame() {
-		// JOptionPane.showMessageDialog(null,
-		// "Welcome to Pokemon Mystery Dungeon!");
-		// choosePokemon();
-		Pokemon p = new Mudkip(false, land, this);// used for testing
-		hero = new Hero(p, land, this);
+		 JOptionPane.showMessageDialog(null,
+		 "Welcome to Pokemon Mystery Dungeon!");
+			if (!firstStage)
+				this.getInfo().writeText("You moved to the next stage!");
+			else
+				firstStage = false;
+			boolean check = false;
+			Dungeon d;
+
+			d = new Dungeon(60,60);// creates a dungeon
+			ArrayList<Room> roo = d.getRooms();
+			boolean reDo = d.checkRooms();
+			while (reDo == true) {
+				d = new Dungeon(50, 50);
+				reDo = d.checkRooms();
+
+			}
+
+			land = d.getDungeon();// / change to land
+			openSpaces = openLocations();// gets locations of the rooms/corridors
+			grid = new BoundedGrid<>(land.length, land[1].length);
+			world = new ActorWorld(grid);
+
+			int counter = 0;
+			for (int i = 0; i < numEnemies*floorLevel; i++) {
+				addEnemy();
+				counter++;
+			}
+			for (int i = 0; i < numItems+floorLevel; i++) {
+				addItem();
+			}
+			PersonalityTest t= new PersonalityTest(land);
+			Pokemon z=t.chooseCharacter(this);
+			hero= new Hero(z,land,this);
+			Location l = (openSpaces.get((int) (Math.random() * openSpaces.size())));
+			world.add(openSpaces.get((int) (Math.random() * openSpaces.size())),
+					hero.main);
+			hero.setGrid(grid);
+			hero.setPanel(this);
+
+			addStairs();
+
+			ArrayList<ArrayList<Location>> a = d.getCorridors();
+			for (ArrayList<Location> lo : a) {
+				for (int i = 0; i < lo.size(); i++) {
+					openSpaces.add(lo.get(i));
+				}
+			}
+			repaint();
 
 	}
 
@@ -251,12 +295,12 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		}
 	}
 
-	private void choosePokemon() {
-		PersonalityTest test = new PersonalityTest(this.land);
-		Pokemon p = test.chooseCharacter();
-		hero = new Hero(p, land, this);
-
-	}
+//	private void choosePokemon() {
+//		PersonalityTest test = new PersonalityTest(this.land);
+//		Pokemon p = test.chooseCharacter();
+//		hero = new Hero(p, land, this);
+//
+//	}
 
 	@Override
 	public void paintComponent(Graphics g) {
