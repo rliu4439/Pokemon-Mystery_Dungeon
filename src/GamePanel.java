@@ -198,7 +198,7 @@ startGame();
 		// System.out.println("openspaces is size " + openSpaces.size());
 		Location l = openSpaces.get(pick);
 		// System.out.println(l);
-		int choose = 0;//(int) (Math.random() * 4);
+		int choose = (int) (Math.random() * 4);
 		// System.out.println(choose);
 		switch (choose) {
 		case 0:
