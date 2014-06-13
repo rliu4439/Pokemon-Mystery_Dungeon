@@ -35,7 +35,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 	ActorWorld world;
 	BoundedGrid grid;
 	String[][] land;
-	int numEnemies = 3;
+	int numEnemies = 4;
 	int numItems = 50;
 	int floorLevel = 1;
 	int numSteps = 0;// number of steps taken by main character
@@ -103,7 +103,6 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 			addEnemy();
 			counter++;
 		}
-		// System.out.println("Made " + counter + " enemy Pokemon");
 		for (int i = 0; i < numItems; i++) {
 			addItem();
 		}
@@ -122,6 +121,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				openSpaces.add(lo.get(i));
 			}
 		}
+		repaint();
 	}
 
 	public void startGame() {
@@ -242,6 +242,7 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 		for (int i = 0; i < enemies.size(); i++) {
 			if (enemies.get(i).getHp() <= 0 && enemies.get(i).isEnemy() == true) {
 				enemies.get(i).removeSelfFromGrid();
+				getInfo().writeText(enemies.get(i).getName()+" has been defeated. You gained 5 XP points!");
 				System.out.println("removed " + enemies.get(i));
 				enemies.remove(enemies.get(i));
 				hero.increaseXP();
@@ -335,8 +336,9 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				hero.moveRight();
 				System.out.println("moving right");
 				moveEnemies(friendly);
-				hero.checkStatus();
+//				hero.checkStatus();
 				repaint();
+				hero.checkStatus();
 			}
 
 		});
@@ -347,8 +349,9 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				// System.out.println("moving left");
 				hero.moveLeft();
 				moveEnemies(friendly);
-				hero.checkStatus();
+//				hero.checkStatus();
 				repaint();
+				hero.checkStatus();
 			}
 		});
 		this.getInputMap().put(KeyStroke.getKeyStroke("UP"), "moveUp");
@@ -359,8 +362,9 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				// System.out.println("moving up");
 				hero.moveUp();
 				moveEnemies(friendly);
-				hero.checkStatus();
+//				hero.checkStatus();
 				repaint();
+				hero.checkStatus();
 			}
 
 		});
@@ -374,8 +378,9 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 				// System.out.println("moving down");
 				moveEnemies(friendly);
 				// System.out.println("Finished moving enemies");
-				hero.checkStatus();
+//				hero.checkStatus();
 				repaint();
+				hero.checkStatus();
 			}
 		});
 
@@ -392,8 +397,9 @@ public class GamePanel extends JPanel {// change grid to land to hold locations
 									hero.main.getDirection())));
 				// System.out.println("moving right");
 				moveEnemies(friendly);
-				hero.checkStatus();
+			
 				repaint();
+				hero.checkStatus();
 			}
 
 		});

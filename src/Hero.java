@@ -24,7 +24,7 @@ public class Hero extends Pokemon {
 	GamePanel panel;
 	int level = 1;
 	int counter = 0;
-	int xp = 0;
+	int xp = 15;
 	boolean check = false;
 
 	public Hero(Pokemon p, String[][] la, GamePanel pa) {
@@ -139,6 +139,13 @@ public class Hero extends Pokemon {
 		if (xp >= level * 20) {
 
 			levelUp();
+			this.panel.getInfo().writeText("Level up!");
+			this.panel.getInfo().writeText(
+					"Your hp has increased to " + main.getHp());
+			this.panel.getInfo().writeText(
+					"Your attack has increased to " + main.attack);
+			this.panel.getInfo().writeText(
+					"Your defense is now " + main.getDefense());
 			stamina = 100;
 			System.out.println("Hp has changed to " + main.getHp());
 			System.out.println("Attack has changed to " + main.attack);
@@ -182,9 +189,17 @@ public class Hero extends Pokemon {
 		int row = current.getRow();
 		int col = current.getCol();
 		if (land[row][col].equals("S") == true) {
-			stage++;
-			this.main.removeSelfFromGrid();
-			this.panel.nextLevel();
+			int n = JOptionPane.showConfirmDialog(
+				    null,
+				    "Are you sure you want to travel to the next level?",
+				    "Next Level",
+				    JOptionPane.YES_NO_OPTION);
+			if(n==JOptionPane.OK_OPTION){
+				stage++;
+				this.main.removeSelfFromGrid();
+				this.panel.nextLevel();
+			}
+//			
 		}
 		panel.getItemHolder().redrawButtons();
 
@@ -226,12 +241,6 @@ public class Hero extends Pokemon {
 		// System.out.println("Current Location is " + main.getLocation());
 		if (land[row][col].equals("W") == false
 				&& grid.isValid(new Location(row, col))) {
-			// if (land[row][col].equals("S") == true){
-			// stage++;
-			// this.removeSelfFromGrid();
-			// this.panel.nextLevel();
-			// }
-			// System.out.println(a);
 			if (a == null || a instanceof Items) {
 				if (a instanceof Apple) {
 					items.get(0).add();
