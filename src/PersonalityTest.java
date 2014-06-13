@@ -90,19 +90,19 @@ public class PersonalityTest {
 		 }
 			
 		
-		 if (counter <=4) {
+		 if (counter <=3) {
 		 Pokemon a = new Pichu(false, land,panel);
 		 JOptionPane.showMessageDialog(null, "You would be a Pichu!");
 		 return a;
-		 } else if (counter >=5 && counter<=6) {
+		 } else if (counter >=4 && counter<=5) {
 		 JOptionPane.showMessageDialog(null, "You would be a Munchlax!");
 		 Pokemon a = new Munchlax(false, land,panel);
 		 return a;
-		 } else if (counter >=7 && counter <=8) {
+		 } else if (counter ==6 ) {
 		 Pokemon a = new Mudkip(false, land,panel);
 		 JOptionPane.showMessageDialog(null, "You would be a Mudkip!");
 		 return a;
-		 } else if (counter>8) {
+		 } else if (counter>=7) {
 		 Pokemon a = new Cyndaquil(false, land,panel);
 		 JOptionPane.showMessageDialog(null, "You would be a Cyndaquil!");
 		 return a;
